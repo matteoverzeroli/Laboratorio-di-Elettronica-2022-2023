@@ -2,12 +2,22 @@
 In questa esperienza di laboratorio si è realizzato e analizzato il seguente circuito:
 \begin{figure}[h!]
 	\centering
-	%\includegraphics[width=0.4\linewidth]{./OtherFiles/Laboratorio 1/xxxxx}
-	\caption{Inserire schema e foto circuito}
+	\begin{circuitikz}[scale=1.2, transform shape]
+		\draw (0,0.5) node[ground]{};
+		\draw (0,2) node[above]{$v_{in}$} to[short, o-] (0,1.5) to[sV=500<\milli\volt>] (0,0.5);
+		\draw (0,2) to[R=4.7<\kilo\ohm>, -*] ++(3,0) ++(0.1,-.1) node[below]{$V^-$};
+		\draw (3,2) to (4,2);
+		\draw (3.7,2) node[op amp, anchor=-](oa){\texttt{TL071}};
+		\draw (3.7,1) node[ground]{} to[short, -*] (3.7,1);
+		\draw (3,2) -- ++(0,1.3) coordinate(C) to[C=300<\pico\farad>] ++(3.08,0) (C-|oa.out) coordinate(Co) -- (oa.out) to [short, *-o] ++(1,0) node[above]{$v_{out}$};
+		\draw (3,3.3) -- ++(0,1.3) to[R=47<\kilo\ohm>] ++(3,0) -| (Co);
+	\end{circuitikz}
+	\includegraphics[width=0.4\linewidth]{./ImageFiles/Laboratorio 1/CIRC.jpg}
+	\caption{Schema circuitale e foto circuito}
 	\label{fig:circuito}
 \end{figure}
 
-Il circuito realizza un filtro passa basso attivo, utilizzando un amplificatore operazionale retroazionato negativamente. Infatti, è possibile ricavare la funzione di trasferimento del circuito tramite un bilancio delle correnti al nodo V\super{-}\todo{Magari inserire nello schema un label al nodo V- e anche il nodo vout}. Si consideri v\sub{in} come un generatore ideale di tensione applicato in ingresso al circuito. Indicando con Z\sub{1} l'impedenza equivalente del parallelo tra R\sub{1} e C\sub{1} e con Z\sub{2} l'impedenza della resistenza R\sub{2}, si può ottenere la funzione di trasferimento del circuito:
+Il circuito realizza un filtro passa basso attivo, utilizzando un amplificatore operazionale retroazionato negativamente. Infatti, è possibile ricavare la funzione di trasferimento del circuito tramite un bilancio delle correnti al nodo V\super{-}. Si consideri v\sub{in} come un generatore ideale di tensione applicato in ingresso al circuito. Indicando con Z\sub{1} l'impedenza equivalente del parallelo tra R\sub{1} e C\sub{1} e con Z\sub{2} l'impedenza della resistenza R\sub{2}, si può ottenere la funzione di trasferimento del circuito:
 \begin{equation}
 	v_{out}=-\frac{Z_1}{Z_2}v_{in}=-\frac{1}{R_2}\frac{R_1}{1+j w R_1 C_1} vin,
 \end{equation}
