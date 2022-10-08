@@ -25,14 +25,34 @@ da cui si ricava
 \begin{equation}
 	T=\frac{v_{out}}{v_{in}}=-\frac{R_1}{R_2}\frac{1}{1+j w R_1 C_1}.
 \end{equation}
-Questa funzione di trasferimento corrisponde a un filtro passa basso. Infatti, è possibile calcolare l'andamento del modulo e della fase in funzione di $\omega$:
+Questa funzione di trasferimento corrisponde a un filtro passa basso. Infatti, è possibile calcolare l'espressione del modulo e della fase in funzione di $\omega$:
 \begin{equation}
 	\begin{split}
 		|T|&=\frac{R_1}{R_2}\frac{1}{\sqrt{1+(wR_1C_1)^2}} \\
 		\angle T&=\SI{180}{\degree}-arctan(\omega R_1 C_1).
 	\end{split}
 \end{equation}
-Per comprendere il comportamento del modulo e della fase in funzione della frequenza del segnale applicato in ingresso, è necessario analizzare i termini dipendenti da $\omega$ nelle due equazioni. Per quanto riguarda l'espressione del modulo della funzione di trasferimento, il termine $\sqrt{1+(wR_1C_1)^2}.... $ \todo{inserire le due frecce per i limiti} mentre nell'espressione della fase, il termine $arctan(\omega R_1 C_1)....$ \todo{ut supra}. Il modulo quindi tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza, mentre la fase è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.\todo{da sistemare questa parte}
+Per comprendere l'andamento del modulo e della fase in funzione della frequenza del segnale applicato in ingresso, è necessario analizzare i termini dipendenti da $\omega$ nelle due equazioni. Nell'espressione del modulo della funzione di trasferimento, il termine 
+\begin{equation}
+	\sqrt{1+(wR_1C_1)^2} \to
+	\begin{cases}
+		1 \; per \; \omega \to 0 \\
+		\infty \; per \; \omega \to \infty
+	\end{cases}
+,
+\end{equation}
+mentre nell'espressione della fase, il termine
+\begin{equation}
+	arctan(\omega R_1 C_1) \to
+	\begin{cases}
+		0 \; per \; \omega \to 0 \\
+		90^\circ \; per \; \omega \to \infty
+	\end{cases}
+	.
+\end{equation}
+
+
+Il modulo quindi tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza, mentre la fase è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.\todo{da sistemare questa parte}
 Si determina quindi un comportamento di un filtro passa basso invertente del primo ordine, con frequenza di taglio pari a $f=\frac{1}{2\pi R_1C_1}$.
 
 I valori dei componenti passivi sono stati scelti per soddisfare i requisiti di prestazioni del filtro. In particolare, veniva richiesto un guadagno di un fattore 10 con frequenza di taglio pari a \SI{10}{\kilo\hertz}. I valori scelti ... (\todo{inserire tabella valori con valori nominali/misurati dei componenti}).
