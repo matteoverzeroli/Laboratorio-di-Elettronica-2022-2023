@@ -4,7 +4,7 @@ In questa esperienza di laboratorio si è realizzato e analizzato il seguente ci
 	\begin{minipage}{.4\textwidth}
 	\begin{circuitikz}[scale=.9, use fpu reciprocal]
 		\draw (0,.5) node[ground]{} coordinate(botl);
-		\draw (0,2) to[sV=$V_{in}$] (0,.5);
+		\draw (0,2) to[sV=$v_{in}$] (0,.5);
 		\draw (0,2) to[R=$R_2$, -*] ++(3,0) ++(0.1,-.1) node[below]{$V^-$};
 		\draw (3,2) to (4,2);
 		\draw (3.7,2) node[op amp, anchor=-](oa){\texttt{TL071}};
