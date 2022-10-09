@@ -39,6 +39,7 @@ Questa funzione di trasferimento corrisponde a un filtro passa basso. È possibi
 		|T|&=\frac{R_1}{R_2}\frac{1}{\sqrt{1+(wR_1C_1)^2}} \\
 		\angle T&=\SI{180}{\degree}-arctan(\omega R_1 C_1).
 	\end{split}
+	\label{eq:1.3}
 \end{equation}
 Per comprendere l'andamento del modulo e della fase in funzione della frequenza del segnale applicato in ingresso, è necessario analizzare i termini dipendenti da $\omega$ nelle due equazioni. Nell'espressione del modulo della funzione di trasferimento, il termine 
 \begin{equation}
@@ -58,9 +59,7 @@ mentre nell'espressione della fase, il termine
 	\end{cases}
 	.
 \end{equation}
-
-
-Il modulo quindi tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza, mentre la fase è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.\todo{da sistemare questa parte}
+Il modulo quindi tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza, mentre la fase è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.
 Il comportamento del circuito è quindi quello di un filtro passa basso invertente del primo ordine, con frequenza di taglio pari a $f=\frac{1}{2\pi R_1C_1}$.
 
 I valori dei componenti passivi sono stati scelti per soddisfare i requisiti di prestazioni del filtro. In particolare, veniva richiesto un guadagno di un fattore 10 con frequenza di taglio pari a \SI{10}{\kilo\hertz}. I valori nominali ed effettivi dei componenti passivi sono riportati in tabella \ref{tab:valori_componenti}.
@@ -69,32 +68,32 @@ I valori dei componenti passivi sono stati scelti per soddisfare i requisiti di 
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
-		Componente	& Valore Nominale & Valore Effettivo \\ \hline
-		R1          & 3.3K\si{\ohm} &                   \\ \hline
-		R2          & 38K\si{\ohm} &                   \\ \hline
-		C1          & 390p\si{\farad} &                   \\ \hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		R\sub{1}          & \SI{38}{\kilo\ohm} &     \SI{38.10}{\kilo\ohm}  \\ \hline
+		R\sub{2}          & \SI{3.3}{\kilo\ohm} &      \SI{3.29}{\kilo\ohm} \\ \hline
+		C\sub{1}          & \SI{390}{\pico\farad} &   Non misurabile  \\ \hline
 		
 	\end{tabular}
-	\caption{Valori nominali ed effettivi dei componenti passivi del circuito.}
+	\caption{Valori nominali e misurati dei componenti passivi del circuito.}
 	\label{tab:valori_componenti}
 \end{table}
 
-Attraverso un generatore di funzioni è stato applicato in ingresso al circuito una sinusoide con ampiezza picco-picco pari a \SI{500}{\milli\volt} e frequenza compresa tra \SI{100}{\hertz} e \SI{10}{\mega\hertz}. Tramite l'oscilloscopio sono state ottenute le misure di ampiezza picco-picco del segnale in uscita al circuito e la differenza di fase tra il segnale in ingresso e quello in uscita. Grazie a questi valori sono stati ricostruiti i diagrammi di Bode di modulo e fase del circuito, riportati in figura \ref{fig:diagrammi_di_Bode}.
+Attraverso un generatore di forme d'onda sono stati applicati in ingresso al circuito dei segnali sinusoidali con ampiezza picco-picco pari a \SI{500}{\milli\volt} e frequenza compresa tra i \SI{100}{\hertz} e i \SI{10}{\mega\hertz}. Tramite l'oscilloscopio sono state ottenute le misure di ampiezza picco-picco del segnale in uscita al circuito e la differenza di fase tra il segnale in ingresso e quello in uscita. Grazie a questi valori sono stati ricostruiti i diagrammi di Bode di modulo e fase del circuito, riportati in figura \ref{fig:diagrammi_di_Bode}.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 1/Diagrammi di Bode.png}
+	\includegraphics[width=0.80\linewidth]{./ImageFiles/Laboratorio 1/Diagrammi di Bode.png}
 	\caption{Diagrammi di Bode del filtro passa basso attivo del primo ordine.}
 	\label{fig:diagrammi_di_Bode}
 \end{figure}
 
 Dai diagrammi di Bode della funzione di trasferimento si può osservare il comportamento del filtro passa basso:
 \begin{itemize}
-	\item osservando il diagramma di Bode del modulo si può notare che fino alla frequenza di taglio del circuito, che è pari a \SI{10711}{\hertz}, il segnale in ingresso viene amplificato di circa \SI{20}{\decibel}, mentre per valori superiori alla frequenza di taglio viene attenuato con una pendenza pari a \SI{20}{\decibel}/dec;
-	\item osservando il diagramma di Bode della fase si può notare che, in corrispondenza della frequenza di taglio, la fase è diminuita di circa 45$^{\circ}$rispetto alle frequenza più basse, mentre una decade dopo la frequenza di taglio raggiunge i -90$^{\circ}$.
+	\item osservando il diagramma di Bode del modulo si può notare che fino alla frequenza di taglio, che è pari a \SI{10711}{\hertz}, il segnale in ingresso viene amplificato di circa \SI{20}{\decibel} (guadagno del circuito pari a 11.58, ossia \SI{21.27}{\decibel}), mentre per valori superiori alla frequenza di taglio viene attenuato con una pendenza pari a \SI{20}{\decibel}/dec;
+	\item osservando il diagramma di Bode della fase si può notare che, in corrispondenza della frequenza di taglio, la fase è diminuita\todo{in realtà è aumentata con il nostro sistema di riferimento della fase no?} di circa 45$^{\circ}$rispetto alle frequenza più basse, mentre una decade dopo la frequenza di taglio raggiunge i -90$^{\circ}$.
 \end{itemize}
 
-Tuttavia, per frequenze superiori ad \SI{1}{\mega\hertz}, il comportamento del circuito non è più quello descritto dalla formula \ref{1.3}\todo{link alla equazione}: infatti, a tali frequenze subentrano dei limiti dell'amplificatore operazionale per cui il sistema non è più retroazionato. \todo{Verificare questa informazione, lo ha detto Gaioni ma non è stato preciso}
+Tuttavia, per frequenze superiori ad \SI{1}{\mega\hertz}, il comportamento del circuito non è più quello ideale descritto dalla formula \ref{eq:1.3}: infatti, a tali frequenze subentrano dei limiti e dei comportamenti in frequenza particolari causati dalla banda limitata di funzionamento dell'amplificatore operazionale.
 
 
 
