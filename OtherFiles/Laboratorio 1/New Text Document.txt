@@ -1,0 +1,17 @@
+Lista temporanea di corrispondenza tra immagini e riferimenti:
+\begin{itemize}
+	\item \SI{1}{\volt} 8.png
+	\item \SI{2}{\volt} 9.png
+	\item \SI{3}{\volt} 10.png
+	\item Tutte quelle riportate sotto a \SI{500}{\milli\volt} e a \SI{500}{\hertz}
+	\item Offset \SI{0}{\volt} 11.png
+	\item Offset \SI{0.1}{\volt} 12.png
+	\item Offset \SI{0.2}{\volt} 13.png
+	\item Offset \SI{-0.1}{\volt} 14.png
+	\item Offset \SI{-0.2}{\volt} 15.png
+	\item Offset \SI{+0.25}{\volt} 16.png
+	\item Offset \SI{-0.25}{\volt} 17.png/18.png
+	\item Offset \SI{+0.5}{\volt} 19.png
+	\item Offset \SI{-0.5}{\volt} 20.png
+	\item Offset \SI{-0.6}{\volt} 21.png
+\end{itemize}
