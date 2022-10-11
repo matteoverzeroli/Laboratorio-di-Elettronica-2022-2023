@@ -27,7 +27,7 @@ In questa esperienza di laboratorio si è realizzato e analizzato il seguente ci
 	\label{fig:circuito}
 \end{figure}
 
-Il circuito realizza un filtro passa basso attivo del primo ordine, utilizzando un amplificatore operazionale retroazionato negativamente. Infatti, è possibile ricavare la funzione di trasferimento del circuito tramite un bilancio delle correnti al nodo V\super{-}. Si consideri v\sub{in} come un generatore ideale di tensione applicato in ingresso al circuito. Indicando con Z\sub{1} l'impedenza equivalente del parallelo tra R\sub{1} e C\sub{1} e con Z\sub{2} l'impedenza della resistenza R\sub{2}, si può ottenere la funzione di trasferimento del circuito:
+Il circuito realizza un filtro passa basso attivo del primo ordine, utilizzando un amplificatore operazionale retroazionato negativamente. Infatti, è possibile ricavare la funzione di trasferimento del circuito tramite un bilancio delle correnti al nodo V\super{-}. Si consideri $v\sub{in}$ come un generatore ideale di tensione applicato in ingresso al circuito. Indicando con Z\sub{1} l'impedenza equivalente del parallelo tra R\sub{1} e C\sub{1} e con Z\sub{2} l'impedenza della resistenza R\sub{2}, si può ottenere la funzione di trasferimento del circuito:
 \begin{equation}
 	v_{out}=-\frac{Z_1}{Z_2}v_{in}=-\frac{R_1}{R_2}\frac{1}{1+j w R_1 C_1} v_{in},
 \end{equation}
@@ -35,7 +35,7 @@ da cui si ricava
 \begin{equation}
 	T=\frac{v_{out}}{v_{in}}=-\frac{R_1}{R_2}\frac{1}{1+j w R_1 C_1}.
 \end{equation}
-Questa funzione di trasferimento corrisponde a un filtro passa basso. È possibile calcolare il valore del modulo e della fase in funzione di $\omega$ tramite le seguenti espressioni:
+Questa funzione di trasferimento corrisponde a quella di un filtro passa basso. È possibile calcolare il valore del modulo e della fase in funzione di $\omega$ tramite le seguenti espressioni:
 \begin{equation}
 	\begin{split}
 		|T|&=\frac{R_1}{R_2}\frac{1}{\sqrt{1+(wR_1C_1)^2}} \\
@@ -61,7 +61,7 @@ mentre nell'espressione della fase, il termine
 	\end{cases}
 	.
 \end{equation}
-Il modulo quindi tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza, mentre la fase è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.
+Il modulo quindi tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza. La fase, invece, è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.
 Il comportamento del circuito è quindi quello di un filtro passa basso invertente del primo ordine, con frequenza di taglio pari a $f=\frac{1}{2\pi R_1C_1}$.
 
 \noindent
@@ -83,7 +83,7 @@ I valori dei componenti passivi sono stati scelti per soddisfare i requisiti di 
 \end{table}
 
 \noindent
-Attraverso un generatore di forme d'onda sono stati applicati in ingresso al circuito dei segnali sinusoidali con ampiezza picco-picco pari a \SI{500}{\milli\volt} e frequenza compresa tra i \SI{100}{\hertz} e i \SI{10}{\mega\hertz}. Nella figura \ref{fig:misure_oscilloscopio_1} è 
+Attraverso un generatore di forme d'onda sono stati applicati in ingresso al circuito dei segnali sinusoidali con ampiezza picco-picco pari a \SI{500}{\milli\volt} e frequenza compresa tra i \SI{100}{\hertz} e i \SI{10}{\mega\hertz}. Nella figura \ref{fig:misure_oscilloscopio_1} sono riportati i segnali in ingresso ed in uscita dell'amplificatore al variare della frequenza. In particolare, in figura \ref{fig:misure_oscilloscopio_1}c è apprezzabile lo sfasamento tra i due segnali dovuto al fatto che la frequenza del segnale in ingresso è nei dintorni della frequenza di taglio del filtro.
 
 \begin{figure}[h!]
 	\centering
@@ -102,7 +102,7 @@ Attraverso un generatore di forme d'onda sono stati applicati in ingresso al cir
 	c)
 	
 	\includegraphics[width=0.8\linewidth]{./ImageFiles/Laboratorio 1/TEK00004}
-	\caption{Misure del segnale in ingresso (linea gialla) e segnale in uscita (linea azzurra) al circuito. Si è utilizzato in ingresso un segnale sinusoidale con ampiezza picco-picco di \SI{500}{\milli\volt} e frequenza di \SI{1}{\hertz} (figura a), \SI{1}{\kilo\hertz} (figura b) e \SI{10}{\kilo\hertz} (figura c).}
+	\caption{Misure del segnale in ingresso (linea gialla) e segnale in uscita (linea azzurra) al circuito. Si è utilizzato in ingresso un segnale sinusoidale con ampiezza picco-picco di \SI{500}{\milli\volt} e frequenza di \SI{100}{\hertz} (figura a), \SI{1}{\kilo\hertz} (figura b) e \SI{10}{\kilo\hertz} (figura c).}
 	\label{fig:misure_oscilloscopio_1}
 \end{figure}
 
@@ -118,7 +118,7 @@ Tramite le funzioni fornite dall'oscilloscopio, sono state ottenute le misure di
 Dai diagrammi di Bode della funzione di trasferimento si può osservare il comportamento del filtro passa basso:
 \begin{itemize}
 	\item osservando il diagramma di Bode del modulo si può notare che fino alla frequenza di taglio, che è pari a \SI{10711}{\hertz}, il segnale in ingresso viene amplificato di circa \SI{20}{\decibel} (guadagno del circuito pari a 11.58, ossia \SI{21.27}{\decibel}), mentre per valori superiori alla frequenza di taglio viene attenuato con una pendenza pari a \SI{20}{\decibel}/dec;
-	\item osservando il diagramma di Bode della fase si può notare che, in corrispondenza della frequenza di taglio, la fase è aumentata di circa 45$^{\circ}$rispetto alle frequenza più basse, mentre una decade dopo la frequenza di taglio raggiunge i -90$^{\circ}$. \todo{inserire punitini acquisizioni nei grafici}
+	\item osservando il diagramma di Bode della fase si può notare che, in corrispondenza della frequenza di taglio, la fase è aumentata di circa 45$^{\circ}$rispetto alle frequenza più basse, mentre una decade dopo la frequenza di taglio raggiunge i -90$^{\circ}$.
 \end{itemize}
 
 \noindent
@@ -126,7 +126,7 @@ Tuttavia, per frequenze superiori ad \SI{1}{\mega\hertz}, il comportamento del c
 %\todo{nel datasheet \url{https://www.ti.com/lit/ds/symlink/tl071.pdf?ts=1665331321631&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTL071} è presente un grafico con guadagno in closed loop}
 
 \clearpage
-In seguito, si è voluto analizzare il comportamento del circuito quando in ingresso si applica un segnale con ampiezza picco-picco maggiore. I risultati sono mostrati nella figura \ref{fig:misure_oscilloscopio_sat}.
+In seguito, si è voluto analizzare il comportamento del circuito quando in ingresso si applica un segnale con ampiezza picco-picco crescente. I risultati sono mostrati nella figura \ref{fig:misure_oscilloscopio_sat}.
 \begin{figure}[h!]
 	\centering
 	a)
@@ -155,24 +155,25 @@ Come si può vedere nella figura \ref{fig:misure_oscilloscopio_sat}b, quando la 
 	\item guadagno del circuito;
 	\item tensioni di alimentazione positiva +E e -E dell'amplificatore operazionale.
 \end{itemize} 
-Infatti, la tensione misurabile in uscita al circuito sul morsetto \textit{v\sub{out}} non può assumere valori superiori ed inferiori alle tensioni di alimentazione del circuito. Nel nostro caso, le tensioni di alimentazione sono state fissate rispettivamente a +\SI{10}{\volt} e a -\SI{10}{\volt}. Dal momento che in ingresso è fornita un'onda sinusoidale di ampiezza picco-picco di circa \SI{2}{\volt} e considerando un fattore di guadagno ingresso/uscita di circa 11.6, il circuito dovrebbe presentare in uscita una sinusoide di ampiezza picco-picco di \SI{23}{\volt}, ossia una sinusoide che oscilla tra +\SI{11.5}{\volt} e -\SI{11.5}{\volt}. Tuttavia, dal momento che l'uscita dovrebbe portarsi a tensioni superiori ed inferiori alle tensioni +E e -E, l'uscita saturerà a valori pari alle alimentazioni. In realtà, a causa dei circuiti interni all'amplificatore operazionale e alle non idealità introdotte, in un circuito reale l'uscita satura a tensioni inferiori a +E e superiori a -E. Inoltre, le tensioni di saturazione positiva e negativa non assumono valori identici, presentando quindi un comportamento asimmetrico. Il fenomeno della saturazione diventa ancora più evidente nella figura \ref{fig:misure_oscilloscopio_sat}c, dove in ingresso viene applicato un segnale sinusoidale di ampiezza picco-picco di \SI{3}{\volt}.
+Infatti, la tensione misurabile in uscita al circuito sul morsetto \textit{v\sub{out}} non può assumere valori superiori ed inferiori alle tensioni di alimentazione del circuito. Nel nostro caso, le tensioni di alimentazione sono state fissate rispettivamente a +\SI{10}{\volt} e a -\SI{10}{\volt}. Dal momento che in ingresso è fornita un'onda sinusoidale di ampiezza picco-picco di circa \SI{2}{\volt} e considerando un fattore di guadagno ingresso/uscita di circa 11.6, il circuito dovrebbe presentare in uscita una sinusoide di ampiezza picco-picco di \SI{23}{\volt}, ossia una sinusoide che oscilla tra +\SI{11.5}{\volt} e -\SI{11.5}{\volt}. Tuttavia, dal momento che l'uscita dovrebbe portarsi a tensioni superiori ed inferiori alle tensioni +E e -E, l'uscita saturerà a valori pari alle alimentazioni. In realtà, a causa dei circuiti interni all'amplificatore operazionale e alle non idealità introdotte, in un circuito reale l'uscita satura a tensioni inferiori a +E e superiori a -E (a meno che non si tratti di amplificatori \textit{Rail-To-Rail}, ma non è il caso del TL071). Inoltre, le tensioni di saturazione positiva e negativa non assumono valori identici, presentando quindi un comportamento asimmetrico. Il fenomeno della saturazione diventa ancora più evidente nella figura \ref{fig:misure_oscilloscopio_sat}c, dove in ingresso viene applicato un segnale sinusoidale di ampiezza picco-picco di \SI{3}{\volt}.
 
 \noindent
-Nelle figure \ref{fig:misure_oscilloscopio_sat}b e \ref{fig:misure_oscilloscopio_sat}c  è possibile anche ricavare l'ampiezza picco-picco che il segnale in uscita può assumere senza che si presenti il fenomeno della saturazione, misurando l'ampiezza picco-picco dei segnali saturati in uscita. In questo circuito si attesta a un valore id \SI{17.61}{\volt}. Infatti, nella \ref{fig:misure_oscilloscopio_sat}a, il segnale in uscita non presenta distorsioni, poiché presenta un valore picco-picco di soli \SI{11.25}{\volt}. 
+Dalle figure \ref{fig:misure_oscilloscopio_sat}b e \ref{fig:misure_oscilloscopio_sat}c  è possibile anche ricavare l'ampiezza picco-picco che il segnale in uscita può assumere senza che si presenti il fenomeno della saturazione, misurando l'ampiezza picco-picco dei segnali saturati in uscita: in questo circuito tale valore è pari a \SI{17.61}{\volt}. Infatti, si può osservare che, in figura \ref{fig:misure_oscilloscopio_sat}a, il segnale in uscita non presenta distorsioni poiché il valore picco-picco è pari a \SI{11.25}{\volt}. 
 
 \noindent
-Un metodo per cercare di eliminare il fenomeno della saturazione è quello di aumentare le tensioni di alimentazione del circuito +E e -E. Così facendo, si aumenta l'ampiezza massima possibile della sinusoide in ingresso. Tuttavia, non è possibile aumentare indefinitamente il valore di queste tensioni. Infatti, bisogna controllare le tensioni massime sopportate dal particolare opamp (analizzando il datasheet) oppure semplicemente perché non si possono sempre generare tensioni elevate. Tipicamente, si cerca di mantenere le tensioni di alimentazione le più basse possibili in modo da limitarne i consumi.
+Per cercare di eliminare il fenomeno della saturazione si potrebbe pensare di aumentare le tensioni di alimentazione del circuito. Così facendo si aumenta l'ampiezza massima possibile della sinusoide in ingresso. Tuttavia, non è possibile aumentare infinitamente il valore di queste tensioni. Infatti, bisogna verificare tramite il datasheet le tensioni massime sopportate dal particolare opamp oppure semplicemente perché non si possono sempre generare tensioni elevate. Tipicamente, si cerca di mantenere le tensioni di alimentazione più basse possibili in modo da limitare i consumi del circuito.
 
-\newpage
-Infine, si è analizzato il comportamento del circuito in funzione della tensione di offset applicata al segnale in ingresso. Il risultato è che la sinusoide in ingresso viene alzata di un valore pari alla tensione di offset rispetto alle prove eseguite fino ad ora (\Fig\ref{fig:misure_oscilloscopio_offset_sinusoide}).
+
+Infine, si è analizzato il comportamento del circuito modificando la tensione di offset applicata al segnale in ingresso. Il risultato è che la sinusoide in ingresso viene alzata di un valore pari alla tensione di offset rispetto alle prove eseguite fino ad ora (\Fig\ref{fig:misure_oscilloscopio_offset_sinusoide}).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.6\linewidth]{./ImageFiles/Laboratorio 1/tensione offset}
 	\caption{Illustrazione della tensione di offset di una sinusoide.}
 	\label{fig:misure_oscilloscopio_offset_sinusoide}
 \end{figure} 
-\clearpage
-Nella figura \ref{fig:misure_oscilloscopio_offset} si riportano i risultati.
+
+
+In figura \ref{fig:misure_oscilloscopio_offset} sono riportati i grafici dei segnali in ingresso ed in uscita al variare della tensione di offset.
 \begin{figure}[h!]
 	\centering
 	a)
@@ -202,13 +203,27 @@ Nella figura \ref{fig:misure_oscilloscopio_offset} si riportano i risultati.
 
 \newpage
 \noindent
-Nelle acquisizioni (\Fig\ref{fig:misure_oscilloscopio_offset}) è possibile notare che il segnale in uscita presenta le seguenti caratteristiche:
+Dalle acquisizioni (\Fig\ref{fig:misure_oscilloscopio_offset}) è possibile notare che il segnale in uscita presenta le seguenti caratteristiche:
 \begin{itemize}
 	\item fattore di amplificazione rispetto al segnale in ingresso pari al guadagno del circuito;
 	\item fase di circa 180$^\circ$ rispetto al segnale in ingresso (amplificatore invertente);
 	\item offset amplificato di un fattore pari al guadagno del circuito e di segno opposto rispetto all'offset del segnale in ingresso.
 \end{itemize}
 Da questi risultati si comprende che anche la parte DC del segnale in ingresso è soggetta ad un fattore di amplificazione pari a $-\frac{R_1}{R_2}$. Infatti, aumentando l'offset del segnale in uscita, aumenta la differenza di potenziale ai capi della resistenza R\sub{2} e di conseguenza la corrente che ne scorre attraverso (legge di Ohm). Di conseguenza, considerando nulle le correnti di ingresso all'amplificatore, aumenta la corrente anche in R\sub{1}. Tuttavia, dal momento che il nodo V\super{-} è una massa virtuale, deve diminuire la tensione sul nodo V\sub{out}. Per questo motivo, l'offset in uscita avrà segno opposto rispetto a quello in ingresso. Considerazioni analoghe possono essere fatte per offset negativi applicati in ingresso.
+Anche in questi casi bisogna prestare attenzione a non far saturare l'uscita: infatti, se l'offset applicato in ingresso è troppo elevato, la sinusoide in uscita rischia essere tagliata dalla saturazione dell'operazionale, come mostrato in figura \ref{fig:misure_oscilloscopio_offset_sat}.
 
-\todo{aggiungere la parte offset+saturazione ultime immagini}
+\begin{figure}[h!]
+	\centering	
+	\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 1/TEK00019}
+	\end{minipage}
+	\qquad\qquad
+	\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 1/TEK00021}
+	\end{minipage}
+	
+	\caption{Misure del segnale in ingresso (linea gialla) e segnale in uscita (linea azzurra) al circuito. Si è utilizzato in ingresso un segnale sinusoidale con ampiezza picco-picco di \SI{500}{\milli\volt}, frequenza di \SI{100}{\hertz}.  A sinistra è stato applicato un offset di +\SI{100}{\milli\volt}, mentre a destra di +\SI{200}{\milli\volt}.}
+	\label{fig:misure_oscilloscopio_offset_sat}
+\end{figure} 
+\todo{da rivedere i valori non trovo la legenda delle immagini.}
 \todo{da rileggere parte su offset e saturazione non simmetrica}
