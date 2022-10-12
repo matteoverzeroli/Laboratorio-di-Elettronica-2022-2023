@@ -28,7 +28,7 @@ In questa esperienza di laboratorio si è realizzato e analizzato il seguente ci
 \end{figure}
 
 \noindent
-Il circuito realizza un filtro passa basso attivo del primo ordine, utilizzando un amplificatore operazionale retroazionato negativamente. In particolare, si utilizza l'amplificatore operazionale TL071 (\url{https://www.st.com/resource/en/datasheet/tl071.pdf}). Questo amplificatore rientra nella categoria degli operazionali \textit{general-purpose} ed è caratterizzato da elevati slew rate e basse correnti di ingresso.
+Il circuito realizza un filtro passa basso attivo del primo ordine grazie ad un amplificatore operazionale retroazionato negativamente. In particolare, si utilizza l'amplificatore operazionale TL071 (\url{https://www.st.com/resource/en/datasheet/tl071.pdf}). Questo amplificatore rientra nella categoria degli operazionali \textit{general-purpose} ed è caratterizzato da elevati slew rate e basse correnti di ingresso.
 \`E possibile ricavare la funzione di trasferimento del circuito tramite un bilancio delle correnti al nodo V\super{-}. Si consideri $v\sub{in}$ come un generatore ideale di tensione applicato in ingresso al circuito. Indicando con Z\sub{1} l'impedenza equivalente del parallelo tra R\sub{1} e C\sub{1} e con Z\sub{2} l'impedenza della resistenza R\sub{2}, si può ottenere la funzione di trasferimento del circuito:
 \begin{equation}
 	v_{out}=-\frac{Z_1}{Z_2}v_{in}=-\frac{R_1}{R_2}\frac{1}{1+j w R_1 C_1} v_{in},
@@ -63,8 +63,8 @@ mentre nell'espressione della fase, il termine
 	\end{cases}
 	.
 \end{equation}
-Quindi il modulo tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza. La fase, invece, è pari a circa \SI{180}{\degree} per segnali a bassa frequenza, e tende a \SI{90}{\degree} per segnali ad alta frequenza.
-Il comportamento del circuito è quindi quello di un filtro passa basso invertente del primo ordine, con frequenza di taglio pari a $f=\frac{1}{2\pi R_1C_1}$.
+Quindi il modulo tende a $\frac{R_1}{R_2}$ per segnali in ingresso a bassa frequenza, mentre tende a zero per segnali in ingresso ad alta frequenza. La fase, invece, è pari a circa \SI{180}{\degree} per segnali a bassa frequenza e tende a \SI{90}{\degree} per segnali ad alta frequenza.
+Il comportamento del circuito è quindi quello di un filtro passa basso invertente del primo ordine, con frequenza di taglio pari a $f=\frac{1}{2\pi R_1C_1}$. \todo{aggiungerei un grafico sul comportamento ideale}
 
 \noindent
 I valori dei componenti passivi sono stati scelti per soddisfare i requisiti di prestazioni del filtro. In particolare, veniva richiesto un guadagno di un fattore 10 con frequenza di taglio pari a \SI{10}{\kilo\hertz}. I valori nominali ed effettivi dei componenti passivi utilizzati sono riportati in tabella \ref{tab:valori_componenti}. Inoltre, le tensioni di alimentazione positiva +E e negativa -E dell'amplificatore operazionale sono state fissate rispettivamente a +\SI{10}{\volt} e -\SI{10}{\volt}.
