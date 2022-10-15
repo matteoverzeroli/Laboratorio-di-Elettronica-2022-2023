@@ -63,8 +63,16 @@ Per analizzare il circuito, è utile suddividere due casi:
 	\item se $v_{in}<0$, il diodo D è spento e l'amplificatore operazionale non è più retroazionato. All'interno della resistenza non scorre corrente e quindi il nodo v\sub{out} è mantenuto a una tensione di \SI{0}{\volt}. In questo caso, l'opamp si comporta come un comparatore. Per cui, essendo v\sub{in} negativa, v\sub{1} si porta alla tensione di saturazione negativa dell'amplificatore.
 \end{itemize}
 In questo circuito, si è mantenuto costante il valore di R, mentre si è variata la frequenza del segnale in ingresso fig xxx.
-\todo{inserire foto}
-\todo{inserire problema slew rate}
-Analizzando più in dettaglio il comportamento del circuito, si nota un ritardo di circa \SI{4.08}{\micro\second} del fronte di salita dell'uscita rispetto all'ingresso \ref{fig}. Questo andamento è causato dal fatto che, non appena v\sub{in} diventa maggiore di zero, l'uscita deve saltare dalla tensione di saturazione negativa al valore del segnale in ingresso. Il tempo necessario all'amplificatore per effettuare questa transizione è regolato da un parametro tipico degli amplificatori operazionali definito \textit{slew rate}. \todo{da rifare e continuare------}
+\todo{inserire foto + descrizione tensione di saturazione negativa}
+
+Analizzando più in dettaglio il comportamento del circuito, si nota un ritardo di circa \SI{4.08}{\micro\second} sul fronte di salita dell'uscita rispetto all'ingresso \ref{fig}.
 \todo{aggiungere figura 38}
+Questo andamento è causato dal fatto che, non appena v\sub{in} diventa maggiore di zero, l'uscita deve saltare dalla tensione di saturazione negativa al valore del segnale in ingresso. Il tempo necessario all'amplificatore per effettuare questa transizione è regolato da un parametro tipico degli amplificatori operazionali definito \textit{slew rate}. Esso indica la velocità massima con cui l'amplificatore operazionale può far variare la tensione alla sua uscita. Per questo motivo, lo slew rate è misurato in $\frac{V}{\mu s}$ ed è specificato dal produttore nel datasheet. Nel caso dell'amplificatore TL071, questo parametro può assumere valori da \SI{8}{\micro\second} a \SI{16}{\micro\second}. Si è cercato di stimare lo slew rate nel circuito realizzato facendo il rapporto della la differenza tra il valore finale raggiunto e la tensione di saturazione negativa con il tempo necessario ad effettuare questa transizione \ref{xxx}:
+\begin{equation}
+	SR=\frac{\delta V}{\delta t}=\frac{\SI{9.64}{\volt}}{\SI{1.72}{\micro\second}}=5. 6\frac{V}{\mu s}.
+\end{equation}
+Il valore, pur non rientrando nell'intervallo specificato nel datasheet, assume un valore prossimo.
+\todo{aggiungere figura 40}
+
+
 \todo{terzo circuito}
