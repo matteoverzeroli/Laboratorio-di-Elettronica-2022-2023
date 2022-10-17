@@ -7,7 +7,7 @@ In questa esperienza di laboratorio, si sono analizzati tre circuiti che svolgon
 	\caption{Rappresentazione simbolica di un diodo e foto del diodo 1N4148.}
 	\label{fig:diodo}
 \end{figure}
-Il diodo è un dipolo che permette di realizzare circuiti raddrizzatori grazie al suo comportamento che differisce in base alle condizioni del circuito in cui è inserito. In particolare, se la tensione all'anodo è maggiore di una certa tensione di soglia (tipicamente considerata pari a \SI{0.7}{\volt}) rispetto alla tensione a cui si trova il catodo, il diodo permette il passaggio di corrente dall'anodo al catodo. Al contrario, non è consentito il passaggio di corrente dal catodo all'anodo. Più precisamente, la relazione corrente-tensione è descritta dalla seguente legge esponenziale:
+Il diodo è un dipolo che permette di realizzare circuiti raddrizzatori grazie al suo comportamento che differisce in base alle condizioni del circuito in cui è inserito. In particolare, se la tensione all'anodo è maggiore di una certa tensione di soglia (tipicamente pari a \SI{0.7}{\volt}) rispetto alla tensione a cui si trova il catodo, il diodo permette il passaggio di corrente dall'anodo al catodo. Al contrario, non è consentito il passaggio di corrente dal catodo all'anodo. Più precisamente, la relazione corrente-tensione è descritta dalla seguente legge esponenziale:
 \begin{equation}
 	I_D=I_S[e^{\frac{V_D}{V_T}}-1],
 \end{equation}
@@ -98,7 +98,7 @@ Successivamente si è analizzato il comportamento in frequenza del circuito, var
 	\caption{Misure del segnale in ingresso (linea gialla) e del segnale in uscita (linea azzurra) al circuito. La resistenza è fissa in tutti e quattro i grafici ed è pari a \SI{39}{\kilo\ohm} mentre la frequenza del segnale in ingresso è pari a \SI{1}{\kilo\hertz} (in alto a sinistra), \SI{10}{\kilo\hertz} (in alto a destra), \SI{100}{\kilo\hertz} (in basso a sinistra) e \SI{1}{\mega\hertz} (in basso a destra).}
 	\label{fig:freqwith38}
 \end{figure}
-Osservando le acquisizioni si nota che aumentando la frequenza il segnale in uscita presenta una semionda distorta. In particolare, si può notare che il diodo riesce a seguire abbastanza correttamente il fronte di salita del segnale in ingresso (il diodo in questa fase si accende). Tuttavia, il diodo non è sufficientemente veloce nella fase di spegnimento: di conseguenza, il segnale in uscita dal diodo fa più fatica a seguire il segnale in ingresso\todo{non so come dirla meglio vediamo.}. Questo comportamento asimmetrico è presente a causa dei differenti tempi di accensione e spegnimento che caratterizzano un diodo reale. Questi intervalli sono determinati dai tempi necessari alla formazione ed eliminazione della regione di svuotamento nella giunzione P-N durante il passaggio dalla regione diretta a quella inversa del diodo.  
+Osservando le acquisizioni si nota che aumentando la frequenza il segnale in uscita presenta una semionda distorta. In particolare, si può notare che il diodo riesce a seguire abbastanza correttamente il fronte di salita del segnale in ingresso (il diodo in questa fase si accende). Tuttavia, il diodo non è sufficientemente veloce nella fase di spegnimento: di conseguenza, il segnale in uscita dal diodo non riesce a seguire perfettamente il segnale in ingresso\todo{non so come dirla meglio vediamo.}. Questo comportamento asimmetrico è presente a causa dei differenti tempi di accensione e spegnimento che caratterizzano un diodo reale. Questi intervalli sono determinati dai tempi necessari alla formazione ed eliminazione della regione di svuotamento nella giunzione P-N durante il passaggio dalla regione diretta a quella inversa del diodo.  
 
 \clearpage
 
@@ -186,7 +186,7 @@ Il valore, pur non rientrando nell'intervallo specificato nel datasheet, assume 
 \end{figure}
 
 \clearpage
-Il circuito appena presentato elimina il problema dell'offset tra l'ingresso e l'uscita, ma introduce il ritardo causato dallo \textit{slew rate}. Inoltre, la semionda negativa viene completamente persa. Di seguito, si riporta lo schema del terzo circuito realizzato in laboratorio (\Fig\ref{fig:circuito_3}). Esso svolge la funzione di raddrizzatore a doppia semionda, risolvendo il problema causato dallo \textit{slew rate}, introducendo però l'offset tra ingresso e uscita.
+Il circuito appena presentato elimina il problema dell'offset tra l'ingresso e l'uscita, ma introduce il ritardo causato dallo \textit{slew rate}. Inoltre, la semionda negativa viene completamente persa. Di seguito, si riporta lo schema del terzo circuito realizzato in laboratorio (\Fig\ref{fig:circuito_3}). Esso svolge la funzione di raddrizzatore a doppia semionda, risolvendo il problema causato dallo \textit{slew rate}; tuttavia, introduce un offset tra ingresso e uscita.
 
 \begin{figure}[ht!]
 	\centering
@@ -232,7 +232,7 @@ Si sono utilizzati due diodi 1N4148 con tensioni di soglia misurate pari a \SI{6
 	\label{tab:valori_componenti_3}
 \end{table}
 
-Si può analizzare il circuito in due condizioni:
+Si può analizzare il circuito in tre condizioni:
 \begin{itemize}
 	\item $v_{in}>=\SI{0.7}{\volt}$: in questo caso il diodo D\sub{2} è acceso mentre il diodo D\sub{1} è spento. Infatti, si può riconoscere che l'amplificatore operazionale è in configurazione di amplificatore invertente con guadagno unitario (pari a $\frac{R_2}{R_1}\simeq 1$). Per cui, avremo che $v_1=-v_{in}$. Per questo D\sub{1} è spento, mentre scorrerà corrente in D\sub{2} verso massa attraverso la resistenza R\sub{3};
 	\item  $v_{in}<=-\SI{0.7}{\volt}$: D\sub{2} sarà spento in quanto la tensione tra anodo e catodo è inferiore alla tensione di soglia, mentre D\sub{1} sarà acceso, in quanto $v_1=-v_{in}>\SI{0.7}{\volt}$. Per cui, $v_{out}=v_1-\SI{0.7}{\volt}=-v_{in}-\SI{0.7}{\volt}$;
@@ -244,18 +244,18 @@ Nelle figure \ref{fig:analisi_circuito_3_1} e \ref{fig:analisi_circuito_3_2} son
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{./ImageFiles/Laboratorio 2/TEK00043}
-	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{1}{\kilo\hertz}.}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{1}{\kilo\hertz}.}
 	\label{fig:analisi_circuito_3_1}
 \end{figure}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{./ImageFiles/Laboratorio 2/TEK00042}
-	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{1}$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{1}{\kilo\hertz}.}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{1}$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{1}{\kilo\hertz}.}
 	\label{fig:analisi_circuito_3_2}
 \end{figure}
 
 \noindent
-Questa configurazione permette di rendere indipendente le prestazioni in frequenza del raddrizzatore dallo \textit{slew rate} del particolare amplificatore operazionale utilizzato. Infatti, la dipendenza del circuito del precedente circuito dal questo parametro era causata dal fatto che veniva interrotta la retroazione per $v_{in}<\SI{0}{\volt}$, portando l'uscita alla saturazione negativa. In questo circuito, l'amplificatore è sempre retroazionato e quindi la sua uscita non satura. Per questo motivo, il comportamento in frequenza del circuito dipende solamente dai tempi di accensione e spegnimento dei diodi utilizzati. 
+Questa configurazione permette di rendere indipendente le prestazioni in frequenza del raddrizzatore dallo \textit{slew rate} del particolare amplificatore operazionale utilizzato. Infatti, la dipendenza del circuito precedente da questo parametro era causata dal fatto che veniva interrotta la retroazione per $v_{in}<\SI{0}{\volt}$, portando l'uscita alla saturazione negativa. In questo circuito, l'amplificatore è sempre retroazionato e quindi la sua uscita non satura. Per questo motivo, il comportamento in frequenza del circuito dipende solamente dai tempi di accensione e spegnimento dei diodi utilizzati. 
 
 \noindent
 Per analizzare il comportamento in frequenza del circuito sono state fatte delle misure variando la frequenza del segnale sinusoidale da \SI{1}{\kilo\hertz} a \SI{1}{\mega\hertz} (\Fig\ref{fig:analisi_circuito_3_freq}).
@@ -276,10 +276,10 @@ Per analizzare il comportamento in frequenza del circuito sono state fatte delle
 	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale con ampiezza picco-picco di \SI{2}{\volt} e frequenza di \SI{1}{\kilo\hertz} (in alto a sinistra), \SI{10}{\kilo\hertz} (in alto a destra), \SI{100}{\kilo\hertz} (in basso a sinistra) e \SI{1}{\mega\hertz} (in basso a destra).}
 	\label{fig:analisi_circuito_3_freq}
 \end{figure}
-Dai risultati ottenuti si può osservare come fino alla frequenza di \SI{100}{\kilo\hertz} il circuito funziona ancora correttamente, presentando in uscita una leggera distorsione del segnale. Alla frequenza di \SI{1}{\mega\hertz}, il segnale il uscita presenta una forte distorsione e il circuito non funziona più come un raddrizzatore. Infatti, analizzando più precisamente l'andamento di v\sub{1} e v\sub{in} (\Fig\ref{fig:analisi_circuito_3_3}), notiamo come il segnale v\sub{1} presenta uno sfasamento e, al contrario delle aspettative, presenta anche un fattore di amplificazione. Questo comportamento è complesso da descrivere in quanto bisognerebbe considerare il comportamento in frequenza dell'amplificatore operazionale e dei componenti passivi.
+Dai risultati ottenuti si può osservare come, fino alla frequenza di \SI{100}{\kilo\hertz}, il circuito funziona ancora correttamente presentando in uscita una leggera distorsione del segnale. Alla frequenza di \SI{1}{\mega\hertz}, il segnale in uscita presenta una forte distorsione e il circuito non funziona più come un raddrizzatore. Infatti, analizzando più precisamente l'andamento di $v\sub{1}$ e $v\sub{in}$ (\Fig\ref{fig:analisi_circuito_3_3}), notiamo come il segnale $v\sub{1}$ presenta uno sfasamento e, al contrario delle aspettative, presenta anche un fattore di amplificazione. Questo comportamento è complesso da descrivere in quanto bisognerebbe considerare il comportamento in frequenza dell'amplificatore operazionale e dei componenti passivi.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\linewidth]{./ImageFiles/Laboratorio 2/TEK00050}
-	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{1}$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{1}{\mega\hertz}.}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{1}$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{1}{\mega\hertz}. Si può notare che il segnale $v_{1}$ è amplificato rispetto a $v\sub{1}$.}
 	\label{fig:analisi_circuito_3_3}
 \end{figure}
