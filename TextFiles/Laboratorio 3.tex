@@ -1,6 +1,5 @@
 \chapter{Laboratorio 3}
 
-\section{Rettificatore a doppia semionda di precisione}
 Il primo circuito analizzato è un rettificatore a doppia semionda di precisione (\Fig\ref{fig:circuito_1}). Grazie all'utilizzo di due amplificatori operazionali ed un diodo, è possibile eliminare i problemi relativi al rettificatore a doppia semionda visto nella precedente esperienza di laboratorio, dove veniva utilizzato un unico amplificatore operazionale e due diodi. Per questo circuito sono stati utilizzati due amplificatori operazionali \textit{general-purpose} \textbf{\textmu A741} \url{https://www.ti.com/lit/ds/symlink/ua741.pdf}.
 
 \todo{Schema circuitale del raddrizzatore a doppia semionda di precisione e foto del circuito realizzato. Attenzione che è cambiato l'opamp. mettere anche il nodo vout2 del secondo opamp}
@@ -21,3 +20,9 @@ Inoltre, si può verificare la caratteristica ingresso-uscita del circuito anali
 \noindent
 Successivamente si è analizzato il comportamento in frequenza del circuito, effettuando delle misure di $v_{in}$ e $v_{out}$ con l'oscilloscopio, variando la frequenza della sinusoide in ingresso. \todo{inserire foto 01,03,04,05}
 \`E possibile notare che dalla frequenza di \SI{1}{\kilo\hertz} l'uscita presenta un ritardo sul fronte di salita e il circuito dai \SI{10}{\kilo\hertz} non funziona più come un raddrizzatore. Questo comportamento è legato allo \textit{slew rate} dell'amplificatore \textit{A2}. Infatti, quando il diodo è spento \textit{A2} non è più in retroazione e l'uscita $v_{out}^2$ satura alla tensione di saturazione negativa (poiché $v_+^2$ è a massa e $v_-^2=v_{in}>0$).\todo{aggiungere immagine 02} Il nodo $v_{out}^2$ dovrà quindi passare immediatamente dalla tensione -E a \SI{0}{\volt}. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
+
+\clearpage
+Il secondo circuito analizzato è chiamato \textbf{Trigger di Schmitt} e svolge la funzione di comparatore con isteresi. \todo{inserire foto circuito e schema}
+\todo{inserire descrizione funzionamento}
+\todo{inserire spiegazione delle differenze con i comparatori normali}
+\todo{inserire caratteristica ingresso uscita con anche la foto oscilloscopio}
