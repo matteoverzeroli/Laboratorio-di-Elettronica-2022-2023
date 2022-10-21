@@ -1,0 +1,30 @@
+\chapter{Laboratorio 3}
+
+\section{Rettificatore a doppia semionda di precisione}
+Il primo circuito analizzato è un rettificatore a doppia semionda di precisione (\Fig\ref{fig:circuito_1}). Grazie all'utilizzo di due amplificatori operazionali ed un diodo, è possibile eliminare i problemi relativi al rettificatore a doppia semionda visto nel laboratorio 2, dove veniva utilizzato un unico amplificatore operazionale e due diodi. 
+
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\scalebox{1.4}{
+			\begin{circuitikz}
+				\draw (0,0) node[above]{$v_{in}$} to[short,o-] ++(1,0) to[D=$D$] ++(1,0) -- ++(.5,0) coordinate(dout) to[short, -o] ++(1,0) node[above]{$v_{out}$};
+				\draw (dout) to[R=$R$] ++(0,-2) node[ground]{};
+				\draw (-.5,-3) rectangle (4,1);
+			\end{circuitikz}
+		}
+	\end{minipage}\qquad
+	\begin{minipage}{.48\textwidth}
+		\includegraphics[width=\linewidth]{}
+	\end{minipage}
+	\caption{Schema circuitale del raddrizzatore a doppia semionda di precisione e foto del circuito realizzato.}
+	\label{fig:circuito_1}
+\end{figure}
+
+Per studiare il comportamento del sistema è necessario analizzare come si comporta il diodo al variare della tensione di ingresso $V_{in}$:
+\begin{itemize}
+	\item $V_{in} \geq 0$: si ipotizza che il diodo sia acceso. Allora, $A2$ \todo{per distinguere tra i due opamp chiamo quello sopra A1 e quello sotto A2, riportare nel grafico} è in retroazione negativa. Di conseguenza vale il principio di cortocircuito virtuale e quindi il nodo $V_{+}$ \todo{nel circuito sarà il nodo + di A1} è a massa. Se questo fosse vero, la corrente dovrebbe percorrere la resistenza $R1$ da sinistra verso destra\todo{Nominiamo le resistenze anche se hanno lo stesso valore se non spiegare il circuito è un casino. le nominiamo dal basso all'alto, quindi R1 è quella più in basso}. Tuttavia, ciò non è possibile, perchè i morsetti dell'amplificatore operazionale non assorbono corrente e il diodo non permette il passaggio di corrente. Quindi, l'ipotesi che il diodo sia acceso non è corretta e per $V_{in} > 0$ il diodo è spento. Questo significa che l'amplificatore $A2$ non è retroazionato. Allora, in $R1$ non scorre corrente e la tensione sul nodo $V_{+}$ è pari a $V_{in}$. Ma questo implica che anche la tensione sul nodo $V_{-}$ sia pari a $V_{in}$. Di conseguenza, non scorre corrente neanche in $R2$ e quindi in $R3$. Allora, la tensione $V_{in}$ si propaga anche in uscita e $V_{out} = V_{in}$;
+	\item $V_{in} < 0$: si ipotizza che il diodo sia acceso, quindi $A2$ è retroazionato negativamente. Il nodo $V_{+}$ è connesso ad una massa virtuale e quindi la corrente scorre nella resistenza $R1$ da destra a sinistra, dato che $V_{in} < 0$. Tale corrente può venire dal diodo e questo verifica l'ipotesi fatta. Se $V_{+}$ è a massa, lo è anche $V_{-}$, quindi $A1$ è in configurazione invertente. Se $R2 = R3$, il guadagno dell'amplificatore invertente è pari a 1 e $V_{out} = -V_{in}$.
+\end{itemize}
+
+Di conseguenza, questo circuito rettifica entrambe le semionde e lo fa eliminando il problema dello \text{shift} di tensione causato dalla tensione di polarizzazione del diodo (\Fig\ref{xxx}). 
