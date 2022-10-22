@@ -23,6 +23,20 @@ Successivamente si è analizzato il comportamento in frequenza del circuito, eff
 
 \clearpage
 Il secondo circuito analizzato è chiamato \textbf{Trigger di Schmitt} e svolge la funzione di comparatore con isteresi. \todo{inserire foto circuito e schema}
-\todo{inserire descrizione funzionamento}
+Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene applicato al morsetto invertente di un amplificatore operazionale (nel nostro caso si è utilizzato il \textbf{\textmu A741}), retroazionato positivamente grazie alle resistenze R\sub{1} e R\sub{2}. Per cui, non è più valido il principio di cortocircuito virtuale tra V\super{+} e V\super{-}, poiché non è più presente una retroazione negativa. Per cui, l'uscita $v_{out}=A(v^+-v^-)$, con A pari al guadagno dell'amplificatore operazionale, e il circuito si comporta come un comparatore. Infatti, supponendo un guadagno molto alto (idealmente tendente all'infinito), accade che:
+\begin{itemize}
+	\item se $v^+-v^->0$, allora $v_{out}=+E$;
+	\item se $v^+-v^-<0$, allora $v_{out}=-E$.
+\end{itemize}
+Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella presentata di un normale comparatore. Le resistenze R\sub{1} e R\sub{2} definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a -E, di conseguenza l'uscita $v_{out}$ saturerà alla tensione +E (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}(+E)=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}(+E)$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione +E. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa -E e rimarrà tale fino a quando $v_{in}<V_L^+=\frac{R_1}{R_1+R_2}(-E)\overset{\mathrm{R_1=R_2}}{=}V_L^+=\frac{1}{2}(-E)$. 
+
+\noindent
+Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione +E e -E, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso
+
+\todo{magari inserire un grafico fatto tipo a mano su onenote per esempio delle soglie che magari è più pratico?}
+
+\todo{continuare spiegazione }
+
+\todo{inserire valori resistenze reale}
 \todo{inserire spiegazione delle differenze con i comparatori normali}
 \todo{inserire caratteristica ingresso uscita con anche la foto oscilloscopio}
