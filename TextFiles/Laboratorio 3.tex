@@ -85,6 +85,7 @@ Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge 
 	\label{fig:circuito_2}
 \end{figure}
 
+\noindent
 Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene applicato al morsetto invertente di un amplificatore operazionale (nel nostro caso si è utilizzato il \textbf{\textmu A741}), retroazionato positivamente grazie alle resistenze $R\sub{1}$ e $R\sub{2}$. Di conseguenza, non è più valido il principio di cortocircuito virtuale tra $V\super{+}$ e $V\super{-}$, poiché non è più presente una retroazione negativa. Per cui, l'uscita $v_{out}=A(v^+-v^-)$, con A pari al guadagno dell'amplificatore operazionale, e il circuito si comporta come un comparatore. Infatti, supponendo un guadagno molto alto (idealmente tendente all'infinito), accade che:
 \begin{itemize}
 	\item se $v^+-v^->0$, allora $v_{out}=+E$;
@@ -94,9 +95,7 @@ Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa da
 
 \noindent
 Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione +E e -E, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. \todo{Verificare bene questa frase, mi sembra che possa essere fraintesa.}
-
 \todo{magari inserire un grafico fatto tipo a mano su onenote per esempio delle soglie che magari è più pratico?}
-
 I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}.
 
 \def\arraystretch{1.3}
@@ -111,23 +110,23 @@ I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tab
 	\caption{Valori nominali e misurati delle resistenze utilizzate nel circuito.}
 	\label{tab:valori_componenti_2}
 \end{table}
-
-\todo{continuare spiegazione }
-
 \todo{inserire valori resistenze reale}
+
+\noindent
 L'utilizzo di questa struttura è molto utile perché è meno sensibile rispetto ai disturbi che possono esserci sul segnale in ingresso al sistema. Infatti, se il segnale in ingresso fosse molto disturbato, con un comparatore classico in corrispondenza della soglia l'uscita continuerebbe ad oscillare fino a che il segnale in ingresso con il disturbo sommato non supera abbondantemente la soglia. In un comparatore con isteresi questo problema non si pone: infatti, non appena il segnale sommato al disturbo supera la prima soglia, essa cambia ed è necessario che il segnale superi la seconda (\Fig\ref{fig:trigger_di_shmitt_vantaggi}).
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/Usicta Rumorosa e Trigger di Shmitt.jpg}
+	\includegraphics[width=0.8\linewidth]{./ImageFiles/Laboratorio 3/Usicta Rumorosa e Trigger di Shmitt.jpg}
 	\caption{In questi grafici viene confrontato il comportamento di un comparatore classico (grafico in basso) con uno a \textit{Trigger di Schmitt} (grafico in mezzo) quando il segnale in ingresso è rumoroso (grafico in alto).}
 	\label{fig:trigger_di_shmitt_vantaggi}
 \end{figure} 
 
+\noindent
 La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt} è un ciclo di isteresi (\Fig\ref{fig:ciclo_isteresi}): come si può vedere dal grafico, in funzione al verso di percorrenza, le tensioni di soglia sono differenti. 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/Ciclo di Isteresi.png}
+	\includegraphics[width=0.8\linewidth]{./ImageFiles/Laboratorio 3/Ciclo di Isteresi.png}
 	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}.}
 	\label{fig:ciclo_isteresi}
 \end{figure} 
@@ -135,7 +134,7 @@ La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt
 
 
 \clearpage
-Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}). Un circuito oscillatore produce in uscita un'onda quadra, senza che in ingresso vi sia applicato un segnale.
+Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che produce in uscita un'onda quadra, senza che in ingresso vi sia applicato un segnale.
 
  \begin{figure}[h!]
  	\centering
@@ -163,29 +162,64 @@ Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}). Un ci
  	\label{fig:circuito_3}
  \end{figure}
 
-Per valutare il comportamento del circuito è necessario fare le seguenti osservazioni:
-\begin{itemize}
-	\item l'amplificatore è retroazionato positivamente, per cui l'uscita commuta tra $V_{DD}$ e $V_{SS}$;
-	\item la tensione di soglia dipende in modo dinamico dalla tensione di uscita. 
-\end{itemize}
-Si ipotizzi che la tensione $v^+$ sia maggiore della tensione $v^-$, per cui l'uscita $v_{out} = V_{DD}$ (o una tensione che approssima $V_{DD}$). Allora:
+\noindent
+Per valutare il comportamento del circuito è necessario osservare che l'amplificatore è retroazionato positivamente, per cui l'uscita commuta tra $V_{DD}$ e $V_{SS}$. Si ipotizzi che la tensione $v^+$ sia maggiore della tensione $v^-$, per cui l'uscita $v_{out} = V_{DD}$. Allora:
 \begin{equation}
-	v^+ = \frac{R1}{R1+R2}V_{DD} = V_H^+
+	v^+ = \frac{R1}{R1+R2} V_{DD} = V_H^+\overset{\mathrm{R_1=R_2}}{=}V_{DD}/2.
 \end{equation}
-per cui se $R1 = R2$, allora $V_H^+ = V_{DD}/2$. Nell'altra porzione di circuito è presenta una capacità $C$ con in serie la resistenza $R3$. Si ipotizzi che il condensatore sia inizialmente scarico e quindi $V_C = 0$. Se $v_{OUT} = V_{DD}$ allora il condensatore inizia a caricarsi tramite $R3$. Di conseguenza, la tensione al nodo $v_-$ (che è uguale a quella ai capi di $C$) inizia ad aumentare fino a che supera il livello di soglia $V_H^+$. A questo punto, $v^- > v^+$ e quindi $v_{OUT} = V_{SS}$: la tensione ai capi del condensatore è maggiore della tensione in uscita, quindi il condensatore si scarica attraverso $R3$. Ad un certo punto, il condensatore raggiungerà un'altra tensione di soglia pari a:
+Sul morsetto invertente è presente una capacità $C$ in serie alla resistenza $R$. Si ipotizzi che il condensatore sia inizialmente scarico e quindi $V_C = \SI{0}{\volt}$. Se $v_{out} = V_{DD}$ allora il condensatore inizia a caricarsi tramite $R$. Di conseguenza, la tensione al nodo $v^-$ inizia ad aumentare fino a che supera il livello di soglia $V_H^+$. A questo punto, $v^- > v^+$ e quindi $v_{out} = V_{SS}$. Ora, la tensione ai capi del condensatore è maggiore della tensione in uscita, quindi il condensatore si scarica attraverso $R$. Ad un certo punto, il condensatore raggiungerà l'altra tensione di soglia pari a:
 \begin{equation}
-	V_L^+ = \frac{R1}{R1+R2}V_{SS}
+	V_L^+ = \frac{R1}{R1+R2} V_SS\overset{\mathrm{R_1=R_2}}{=}V_{SS}/2.
 \end{equation}
-per cui se $R1 = R2$, allora $V_L^+ = V_{SS}/2$. Di conseguenza, $v_{OUT}$ ritorna a $V_{DD}$ e il condensatore comincia nuovamente una fase di carica. Questo ciclo si ripete all'infinito e tale comportamento si può osservare in figura \ref{fig:oscillatore}.
+Di conseguenza, $v_{out}$ ritorna a $V_{DD}$ e il condensatore comincia nuovamente una fase di carica. Questo ciclo si ripete all'infinito e tale comportamento si può osservare in figura \ref{fig:oscillatore}.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/Oscillatore.jpg}
+	%\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/Oscillatore.jpg}
 	\caption{Segnali $V_{OUT}$ e $V_C$ in funzione del tempo.}
 	\label{fig:oscillatore}
 \end{figure}
+\todo{la toglierei... non c'è molta coerenza con anche alcuni i nomi.. abbiamo quelle delloscilloscopio}
 
- \begin{figure}[h!]
+\todo{inserire foto oscilloscopio}
+
+
+La frequenza di oscillazione può essere regolata variando i valori di resistenze e del condensatore. In particolare, tale frequenza dipende dalla costante di tempo di carica e scarica del condensatore $\tau=RC$. Chiamiamo \textbf{T\sub{1}} l'intervallo di tempo in cui l'uscita rimane a V\sub{DD} mentre con \textbf{T\sub{2}} quando l'uscita rimane a V\sub{SS}. Inoltre, definiamo con \textbf{t\sub{1}} e \textbf{t\sub{2}} l'istante di tempo in cui si presenta, rispettivamente, un fronte di salita e di discesa. \`E possibile calcolare T\sub{1} e T\sub{2} con i seguenti passaggi:
+
+\begin{equation}
+	\begin{split}
+		v^-&=v_C(t_1)=V_{DD}(V_L^+-V_{DD})e^{\frac{T_1}{\tau}}=V_H^+ \\
+		T_1&=\tau \ln{\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}}\overset{\mathrm{R_1=R_2}}{=}\tau \ln{\frac{R_2+2R_1}{R_2}} \\
+		T_2&=\tau \ln{\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}}\overset{\mathrm{R_1=R_2}}{=}\tau \ln{\frac{R_2+2R_1}{R_2}}.
+	\end{split}
+\end{equation}
+Nel circuito realizzato si ottiene quindi che $T_1=T_2$, ossia che l'onda quadra in uscita presenta un \textit{duty-cycle} pari al \SI{50}{\percent}, dove il \textit{duty-cycle} è definito come $\frac{T_1}{T_1+T_2}$.
+
+\noindent
+Di seguito si riportano i valori dei componenti utilizzati: \todo{inserire valori e RIFERIMENTO ALLA TABELLA}
+
+\def\arraystretch{1.3}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		R1 & & \\ \hline
+		R2 & & \\ \hline
+		R & & \\ \hline
+		C & \SI{150}{\nano\farad} & Non misurato \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_3}
+\end{table}
+
+\noindent
+Se volessimo variare il \textit{duty-cycle} del segnale in uscita al circuito, potrei sbilanciare l'alimentazione positiva e negativa dell'amplificatore operazionale. In questo modo, variando le soglie sono in grado di modificare gli intervalli di carica e scarica del condensatore e di conseguenza gli intervalli T\sub{1} e T\sub{2}.
+\todo{inserire immagine confronto tra non sbilanciate e sbilanciate}
+
+
+Il quarto circuito realizzato permette di regolare il \textit{duty-cycle} dell'onda quadra in uscita senza sbilanciare le tensioni di alimentazione (\Fig\ref{fig:circuito_4}).
+\begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\scalebox{.75}{
@@ -212,6 +246,13 @@ per cui se $R1 = R2$, allora $V_L^+ = V_{SS}/2$. Di conseguenza, $v_{OUT}$ ritor
 	\caption{TODO:Temporaneo con doppio diodo}
 	\label{fig:circuito_4}
 \end{figure}
+Inserendo i diodi D1 e D2 è possibile differenziare le costanti di tempo di carica e scarica del circuito, permettendo di variare gli intervalli T\sub{1} e T\sub{2} e di conseguenza le caratteristiche dell'onda in uscita. Infatti, l'analisi del circuito è simile a quella del circuito precedente se non che il condensatore C viene caricato attraverso il diodo D\sub{2} e la resistenza R\sub{4}, mentre si scarica attraverso il diodo D\sub{1} e la resistenza R\sub{3}. Per cui la costante di tempo di carica è $\tau_1 = R_4C$ mentre la costante di scarica è $\tau_2=R_3C$. In modo analogo al circuito precedente si può calcolare gli intervalli T\sub{1} e T\sub{2} come:
+\begin{equation}
+	\begin{split}
+		T_1&=R_4C \ln{\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}} \\
+		T_2&=R_3C \ln{\frac{V_H^+-V_{SS}}{V_L^--V_{SS}}}.
+	\end{split}
+\end{equation}
+In questo modo si ottiene $T_1 \ne T_2$.
 
-La frequenza di oscillazione può essere regolata variando i componenti. In particolare, tale frequenza dipende dalla fase di carica e scarica del condensatore. 
-\todo{continuare ocn le formule} 
+\todo{inserire foto con anche le misure dei tempi t1 e t2: attenzione che avevamo notato delle discrepanze tra teoria e pratica}
