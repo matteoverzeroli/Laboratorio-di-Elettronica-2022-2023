@@ -61,10 +61,22 @@ Successivamente, si è analizzato il comportamento in frequenza del circuito eff
 \`E possibile notare che dalla frequenza di \SI{1}{\kilo\hertz} l'uscita presenta un ritardo sul fronte di salita ed a partire dai \SI{10}{\kilo\hertz} il circuito non funziona più come un raddrizzatore. Questo comportamento è legato allo \textit{slew rate} dell'amplificatore \textit{A2}: infatti, quando il diodo è spento, \textit{A2} non è più in retroazione e l'uscita $v_{out}^2$ satura alla tensione di saturazione negativa (poiché $v_+^2$ è a massa e $v_-^2=v_{in}>0$).\todo{aggiungere immagine 02} Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione -E a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
 
 \clearpage
-Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge la funzione di comparatore con isteresi (\Fig\ref{circuito_2}). 
+Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge la funzione di comparatore con isteresi (\Fig\ref{fig:circuito_2}). 
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
+		\scalebox{.75}{
+			\begin{circuitikz}
+				\draw (0,2.5) node[ground]{};
+				\draw (2,4) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
+				\draw (oa.-) -- (0,4) to[sV=$v_{in}$] (0,2.5);
+				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$+E$};
+				\draw (oa.down) -- ++(0,-0.3) node[vee]{$-E$};
+				\draw (oa.out) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-2.385,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
+				\draw (rg) -- ++(-1,0) to[R=$R_1$] ++(0,-2) node[ground]{};
+				\draw[thick] (-1.2,-1) rectangle (5.65,6);
+			\end{circuitikz} 
+		}
 	\end{minipage}\qquad
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR12.jpg}
@@ -108,7 +120,7 @@ L'utilizzo di questa struttura è molto utile perché è meno sensibile rispetto
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/Usicta Rumorosa e Trigger di Shmitt.jpg}
-	\caption{In questi grafici viene confrontato il comportmento di un comparatore classico (grafico in basso) con uno a \textit{Trigger di Schmitt} (grafico in mezzo) quando il segnale in ingresso è rumoroso (grafico in alto).}
+	\caption{In questi grafici viene confrontato il comportamento di un comparatore classico (grafico in basso) con uno a \textit{Trigger di Schmitt} (grafico in mezzo) quando il segnale in ingresso è rumoroso (grafico in alto).}
 	\label{fig:trigger_di_shmitt_vantaggi}
 \end{figure} 
 
@@ -128,7 +140,21 @@ Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}). Un ci
  \begin{figure}[h!]
  	\centering
  	\begin{minipage}{.45\textwidth}
- 	
+ 	\scalebox{.75}{
+ 			\begin{circuitikz}
+ 				\draw (0,2.5) node[ground]{};
+ 				\draw (2,4) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
+ 				\draw (oa.-) -- (0,4) to[C=$C$] (0,2.5);
+ 				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$+E$};
+ 				\draw (oa.down) -- ++(0,-0.3) node[vee]{$-E$};
+ 				\draw (oa.out) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-2.385,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
+ 				\draw (oa.-) -- ++(0,1.7) coordinate(Rf) to[R=$R$]++(2.385,0) (Rf-|oa.out) -- (oa.out);
+ 				\draw (oa.+) to[short, -o] ++(0,0) ++(-.1,0) node[left]{$v_+$};
+ 				\draw (oa.-) to[short, -o] ++(0,0) ++(0,-.1) node[below]{$v_-$};
+ 				\draw (rg) -- ++(-1,0) to[R=$R_1$] ++(0,-2) node[ground]{};
+ 				\draw[thick] (-1.2,-1) rectangle (5.65,6.5);
+ 			\end{circuitikz} 
+ 		}
  	\end{minipage}\qquad
  	\begin{minipage}{.45\textwidth}
  		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR31.jpg}
@@ -157,7 +183,35 @@ per cui se $R1 = R2$, allora $V_L^+ = V_{SS}/2$. Di conseguenza, $v_{OUT}$ ritor
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/Oscillatore.jpg}
 	\caption{Segnali $V_{OUT}$ e $V_C$ in funzione del tempo.}
 	\label{fig:oscillatore}
-\end{figure} 
+\end{figure}
+
+ \begin{figure}[h!]
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\scalebox{.75}{
+			\begin{circuitikz}
+				\draw (0,2.5) node[ground]{};
+				\draw (2,4) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
+				\draw (oa.-) -- (0,4) to[C=$C$] (0,2.5);
+				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$+E$};
+				\draw (oa.down) -- ++(0,-0.3) node[vee]{$-E$};
+				\draw (oa.out) -- ++(1.613,0) coordinate(loop);
+				\draw (loop) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-4,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
+				\draw (oa.-) -- ++(0,1.7) coordinate(r4) -- ++(0,1.5) to[R=$R_4$]++(2,0) to[D=$D_1$, invert] ++(2,0) coordinate(Rf) (Rf-|loop) -- (loop);
+				\draw (r4) to[R=$R_3$] ++(2,0) to[D=$D_2$] ++(2,0);
+				\draw (oa.+) to[short, -o] ++(0,0) ++(-.1,0) node[left]{$v_+$};
+				\draw (oa.-) to[short, -o] ++(0,0) ++(0,-.1) node[below]{$v_-$};
+				\draw (rg) -- ++(-1,0) to[R=$R_1$] ++(0,-2) node[ground]{};
+				\draw[thick] (-1.2,-1) rectangle (7,8.5);
+			\end{circuitikz} 
+		}
+	\end{minipage}\qquad
+	\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR31.jpg}
+	\end{minipage}
+	\caption{TODO:Temporaneo con doppio diodo}
+	\label{fig:circuito_4}
+\end{figure}
 
 La frequenza di oscillazione può essere regolata variando i componenti. In particolare, tale frequenza dipende dalla fase di carica e scarica del condensatore. 
 \todo{continuare ocn le formule} 
