@@ -147,10 +147,10 @@ Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene appli
 	\item se $v^+-v^->0$, allora $v_{out}=V_{DD}$;
 	\item se $v^+-v^-<0$, allora $v_{out}=V_{SS}$.
 \end{itemize}
-Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a V\sub{SS}, di conseguenza l'uscita $v_{out}$ saturerà alla tensione V\sub{DD} (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione V\sub{DD}. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa V\sub{SS} e rimarrà tale fino a quando $v_{in}<\frac{R_1}{R_1+R_2}V_{SS}\overset{\mathrm{R_1=R_2}}{=}V_L^+=\frac{1}{2}V_{SS}$. 
+Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a $V\sub{SS}$, di conseguenza l'uscita $v_{out}$ saturerà alla tensione $V\sub{DD}$ (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione $V\sub{DD}$. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa $V\sub{SS}$ e rimarrà tale fino a quando $v_{in}<\frac{R_1}{R_1+R_2}V_{SS}=V_L^+\overset{\mathrm{R_1=R_2}}{=}\frac{1}{2}V_{SS}$. 
 
 \noindent
-Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione V\sub{DD} e V\sub{SS}, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}. Le tensioni di alimentazione sono state impostate a V\sub{DD}=\SI{10}{\volt} e V\sub{SS}=-\SI{10}{\volt}.
+Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione $V\sub{DD}$ e $V\sub{SS}$, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}. Le tensioni di alimentazione sono state impostate a V\sub{DD}=\SI{10}{\volt} e V\sub{SS}=-\SI{10}{\volt}.
 
 \def\arraystretch{1.3}
 \begin{table}[h]
@@ -166,7 +166,7 @@ Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione V\sub
 \end{table}
 
 \noindent
-L'utilizzo di questa struttura è molto utile perché è meno sensibile a disturbi che possono presentarsi sul segnale in ingresso al sistema. Infatti, in un semplice comparatore, se il segnale in ingresso fosse molto disturbato in corrispondenza della soglia, l'uscita continuerebbe a commutare tra V\sub{DD} e V\sub{SS} fino a che il segnale in ingresso non supera abbondantemente la soglia. In un comparatore con isteresi questo problema non si pone: infatti, non appena il segnale (a cui si somma un disturbo) supera la prima soglia, essa cambia ed è necessario che il segnale attraversi una seconda (\Fig\ref{fig:trigger_di_shmitt_vantaggi}).
+L'utilizzo di questa struttura è molto utile perché è meno sensibile a disturbi che possono presentarsi sul segnale in ingresso al sistema. Infatti, in un semplice comparatore, se il segnale in ingresso fosse molto disturbato in corrispondenza della soglia, l'uscita continuerebbe a commutare tra $V\sub{DD}$ e $V\sub{SS}$ fino a che il segnale in ingresso non supera abbondantemente la soglia. In un comparatore con isteresi questo problema non si pone: infatti, non appena il segnale (a cui si somma un disturbo) supera la prima soglia, essa cambia ed è necessario che il segnale ne attraversi una seconda (\Fig\ref{fig:trigger_di_shmitt_vantaggi}).
 
 \begin{figure}[h!]
 	\centering
@@ -178,7 +178,7 @@ Nella figura \ref{fig:uscita_circuito_2} sono riportate le misure del segnale in
 \begin{figure}[tbh]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00007.PNG}
-	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{20}{\volt} con frequenza pari a \SI{100}{\hertz}.}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{20}{\volt} con frequenza pari a \SI{100}{\hertz}.}
 	\label{fig:uscita_circuito_2}
 \end{figure}
 
@@ -188,10 +188,10 @@ La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt
 	\centering
 	\includegraphics[width=0.4\linewidth]{./ImageFiles/Laboratorio 3/Ciclo di Isteresi.png}
 	\includegraphics[width=0.5\linewidth]{./ImageFiles/Laboratorio 3/TEK00008.PNG}
-	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}, a sinistra l'andamento teorico e a destra l'andamento misurato nella modalità XY.}
+	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}: a sinistra l'andamento teorico e a destra l'andamento misurato nella modalità XY.}
 	\label{fig:ciclo_isteresi}
 \end{figure} 
-\todo{inseriamo le immagini da 9 a 13?}
+
 \clearpage 
 Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che produce in uscita un'onda quadra, senza che in ingresso vi sia applicato un segnale.
 
