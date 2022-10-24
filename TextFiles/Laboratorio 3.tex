@@ -63,7 +63,7 @@ I valori nominali ed effettivi delle resistenze utilizzate e la tensioni di sogl
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		R1 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm}
+		R1 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm} \\ \hline
 		R2 &\SI{18}{\kilo\ohm} & \SI{17,81}{\kilo\ohm} \\ \hline
 		R3 &\SI{18}{\kilo\ohm} & \SI{18,03}{\kilo\ohm} \\ \hline
 		V\sub{D} & $\simeq$\SI{0.7}{\volt} & \SI{617}{\milli\volt} \\ \hline
@@ -71,8 +71,6 @@ I valori nominali ed effettivi delle resistenze utilizzate e la tensioni di sogl
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_1}
 \end{table}
-
-\todo{inserire valori}
 
 \noindent
 \`E possibile verificare la caratteristica ingresso-uscita del circuito analizzando il grafico XY generato dall'oscilloscopio (\Fig\ref{fig:xy_circuito_1}). 
@@ -110,7 +108,7 @@ Successivamente, si è analizzato il comportamento in frequenza del circuito eff
 	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}^2$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}. \`E possibile notare la saturazione dell'uscita dell'amplificatore \textit{A2}.}
 	\label{fig:uscita_sat_circuito_1}
 \end{figure}
-Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione V\sub{SS} a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato (\Fig\ref{fig:slew_rate_circuito_1}) è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
+Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione V\sub{SS} a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate. Il valore stimato (\Fig\ref{fig:slew_rate_circuito_1}) è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00006.PNG}
