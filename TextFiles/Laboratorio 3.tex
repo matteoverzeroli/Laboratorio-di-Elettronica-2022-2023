@@ -1,6 +1,6 @@
 \chapter{Laboratorio 3}
 
-Il primo circuito analizzato è un rettificatore a doppia semionda di precisione (\Fig\ref{fig:circuito_1}). Grazie all'utilizzo di due amplificatori operazionali ed un diodo, è possibile eliminare i problemi relativi al rettificatore a doppia semionda visto nella precedente esperienza di laboratorio, dove veniva utilizzato un unico amplificatore operazionale e due diodi. Per questo circuito sono stati utilizzati due amplificatori operazionali \textit{general-purpose} \textbf{\textmu A741} \url{https://www.ti.com/lit/ds/symlink/ua741.pdf}.
+Il primo circuito analizzato è un rettificatore a doppia semionda di precisione (\Fig\ref{fig:circuito_1}). Grazie all'utilizzo di due amplificatori operazionali ed un diodo, è possibile eliminare i problemi relativi al rettificatore a doppia semionda visto nella precedente esperienza di laboratorio, dove veniva utilizzato un unico amplificatore operazionale e due diodi. Per questo circuito sono stati utilizzati due amplificatori operazionali \textit{general-purpose} \textbf{\textmu A741} (\url{https://www.ti.com/lit/ds/symlink/ua741.pdf}).
 \begin{figure}[ht!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -35,28 +35,88 @@ Il primo circuito analizzato è un rettificatore a doppia semionda di precisione
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR21.jpg}
 	\end{minipage}
-	\caption{Schema circuitale del raddrizzatore a doppia semionda e foto del circuito realizzato.}
+	\caption{Schema circuitale del raddrizzatore a doppia semionda di precisione e foto del circuito realizzato.}
 	\label{fig:circuito_1}
 \end{figure}
 
 \noindent
 Per studiare il comportamento del sistema è necessario analizzare come si comporta il diodo al variare della tensione di ingresso $v_{in}$:
 \begin{itemize}
-	\item $v_{in} \geq 0$: si ipotizza inizialmente che il diodo sia acceso. Allora, $A2$  è in retroazione negativa. Di conseguenza vale il principio di cortocircuito virtuale e quindi il nodo $v_{+}^1$ è a massa. Se questo fosse vero, la corrente dovrebbe percorrere la resistenza $R1$ da sinistra verso destra\todo{Nominiamo le resistenze anche se hanno lo stesso valore se non spiegare il circuito è un casino. le nominiamo dal basso all'alto, quindi R1 è quella più in basso. Marco: Dovrebbe essere giusto, verificate}. Tuttavia, ciò non è possibile, perchè i morsetti dell'amplificatore operazionale non assorbono corrente e il diodo non permette il passaggio di corrente in quel verso. Quindi, l'ipotesi che il diodo sia acceso non è corretta e assumiamo che il diodo è spento. Questo significa che l'amplificatore $A2$ non è retroazionato. Allora, in $R1$ non può scorrere corrente e la tensione sul nodo $v_{+}^1$ è pari a $v_{in}$. Ma questo implica che anche la tensione sul nodo $v_{-}^1$ sia pari a $v_{in}$. Di conseguenza, non scorre corrente neanche in $R2$ e quindi nemmeno in $R3$. Allora, la tensione $v_{out} = v_{in}$;
+	\item $v_{in} \geq 0$: si ipotizza inizialmente che il diodo sia acceso. Allora, $A2$  è in retroazione negativa. Di conseguenza vale il principio di cortocircuito virtuale e quindi il nodo $v_{+}^1$ è a massa. Se questo fosse vero, la corrente dovrebbe percorrere la resistenza $R1$ da sinistra verso destra. Tuttavia, ciò non è possibile, perché i morsetti dell'amplificatore operazionale non assorbono corrente e il diodo non permette il passaggio di corrente in quel verso. Quindi, l'ipotesi che il diodo sia acceso non è corretta e assumiamo che il diodo è spento. Questo significa che l'amplificatore $A2$ non è retroazionato. Allora, in $R1$ non può scorrere corrente e la tensione sul nodo $v_{+}^1$ è pari a $v_{in}$. Ma questo implica che anche la tensione sul nodo $v_{-}^1$ sia pari a $v_{in}$. Di conseguenza, non scorre corrente neanche in $R2$ e quindi nemmeno in $R3$. Allora, la tensione $v_{out} = v_{in}$;
 	\item $v_{in} < 0$: si ipotizza che il diodo sia acceso, quindi $A2$ è retroazionato negativamente. Il nodo $v_{+}^1$ è connesso ad una massa virtuale e quindi la corrente scorre nella resistenza $R1$ da destra a sinistra, dato che $v_{in} < 0$. Tale corrente può provenire dal diodo e questo verifica l'ipotesi iniziale. Se $v_{+}^1$ è a massa, lo è anche $v_{-}^1$, quindi $A1$ è in configurazione invertente. Se $R2 = R3$, il guadagno dell'amplificatore invertente è pari a 1 e $v_{out} = -v_{in}$.
 \end{itemize}
-Di conseguenza, questo circuito rettifica entrambe le semionde e elimina il problema dello \text{shift} di tensione causato dalla tensione di polarizzazione del diodo. Nella figura \todo{inserire figura 01} è possibile verificare il comportamento del circuito.
-
-I valori nominali ed effettivi delle resistenze utilizzate e la tensioni di soglia del diodo (misurata tramite multimetro) sono riportati in tabella \ref{xxx}.
-
-\todo{inserire tabella con valori effettivi e misurati anche del diodo come nelle scorse relazioni e aggiungere indicazioni tensione VDD e VSS}
+Di conseguenza, questo circuito rettifica entrambe le semionde e elimina il problema dello \text{shift} di tensione causato dalla tensione di polarizzazione del diodo. Nella figura \ref{fig:uscita_circuito_1} è possibile verificare il comportamento del circuito.
+\begin{figure}[tbh]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00001.PNG}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}.}
+	\label{fig:uscita_circuito_1}
+\end{figure}
+Si noti come il circuito presenta in uscita il segnale in ingresso rettificato senza alcun shift di tensione. 
 
 \noindent
-Inoltre, si può verificare la caratteristica ingresso-uscita del circuito analizzando il grafico XY generato dall'oscilloscopio \todo{inserire figura 00}. Questo grafico mostra la tensione di uscita (asse delle ordinate) in funzione della tensione in ingresso (asse delle ascisse) e rappresenta una funzione di valore assoluto: infatti, il compito di un rettificatore è quello di riportare inalterato il segnale in ingresso in uscita, se positivo, ed invertirlo se negativo.
+I valori nominali ed effettivi delle resistenze utilizzate e la tensioni di soglia del diodo (misurata tramite multimetro) sono riportati in tabella \ref{tab:valori_componenti_1}. Inoltre, gli amplificatori sono stati alimentati con una tensione positiva di +\SI{10}{\volt} e di -\SI{10}{\volt}.
+
+\def\arraystretch{1.3}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		R1 & & \\ \hline
+		R2 & & \\ \hline
+		R3 & & \\ \hline
+		V\sub{D} & $\simeq$\SI{0.7}{\volt} & \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_1}
+\end{table}
+
+\todo{inserire valori}
 
 \noindent
-Successivamente, si è analizzato il comportamento in frequenza del circuito effettuando delle misure di $v_{in}$ e $v_{out}$ con l'oscilloscopio, variando la frequenza della sinusoide in ingresso. \todo{inserire foto 01,03,04,05}
-\`E possibile notare che dalla frequenza di \SI{1}{\kilo\hertz} l'uscita presenta un ritardo sul fronte di salita ed a partire dai \SI{10}{\kilo\hertz} il circuito non funziona più come un raddrizzatore. Questo comportamento è legato allo \textit{slew rate} dell'amplificatore \textit{A2}: infatti, quando il diodo è spento, \textit{A2} non è più in retroazione e l'uscita $v_{out}^2$ satura alla tensione di saturazione negativa (poiché $v_+^2$ è a massa e $v_-^2=v_{in}>0$).\todo{aggiungere immagine 02} Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione V\sub{SS} a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
+\`E possibile verificare la caratteristica ingresso-uscita del circuito analizzando il grafico XY generato dall'oscilloscopio (\Fig\ref{fig:xy_circuito_1}). 
+\begin{figure}[tbh]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00000.PNG}
+	\caption{Grafico XY dove in ingresso è stato applicato un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}.}
+	\label{fig:xy_circuito_1}
+\end{figure}
+Questo grafico mostra la tensione di uscita (asse delle ordinate) in funzione della tensione in ingresso (asse delle ascisse) e rappresenta una funzione di valore assoluto: infatti, il compito di un rettificatore è quello di riportare inalterato il segnale in ingresso in uscita, se positivo, ed invertirlo se negativo.
+
+\noindent
+Successivamente, si è analizzato il comportamento in frequenza del circuito effettuando delle misure di $v_{in}$ e $v_{out}$ con l'oscilloscopio, variando la frequenza della sinusoide in ingresso. Le misure sono riportate nella figura \ref{fig:uscita_freq_circuito_1}.
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00001.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00003.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00004.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00005.PNG}
+	\end{minipage}
+	\caption{Misure del segnale in ingresso (linea gialla) e del segnale in uscita (linea azzurra) al circuito. Il segnale in ingresso è una sinusoide di \SI{2}{\volt} picco-picco e frequenza pari a \SI{100}{\hertz} (in alto a sinistra), \SI{1}{\kilo\hertz} (in alto a destra), \SI{10}{\kilo\hertz} (in basso a sinistra) e \SI{100}{\kilo\hertz} (in basso a destra).}
+	\label{fig:uscita_freq_circuito_1}
+\end{figure}
+\`E possibile notare che dalla frequenza di \SI{1}{\kilo\hertz} l'uscita presenta un ritardo sul fronte di salita ed a partire dai \SI{10}{\kilo\hertz} il circuito non funziona più come un raddrizzatore. Questo comportamento è legato allo \textit{slew rate} dell'amplificatore \textit{A2}: infatti, quando il diodo è spento, \textit{A2} non è più in retroazione e l'uscita $v_{out}^2$ satura alla tensione di saturazione negativa (poiché $v_+^2$ è a massa e $v_-^2=v_{in}>0$) (\Fig\ref{fig:uscita_sat_circuito_1}).
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00002.PNG}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}^2$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}. \`E possibile notare la saturazione dell'uscita dell'amplificatore \textit{A2}.}
+	\label{fig:uscita_sat_circuito_1}
+\end{figure}
+Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione V\sub{SS} a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato (\Fig\ref{fig:slew_rate_circuito_1}) è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00006.PNG}
+	\caption{Misure con cursori sul segnale $v_{in}$ (linea gialla) e del segnale $v_{out}^2$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}.}
+	\label{fig:slew_rate_circuito_1}
+\end{figure}
 
 \clearpage
 Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge la funzione di comparatore con isteresi (\Fig\ref{fig:circuito_2}). 
