@@ -13,18 +13,16 @@ Il primo circuito analizzato è un rettificatore a doppia semionda di precisione
 				\draw (3,2) to (4,2);
 				\draw (3.7,2) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
 				\draw (oa.down) ++(.5,.2) node[below]{$A1$};
-				\draw (oa.up) -- ++(0, .3) node[vcc]{$+E$};
-				\draw (oa.down) -- ++(0,-.3) node[vee]{$-E$};
+				\draw (oa.up) -- ++(0, .3) node[vcc]{$V_{DD}$};
+				\draw (oa.down) -- ++(0,-.3) node[vee]{$V_{SS}$};
 				\draw (vin) to[R=$R_1$] (oa.+);
 				\draw (1.32,-2) node[op amp, anchor=-](oa2){\texttt{\textmu A741}};
 				\draw (oa2.down) ++(.5,.2) node[below]{$A2$};
 				\draw (oa.+) -- ++(0,-1) to[D=$D_1$, invert] (oa2.out-|oa.+) to[short, -o] ++(0,0) ++(0,-.1) node[below]{$v_{out2}$};
 				\draw (oa2.-) -- ++(0,2) -- ++(2.4,0);
-				\draw (oa2.up) -- ++(0, .3) node[vcc]{$+E$};
-				\draw (oa2.down) -- ++(0,-.3) node[vee]{$-E$};
+				\draw (oa2.up) -- ++(0, .3) node[vcc]{$V_{DD}$};
+				\draw (oa2.down) -- ++(0,-.3) node[vee]{$V_{SS}$};
 				\draw (oa2.+) -- ++(0,-.3) node[ground]{};
-				\draw (oa.up) -- ++(0, .3) node[vcc]{$+E$};
-				\draw (oa.down) -- ++(0,-.3) node[vee]{$-E$};
 				\draw (oa2.+) to[short,-o] ++(0,0) node[left]{$v^2_+$};
 				\draw (oa2.-) to[short,-o] ++(0,0) node[left]{$v^2_-$};
 				\draw (oa.+) to[short,-o] ++(0,0) node[above]{$v^1_+$};
@@ -51,14 +49,14 @@ Di conseguenza, questo circuito rettifica entrambe le semionde e elimina il prob
 
 I valori nominali ed effettivi delle resistenze utilizzate e la tensioni di soglia del diodo (misurata tramite multimetro) sono riportati in tabella \ref{xxx}.
 
-\todo{inserire tabella con valori effettivi e misurati anche del diodo come nelle scorse relazioni e aggiungere indicazioni tensione +E e -E}
+\todo{inserire tabella con valori effettivi e misurati anche del diodo come nelle scorse relazioni e aggiungere indicazioni tensione VDD e VSS}
 
 \noindent
 Inoltre, si può verificare la caratteristica ingresso-uscita del circuito analizzando il grafico XY generato dall'oscilloscopio \todo{inserire figura 00}. Questo grafico mostra la tensione di uscita (asse delle ordinate) in funzione della tensione in ingresso (asse delle ascisse) e rappresenta una funzione di valore assoluto: infatti, il compito di un rettificatore è quello di riportare inalterato il segnale in ingresso in uscita, se positivo, ed invertirlo se negativo.
 
 \noindent
 Successivamente, si è analizzato il comportamento in frequenza del circuito effettuando delle misure di $v_{in}$ e $v_{out}$ con l'oscilloscopio, variando la frequenza della sinusoide in ingresso. \todo{inserire foto 01,03,04,05}
-\`E possibile notare che dalla frequenza di \SI{1}{\kilo\hertz} l'uscita presenta un ritardo sul fronte di salita ed a partire dai \SI{10}{\kilo\hertz} il circuito non funziona più come un raddrizzatore. Questo comportamento è legato allo \textit{slew rate} dell'amplificatore \textit{A2}: infatti, quando il diodo è spento, \textit{A2} non è più in retroazione e l'uscita $v_{out}^2$ satura alla tensione di saturazione negativa (poiché $v_+^2$ è a massa e $v_-^2=v_{in}>0$).\todo{aggiungere immagine 02} Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione -E a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
+\`E possibile notare che dalla frequenza di \SI{1}{\kilo\hertz} l'uscita presenta un ritardo sul fronte di salita ed a partire dai \SI{10}{\kilo\hertz} il circuito non funziona più come un raddrizzatore. Questo comportamento è legato allo \textit{slew rate} dell'amplificatore \textit{A2}: infatti, quando il diodo è spento, \textit{A2} non è più in retroazione e l'uscita $v_{out}^2$ satura alla tensione di saturazione negativa (poiché $v_+^2$ è a massa e $v_-^2=v_{in}>0$).\todo{aggiungere immagine 02} Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione V\sub{SS} a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate \todo{inserire figura 06}. Il valore stimato è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
 
 \clearpage
 Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge la funzione di comparatore con isteresi (\Fig\ref{fig:circuito_2}). 
@@ -70,8 +68,8 @@ Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge 
 				\draw (0,2.5) node[ground]{};
 				\draw (2,4) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
 				\draw (oa.-) -- (0,4) to[sV=$v_{in}$] (0,2.5);
-				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$+E$};
-				\draw (oa.down) -- ++(0,-0.3) node[vee]{$-E$};
+				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$V_{DD}$};
+				\draw (oa.down) -- ++(0,-0.3) node[vee]{$V_{SS}$};
 				\draw (oa.out) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-2.385,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
 				\draw (rg) -- ++(-1,0) to[R=$R_1$] ++(0,-2) node[ground]{};
 				\draw[thick] (-1.2,-1) rectangle (5.65,6);
@@ -88,13 +86,13 @@ Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge 
 \noindent
 Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene applicato al morsetto invertente di un amplificatore operazionale (nel nostro caso si è utilizzato il \textbf{\textmu A741}), retroazionato positivamente grazie alle resistenze $R\sub{1}$ e $R\sub{2}$. Di conseguenza, non è più valido il principio di cortocircuito virtuale tra $V\super{+}$ e $V\super{-}$, poiché non è più presente una retroazione negativa. Per cui, l'uscita $v_{out}=A(v^+-v^-)$, con A pari al guadagno dell'amplificatore operazionale, e il circuito si comporta come un comparatore. Infatti, supponendo un guadagno molto alto (idealmente tendente all'infinito), accade che:
 \begin{itemize}
-	\item se $v^+-v^->0$, allora $v_{out}=+E$;
-	\item se $v^+-v^-<0$, allora $v_{out}=-E$.
+	\item se $v^+-v^->0$, allora $v_{out}=V_{DD}$;
+	\item se $v^+-v^-<0$, allora $v_{out}=V_{SS}$.
 \end{itemize}
-Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella vista prima di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a -E, di conseguenza l'uscita $v_{out}$ saturerà alla tensione +E (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}(+E)=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}(+E)$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione +E. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa -E e rimarrà tale fino a quando $v_{in}<V_L^+=\frac{R_1}{R_1+R_2}(-E)\overset{\mathrm{R_1=R_2}}{=}V_L^+=\frac{1}{2}(-E)$. 
+Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella vista prima di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a V\sub{SS}, di conseguenza l'uscita $v_{out}$ saturerà alla tensione V\sub{DD} (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione V\sub{DD}. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa V\sub{SS} e rimarrà tale fino a quando $v_{in}<V_L^+=\frac{R_1}{R_1+R_2}V_{SS}\overset{\mathrm{R_1=R_2}}{=}V_L^+=\frac{1}{2}V_{SS}$. 
 
 \noindent
-Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione +E e -E, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. \todo{Verificare bene questa frase, mi sembra che possa essere fraintesa.}
+Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione V\sub{DD} e V\sub{SS}, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. \todo{Verificare bene questa frase, mi sembra che possa essere fraintesa.}
 \todo{magari inserire un grafico fatto tipo a mano su onenote per esempio delle soglie che magari è più pratico?}
 I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}.
 
@@ -144,8 +142,8 @@ Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che pr
  				\draw (0,2.5) node[ground]{};
  				\draw (2,4) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
  				\draw (oa.-) -- (0,4) to[C=$C$] (0,2.5);
- 				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$+E$};
- 				\draw (oa.down) -- ++(0,-0.3) node[vee]{$-E$};
+ 				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$V_{DD}$};
+ 				\draw (oa.down) -- ++(0,-0.3) node[vee]{$V_{SS}$};
  				\draw (oa.out) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-2.385,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
  				\draw (oa.-) -- ++(0,1.7) coordinate(Rf) to[R=$R$]++(2.385,0) (Rf-|oa.out) -- (oa.out);
  				\draw (oa.+) to[short, -o] ++(0,0) ++(-.1,0) node[left]{$v_+$};
@@ -227,8 +225,8 @@ Il quarto circuito realizzato permette di regolare il \textit{duty-cycle} dell'o
 				\draw (0,2.5) node[ground]{};
 				\draw (2,4) node[op amp, anchor=-](oa){\texttt{\textmu A741}};
 				\draw (oa.-) -- (0,4) to[C=$C$] (0,2.5);
-				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$+E$};
-				\draw (oa.down) -- ++(0,-0.3) node[vee]{$-E$};
+				\draw (oa.up) -- ++(0, 0.3) node[vcc]{$V_{DD}$};
+				\draw (oa.down) -- ++(0,-0.3) node[vee]{$V_{SS}$};
 				\draw (oa.out) -- ++(1.613,0) coordinate(loop);
 				\draw (loop) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-4,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
 				\draw (oa.-) -- ++(0,1.7) coordinate(r4) -- ++(0,1.5) to[R=$R_4$]++(2,0) to[D=$D_1$, invert] ++(2,0) coordinate(Rf) (Rf-|loop) -- (loop);
