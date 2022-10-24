@@ -238,9 +238,9 @@ Di conseguenza, $v_{out}$ ritorna a $V_{DD}$ e il condensatore comincia nuovamen
 	\caption{Segnali $V_{OUT}$ e $V_C$ in funzione del tempo.}
 	\label{fig:oscillatore}
 \end{figure}
-\todo{la toglierei... non c'è molta coerenza con anche alcuni i nomi.. abbiamo quelle delloscilloscopio}
+\todo{inserire foto 13}
 
-\todo{inserire foto oscilloscopio}
+\todo{inserire le foto successive? non ricordo se sono utili}
 
 
 La frequenza di oscillazione può essere regolata variando i valori di resistenze e del condensatore. In particolare, tale frequenza dipende dalla costante di tempo di carica e scarica del condensatore $\tau=RC$. Chiamiamo \textbf{T\sub{1}} l'intervallo di tempo in cui l'uscita rimane a V\sub{DD} mentre con \textbf{T\sub{2}} quando l'uscita rimane a V\sub{SS}. Inoltre, definiamo con \textbf{t\sub{1}} e \textbf{t\sub{2}} l'istante di tempo in cui si presenta, rispettivamente, un fronte di salita e di discesa. \`E possibile calcolare T\sub{1} e T\sub{2} con i seguenti passaggi:
@@ -252,7 +252,7 @@ La frequenza di oscillazione può essere regolata variando i valori di resistenz
 		T_2&=\tau \ln{\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}}\overset{\mathrm{R_1=R_2}}{=}\tau \ln{\frac{R_2+2R_1}{R_2}}.
 	\end{split}
 \end{equation}
-Nel circuito realizzato si ottiene quindi che $T_1=T_2$, ossia che l'onda quadra in uscita presenta un \textit{duty-cycle} pari al \SI{50}{\percent}, dove il \textit{duty-cycle} è definito come $\frac{T_1}{T_1+T_2}$.
+Nel circuito realizzato si ottiene quindi che $T_1=T_2$ (considerando $R_1=R_2$ e V\sub{DD}=\SI{10}{\volt} e V\sub{SS}=-\SI{10}{\volt}), ossia che l'onda quadra in uscita presenta un \textit{duty-cycle} pari al \SI{50}{\percent}, dove il \textit{duty-cycle} è definito come $\frac{T_1}{T_1+T_2}$.
 
 \noindent
 Nella tabella \ref{tab:valori_componenti_3} si riportano i valori dei componenti utilizzati:
@@ -273,11 +273,11 @@ Nella tabella \ref{tab:valori_componenti_3} si riportano i valori dei componenti
 \end{table}
 
 \noindent
-Se volessimo variare il \textit{duty-cycle} del segnale in uscita al circuito, potrei sbilanciare l'alimentazione positiva e negativa dell'amplificatore operazionale. In questo modo, variando le soglie sono in grado di modificare gli intervalli di carica e scarica del condensatore e di conseguenza gli intervalli T\sub{1} e T\sub{2}.
-\todo{inserire immagine confronto tra non sbilanciate e sbilanciate}
+Se volessimo variare il \textit{duty-cycle} del segnale in uscita al circuito, si potrebbe sbilanciare l'alimentazione positiva e negativa dell'amplificatore operazionale. In questo modo, variando le soglie sono in grado di modificare gli intervalli di carica e scarica del condensatore e di conseguenza gli intervalli T\sub{1} e T\sub{2}.
+\todo{inserire immagine confronto tra non sbilanciate e sbilanciate 21 e 22?}
 
-
-Il quarto circuito realizzato permette di regolare il \textit{duty-cycle} dell'onda quadra in uscita senza sbilanciare le tensioni di alimentazione (\Fig\ref{fig:circuito_4}).
+\clearpage
+Il quarto circuito realizzato è un circuito oscillatore che permette di regolare il \textit{duty-cycle} dell'onda quadra in uscita senza sbilanciare le tensioni di alimentazione (\Fig\ref{fig:circuito_4}). \todo{inserire foto}
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -300,11 +300,13 @@ Il quarto circuito realizzato permette di regolare il \textit{duty-cycle} dell'o
 		}
 	\end{minipage}\qquad
 	\begin{minipage}{.45\textwidth}
-		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR31.jpg}
+		%\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR31.jpg}
 	\end{minipage}
-	\caption{TODO:Temporaneo con doppio diodo}
+	\caption{Schema circuitale dell'oscillatore e foto del circuito realizzato.}
 	\label{fig:circuito_4}
 \end{figure}
+
+\noindent
 Inserendo i diodi D1 e D2 è possibile differenziare le costanti di tempo di carica e scarica del circuito, permettendo di variare gli intervalli T\sub{1} e T\sub{2} e di conseguenza le caratteristiche dell'onda in uscita. Infatti, l'analisi del circuito è simile a quella del circuito precedente se non che il condensatore C viene caricato attraverso il diodo D\sub{2} e la resistenza R\sub{4}, mentre si scarica attraverso il diodo D\sub{1} e la resistenza R\sub{3}. Per cui la costante di tempo di carica è $\tau_1 = R_4C$ mentre la costante di scarica è $\tau_2=R_3C$. In modo analogo al circuito precedente si può calcolare gli intervalli T\sub{1} e T\sub{2} come:
 \begin{equation}
 	\begin{split}
