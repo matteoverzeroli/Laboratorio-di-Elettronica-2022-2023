@@ -63,10 +63,10 @@ I valori nominali ed effettivi delle resistenze utilizzate e la tensioni di sogl
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		R1 & & \\ \hline
-		R2 & & \\ \hline
-		R3 & & \\ \hline
-		V\sub{D} & $\simeq$\SI{0.7}{\volt} & \\ \hline
+		R1 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm}
+		R2 &\SI{18}{\kilo\ohm} & \SI{17,81}{\kilo\ohm} \\ \hline
+		R3 &\SI{18}{\kilo\ohm} & \SI{18,03}{\kilo\ohm} \\ \hline
+		V\sub{D} & $\simeq$\SI{0.7}{\volt} & \SI{617}{\milli\volt} \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_1}
@@ -162,13 +162,12 @@ I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tab
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		R1 & & \\ \hline
-		R2 & & \\ \hline
+		R1 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm} \\ \hline
+		R2 &\SI{18}{\kilo\ohm} & \SI{17,82}{\kilo\ohm} \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati delle resistenze utilizzate nel circuito.}
 	\label{tab:valori_componenti_2}
 \end{table}
-\todo{inserire valori resistenze reale}
 
 \noindent
 L'utilizzo di questa struttura è molto utile perché è meno sensibile rispetto ai disturbi che possono esserci sul segnale in ingresso al sistema. Infatti, se il segnale in ingresso fosse molto disturbato, con un comparatore classico in corrispondenza della soglia l'uscita continuerebbe ad oscillare fino a che il segnale in ingresso con il disturbo sommato non supera abbondantemente la soglia. In un comparatore con isteresi questo problema non si pone: infatti, non appena il segnale sommato al disturbo supera la prima soglia, essa cambia ed è necessario che il segnale superi la seconda (\Fig\ref{fig:trigger_di_shmitt_vantaggi}).
@@ -254,7 +253,7 @@ La frequenza di oscillazione può essere regolata variando i valori di resistenz
 Nel circuito realizzato si ottiene quindi che $T_1=T_2$, ossia che l'onda quadra in uscita presenta un \textit{duty-cycle} pari al \SI{50}{\percent}, dove il \textit{duty-cycle} è definito come $\frac{T_1}{T_1+T_2}$.
 
 \noindent
-Di seguito si riportano i valori dei componenti utilizzati: \todo{inserire valori e RIFERIMENTO ALLA TABELLA}
+Nella tabella \ref{tab:valori_componenti_3} si riportano i valori dei componenti utilizzati:
 
 \def\arraystretch{1.3}
 \begin{table}[h]
@@ -262,9 +261,9 @@ Di seguito si riportano i valori dei componenti utilizzati: \todo{inserire valor
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		R1 & & \\ \hline
-		R2 & & \\ \hline
-		R & & \\ \hline
+		R1 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm} \\ \hline
+		R2 &\SI{18}{\kilo\ohm} & \SI{17,82}{\kilo\ohm} \\ \hline
+		R & \SI{18}{\kilo\ohm} & \SI{18,03}{\kilo\ohm} \\ \hline
 		C & \SI{150}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
