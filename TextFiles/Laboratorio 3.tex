@@ -191,7 +191,7 @@ La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt
 	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}, a sinistra l'andamento teorico e a destra l'andamento misurato nella modalità XY.}
 	\label{fig:ciclo_isteresi}
 \end{figure} 
-
+\todo{inseriamo le immagini da 9 a 13?}
 \clearpage 
 Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che produce in uscita un'onda quadra, senza che in ingresso vi sia applicato un segnale.
 
@@ -224,11 +224,11 @@ Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che pr
 \noindent
 Per valutare il comportamento del circuito è necessario osservare che l'amplificatore è retroazionato positivamente, per cui l'uscita commuta tra $V_{DD}$ e $V_{SS}$. Si ipotizzi che la tensione $v^+$ sia maggiore della tensione $v^-$, per cui l'uscita $v_{out} = V_{DD}$. Allora:
 \begin{equation}
-	v^+ = \frac{R1}{R1+R2} V_{DD} = V_H^+\overset{\mathrm{R_1=R_2}}{=}V_{DD}/2.
+	v^+ = \frac{R1}{R1+R2} V_{DD} = V_H^+\overset{\mathrm{R_1=R_2}}{=}\frac{V_{DD}}{2}.
 \end{equation}
 Sul morsetto invertente è presente una capacità $C$ in serie alla resistenza $R$. Si ipotizzi che il condensatore sia inizialmente scarico e quindi $V_C = \SI{0}{\volt}$. Se $v_{out} = V_{DD}$ allora il condensatore inizia a caricarsi tramite $R$. Di conseguenza, la tensione al nodo $v^-$ inizia ad aumentare fino a che supera il livello di soglia $V_H^+$. A questo punto, $v^- > v^+$ e quindi $v_{out} = V_{SS}$. Ora, la tensione ai capi del condensatore è maggiore della tensione in uscita, quindi il condensatore si scarica attraverso $R$. Ad un certo punto, il condensatore raggiungerà l'altra tensione di soglia pari a:
 \begin{equation}
-	V_L^+ = \frac{R1}{R1+R2} V_SS\overset{\mathrm{R_1=R_2}}{=}V_{SS}/2.
+	V_L^+ = \frac{R1}{R1+R2} V_{SS}\overset{\mathrm{R_1=R_2}}{=}\frac{V_{SS}}{2}.
 \end{equation}
 Di conseguenza, $v_{out}$ ritorna a $V_{DD}$ e il condensatore comincia nuovamente una fase di carica. Questo ciclo si ripete all'infinito e tale comportamento si può osservare in figura \ref{fig:oscillatore}.
 
