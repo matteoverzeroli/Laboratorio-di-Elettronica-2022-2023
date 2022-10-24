@@ -142,17 +142,15 @@ Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge 
 \end{figure}
 
 \noindent
-Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene applicato al morsetto invertente di un amplificatore operazionale (nel nostro caso si è utilizzato il \textbf{\textmu A741}), retroazionato positivamente grazie alle resistenze $R\sub{1}$ e $R\sub{2}$. Di conseguenza, non è più valido il principio di cortocircuito virtuale tra $V\super{+}$ e $V\super{-}$, poiché non è più presente una retroazione negativa. Per cui, l'uscita $v_{out}=A(v^+-v^-)$, con A pari al guadagno dell'amplificatore operazionale, e il circuito si comporta come un comparatore. Infatti, supponendo un guadagno molto alto (idealmente tendente all'infinito), accade che:
+Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene applicato al morsetto invertente di un amplificatore operazionale (nel nostro caso si è utilizzato il \textbf{\textmu A741}), retroazionato positivamente grazie alle resistenze $R\sub{1}$ e $R\sub{2}$. Di conseguenza, non è più valido il principio di cortocircuito virtuale tra $v^+$ e $v^-$, poiché non è più presente una retroazione negativa. Per cui, l'uscita $v_{out}=A(v^+-v^-)$, con A pari al guadagno dell'amplificatore operazionale. Il circuito si comporta come un comparatore. Infatti, supponendo un guadagno molto alto (idealmente tendente all'infinito), accade che:
 \begin{itemize}
 	\item se $v^+-v^->0$, allora $v_{out}=V_{DD}$;
 	\item se $v^+-v^-<0$, allora $v_{out}=V_{SS}$.
 \end{itemize}
-Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella vista prima di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a V\sub{SS}, di conseguenza l'uscita $v_{out}$ saturerà alla tensione V\sub{DD} (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione V\sub{DD}. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa V\sub{SS} e rimarrà tale fino a quando $v_{in}<V_L^+=\frac{R_1}{R_1+R_2}V_{SS}\overset{\mathrm{R_1=R_2}}{=}V_L^+=\frac{1}{2}V_{SS}$. 
+Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a V\sub{SS}, di conseguenza l'uscita $v_{out}$ saturerà alla tensione V\sub{DD} (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione V\sub{DD}. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa V\sub{SS} e rimarrà tale fino a quando $v_{in}<\frac{R_1}{R_1+R_2}V_{SS}\overset{\mathrm{R_1=R_2}}{=}V_L^+=\frac{1}{2}V_{SS}$. 
 
 \noindent
-Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione V\sub{DD} e V\sub{SS}, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. \todo{Verificare bene questa frase, mi sembra che possa essere fraintesa.}
-\todo{magari inserire un grafico fatto tipo a mano su onenote per esempio delle soglie che magari è più pratico?}
-I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}.
+Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione V\sub{DD} e V\sub{SS}, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}. Le tensioni di alimentazione sono state impostate a V\sub{DD}=\SI{10}{\volt} e V\sub{SS}=-\SI{10}{\volt}.
 
 \def\arraystretch{1.3}
 \begin{table}[h]
@@ -168,27 +166,33 @@ I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tab
 \end{table}
 
 \noindent
-L'utilizzo di questa struttura è molto utile perché è meno sensibile rispetto ai disturbi che possono esserci sul segnale in ingresso al sistema. Infatti, se il segnale in ingresso fosse molto disturbato, con un comparatore classico in corrispondenza della soglia l'uscita continuerebbe ad oscillare fino a che il segnale in ingresso con il disturbo sommato non supera abbondantemente la soglia. In un comparatore con isteresi questo problema non si pone: infatti, non appena il segnale sommato al disturbo supera la prima soglia, essa cambia ed è necessario che il segnale superi la seconda (\Fig\ref{fig:trigger_di_shmitt_vantaggi}).
+L'utilizzo di questa struttura è molto utile perché è meno sensibile a disturbi che possono presentarsi sul segnale in ingresso al sistema. Infatti, in un semplice comparatore, se il segnale in ingresso fosse molto disturbato in corrispondenza della soglia, l'uscita continuerebbe a commutare tra V\sub{DD} e V\sub{SS} fino a che il segnale in ingresso non supera abbondantemente la soglia. In un comparatore con isteresi questo problema non si pone: infatti, non appena il segnale (a cui si somma un disturbo) supera la prima soglia, essa cambia ed è necessario che il segnale attraversi una seconda (\Fig\ref{fig:trigger_di_shmitt_vantaggi}).
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{./ImageFiles/Laboratorio 3/Usicta Rumorosa e Trigger di Shmitt.jpg}
-	\caption{In questi grafici viene confrontato il comportamento di un comparatore classico (grafico in basso) con uno a \textit{Trigger di Schmitt} (grafico in mezzo) quando il segnale in ingresso è rumoroso (grafico in alto).}
+	\caption{Confronto del comportamento di un comparatore classico (terzo grafico) con uno a \textit{Trigger di Schmitt} (secondo grafico) quando il segnale in ingresso è rumoroso (primo grafico).}
 	\label{fig:trigger_di_shmitt_vantaggi}
 \end{figure} 
+Nella figura \ref{fig:uscita_circuito_2} sono riportate le misure del segnale in ingresso e uscita al circuito.
+\begin{figure}[tbh]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00007.PNG}
+	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzata in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{20}{\volt} con frequenza pari a \SI{100}{\hertz}.}
+	\label{fig:uscita_circuito_2}
+\end{figure}
 
 \noindent
-La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt} è un ciclo di isteresi (\Fig\ref{fig:ciclo_isteresi}): come si può vedere dal grafico, in funzione al verso di percorrenza, le tensioni di soglia sono differenti. 
+La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt} è un ciclo di isteresi (\Fig\ref{fig:ciclo_isteresi}): come si può vedere dal grafico teorico e misurato, in funzione al verso di percorrenza, le tensioni di soglia sono differenti. 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\linewidth]{./ImageFiles/Laboratorio 3/Ciclo di Isteresi.png}
-	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}.}
+	\includegraphics[width=0.4\linewidth]{./ImageFiles/Laboratorio 3/Ciclo di Isteresi.png}
+	\includegraphics[width=0.5\linewidth]{./ImageFiles/Laboratorio 3/TEK00008.PNG}
+	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}, a sinistra l'andamento teorico e a destra l'andamento misurato nella modalità XY.}
 	\label{fig:ciclo_isteresi}
 \end{figure} 
-\todo{inserire caratteristica ingresso uscita con anche la foto oscilloscopio}
 
-
-\clearpage
+\clearpage 
 Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che produce in uscita un'onda quadra, senza che in ingresso vi sia applicato un segnale.
 
  \begin{figure}[h!]
