@@ -331,7 +331,7 @@ Il quarto circuito realizzato è un circuito oscillatore che permette di regolar
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/CIR41.jpg}
 	\end{minipage}
-	\caption{Schema circuitale dell'oscillatore con tempi di carica e scarica differenti e foto del circuito realizzato.}
+	\caption{Schema circuitale dell'oscillatore con tempi di carica e scarica differenziati e foto del circuito realizzato.}
 	\label{fig:circuito_4}
 \end{figure}
 
@@ -339,25 +339,12 @@ Il quarto circuito realizzato è un circuito oscillatore che permette di regolar
 Inserendo i diodi D1 e D2 è possibile differenziare le costanti di tempo di carica e scarica del circuito, permettendo di variare gli intervalli T\sub{1} e T\sub{2} e di conseguenza le caratteristiche dell'onda in uscita. Infatti, l'analisi del circuito è simile a quella del circuito precedente se non che il condensatore C viene caricato attraverso il diodo D\sub{2} e la resistenza R\sub{4}, mentre si scarica attraverso il diodo D\sub{1} e la resistenza R\sub{3}. Per cui la costante di tempo di carica è $\tau_1 = R_4C$ mentre la costante di scarica è $\tau_2=R_3C$. In modo analogo al circuito precedente si possono calcolare gli intervalli T\sub{1} e T\sub{2} come:
 \begin{equation}
 	\begin{split}
-		T_1&=R_4C \ln{\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}} \\
-		T_2&=R_3C \ln{\frac{V_H^+-V_{SS}}{V_L^--V_{SS}}}.
+		T_1&=R_4C\ln{\frac{V_L^+-V_{DD}}{V_H^+-V_{DD}}}\overset{\mathrm{R_1=R_2}}{=}\tau_1 \ln{\frac{R_2+2R_1}{R_2}} \\
+		T_2&=R_3C \ln{\frac{V_H^+-V_{SS}}{V_L^+-V_{SS}}}\overset{\mathrm{R_1=R_2}}{=}\tau_2 \ln{\frac{R_2+2R_1}{R_2}}.
 	\end{split}
 	\label{eq:t1_t2_4}
 \end{equation}
-In questo modo si ottiene $T_1 \ne T_2$. Anche in questo circuito si è voluto confrontare il valore teorico (ricavato dall'equazione \ref{eq:t1_t2_4}) e misurato di questi intervalli di tempo. 
-
-\begin{table}[h]
-	\centering
-	\begin{tabular}{|c|c|c|}
-		\hline
-		& Valore Teorico & Valore Misurato \\ \hline
-		T\sub{1} &\SI{0}{\milli\second} & \SI{1.62}{\milli\second} \\ \hline
-		T\sub{2} &\SI{0}{\milli\second} & \SI{3.57}{\milli\second} \\ \hline
-		Duty-cycle & \SI{0}{\percent} & \SI{31.21}{\percent} \\ \hline
-	\end{tabular}
-	\caption{Valori teorici e misurati degli intervalli T\sub{1}, T\sub{2} e duty-cycle della sinusoide in uscita.}
-	\label{tab:misure_duty_4}
-\end{table}
+In questo modo si ottiene $T_1 \ne T_2$. Anche in questo circuito si è voluto confrontare il valore teorico (ricavato dall'equazione \ref{eq:t1_t2_4}) e misurato di questi intervalli di tempo. Nella tabella \ref{tab:valori_componenti_4} vengono riportati i valori nominali e misurati dei componenti utilizzati nel circuito. Le tensioni di alimentazioni dell'amplificatore operazionale sono state mantenute a $\pm\SI{10}{\volt}$.
 \def\arraystretch{1.3}
 \begin{table}[h]
 	\centering
@@ -370,16 +357,31 @@ In questo modo si ottiene $T_1 \ne T_2$. Anche in questo circuito si è voluto c
 		R4 & \SI{9}{\kilo\ohm} & \SI{8,96}{\kilo\ohm} \\ \hline
 		D1 & $\simeq$\SI{0.7}{\volt} & \SI{617}{\milli\volt} \\ \hline
 		D2 & $\simeq$\SI{0.7}{\volt} & \SI{620}{\milli\volt} \\ \hline
+		C & \SI{150}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_4}
 \end{table}
+
+\noindent
+Come nel precedente circuito si è voluto confrontare i valori degli intervalli di tempo T\sub{1} e T\sub{2} ottenuti tramite le equazioni \ref{eq:t1_t2_4} e quelli ricavati con le misure effettuate tramite i cursori dell'oscilloscopio (\Fig\ref{fig:t1_t2_4}). Nella tabella \ref{tab:misure_duty_4} si riportano i risultati ottenuti. Si noti come i risultati misurati sul circuito reale si discostino dal valore teorico, portando a un errore sul \textit{duty-cycle} del segnale in uscita del \SI{2}{\percent}.
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		& Valore Teorico & Valore Misurato \\ \hline
+		T\sub{1} &\SI{1.48}{\milli\second} & \SI{1.62}{\milli\second} \\ \hline
+		T\sub{2} &\SI{2.99}{\milli\second} & \SI{3.57}{\milli\second} \\ \hline
+		Duty-cycle & \SI{33.10}{\percent} & \SI{31.21}{\percent} \\ \hline
+	\end{tabular}
+	\caption{Valori teorici e misurati degli intervalli T\sub{1}, T\sub{2} e duty-cycle della sinusoide in uscita.}
+	\label{tab:misure_duty_4}
+\end{table}
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.496\linewidth]{./ImageFiles/Laboratorio 3/TEK00025.PNG}
 	\includegraphics[width=0.496\linewidth]{./ImageFiles/Laboratorio 3/TEK00031.PNG}
 	\caption{Misure dei tempi T\sub{TOT}=T\sub{1}+T\sub{2} e scarica (T\sub{2}) del condensatore. Sono rappresentati i segnali $v_{c}$ (linea gialla) ed il segnale $v_{out}$ (linea azzurra) con tensioni di alimentazioni simmetriche pari a $\pm$\SI{10}{\volt}.}
 	\label{fig:t1_t2_4}
-\end{figure} 
-
-\todo{inserire tabella valori resistenze e commentare i risultati di t1 e t2}
+\end{figure}
