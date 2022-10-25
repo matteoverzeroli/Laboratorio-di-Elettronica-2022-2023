@@ -130,6 +130,9 @@ Il secondo circuito analizzato è chiamato \textit{Trigger di Schmitt} e svolge 
 				\draw (oa.down) -- ++(0,-0.3) node[vee]{$V_{SS}$};
 				\draw (oa.out) -- ++(0,-2.3) coordinate(R2) to[R=$R_2$] ++(-2.385,0) (R2-|oa.+) -- ++(0,1) coordinate(rg) -- (oa.+);
 				\draw (rg) -- ++(-1,0) to[R=$R_1$] ++(0,-2) node[ground]{};
+				\draw (oa.out) to[short, -o] (oa.out) ++(0,.05) node[above]{$v_{out}$};
+				\draw (oa.-) to[short, -o] (oa.-) node[above]{$v_{-}$};
+				\draw (oa.+) to[short, -o] (oa.+) node[above]{$v_{+}$};
 				\draw[thick] (-1.2,-1) rectangle (5.65,6);
 			\end{circuitikz} 
 		}
@@ -209,6 +212,7 @@ Il terzo circuito analizzato è un oscillatore (\Fig\ref{fig:circuito_3}) che pr
  				\draw (oa.-) -- ++(0,1.7) coordinate(Rf) to[R=$R$]++(2.385,0) (Rf-|oa.out) -- (oa.out);
  				\draw (oa.+) to[short, -o] ++(0,0) ++(-.1,0) node[left]{$v_+$};
  				\draw (oa.-) to[short, -o] ++(0,0) ++(0,-.1) node[below]{$v_-$};
+ 				\draw (oa.out) to[short, -o] ++(0,0) ++(.1,0) node[right]{$v_{out}$};
  				\draw (rg) -- ++(-1,0) to[R=$R_1$] ++(0,-2) node[ground]{};
  				\draw[thick] (-1.2,-1) rectangle (5.65,6.5);
  			\end{circuitikz} 
