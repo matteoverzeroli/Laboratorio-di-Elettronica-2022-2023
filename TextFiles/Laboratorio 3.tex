@@ -40,19 +40,18 @@ Il primo circuito analizzato è un rettificatore a doppia semionda di precisione
 \end{figure}
 
 \noindent
-Per studiare il comportamento del sistema è necessario analizzare come si comporta il diodo al variare della tensione di ingresso $v_{in}$:
+Per studiare il comportamento del circuito è necessario analizzare come si comporta il diodo al variare della tensione di ingresso $v_{in}$:
 \begin{itemize}
 	\item $v_{in} \geq 0$: si ipotizza inizialmente che il diodo sia acceso. Allora, $A2$  è in retroazione negativa. Di conseguenza vale il principio di cortocircuito virtuale e quindi il nodo $v_{+}^1$ è a massa. Se questo fosse vero, la corrente dovrebbe percorrere la resistenza $R1$ da sinistra verso destra. Tuttavia, ciò non è possibile, perché i morsetti dell'amplificatore operazionale non assorbono corrente e il diodo non permette il passaggio di corrente in quel verso. Quindi, l'ipotesi che il diodo sia acceso non è corretta e assumiamo che il diodo sia spento. Questo significa che l'amplificatore $A2$ non è retroazionato. Allora, in $R1$ non può scorrere corrente e la tensione sul nodo $v_{+}^1$ è pari a $v_{in}$. Ma questo implica che anche la tensione sul nodo $v_{-}^1$ sia pari a $v_{in}$. Di conseguenza, non scorre corrente neanche in $R2$ e quindi nemmeno in $R3$. Allora, la tensione $v_{out} = v_{in}$;
 	\item $v_{in} < 0$: si ipotizza che il diodo sia acceso, quindi $A2$ è retroazionato negativamente. Il nodo $v_{+}^1$ è connesso ad una massa virtuale e quindi la corrente scorre nella resistenza $R1$ da destra a sinistra, dato che $v_{in} < 0$. Tale corrente può provenire solo dal diodo e questo verifica l'ipotesi iniziale. Se $v_{+}^1$ è a massa, lo è anche $v_{-}^1$, quindi $A1$ è in configurazione invertente. Se $R2 = R3$, il guadagno dell'amplificatore invertente è pari a 1 e $v_{out} = -v_{in}$.
 \end{itemize}
-Di conseguenza, questo circuito rettifica entrambe le semionde ed elimina il problema dello \text{shift} di tensione causato dalla tensione di polarizzazione del diodo. Nella figura \ref{fig:uscita_circuito_1} è possibile verificare il comportamento del circuito.
+Di conseguenza, questo circuito rettifica entrambe le semionde ed elimina il problema dello \text{shift} di tensione causato dalla tensione di polarizzazione del diodo. Nella figura \ref{fig:uscita_circuito_1} è possibile verificarne il comportamento. Si noti come il circuito presenta in uscita il segnale in ingresso rettificato senza alcun shift di tensione. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00001.PNG}
 	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}.}
 	\label{fig:uscita_circuito_1}
 \end{figure}
-Si noti come il circuito presenta in uscita il segnale in ingresso rettificato senza alcun shift di tensione. 
 
 \noindent
 I valori nominali ed effettivi delle resistenze utilizzate e la tensione di soglia del diodo (misurata tramite multimetro) sono riportati in tabella \ref{tab:valori_componenti_1}. Inoltre, gli amplificatori sono stati alimentati con una tensione duale di $\pm$\SI{10}{\volt}.
@@ -66,7 +65,7 @@ I valori nominali ed effettivi delle resistenze utilizzate e la tensione di sogl
 		R1 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm} \\ \hline
 		R2 &\SI{18}{\kilo\ohm} & \SI{17,81}{\kilo\ohm} \\ \hline
 		R3 &\SI{18}{\kilo\ohm} & \SI{18,03}{\kilo\ohm} \\ \hline
-		V\sub{D} & $\simeq$\SI{0.7}{\volt} & \SI{617}{\milli\volt} \\ \hline
+		V\sub{D} & $\simeq$\SI{700}{\milli\volt} & \SI{617}{\milli\volt} \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_1}
@@ -108,11 +107,11 @@ Successivamente, si è analizzato il comportamento in frequenza del circuito eff
 	\caption{Misure del segnale $v_{in}$ (linea gialla) e del segnale $v_{out}^2$ (linea azzurra). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}. \`E possibile notare la saturazione dell'uscita dell'amplificatore \textit{A2}.}
 	\label{fig:uscita_sat_circuito_1}
 \end{figure}
-Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione $V\sub{SS}$ a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate. Il valore stimato (\Fig\ref{fig:slew_rate_circuito_1}) è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
+Il nodo $v_{out}^2$ dovrebbe quindi passare dalla tensione $V\sub{SS}$ a \SI{0}{\volt} con una pendenza pari ad infinito, ma ciò è impossibile in un amplificatore operazionale reale. Dal datasheet si ricava che lo \textit{slew rate} del \textbf{\textmu A741} è pari a \SI{0.5}{\volt\per\micro\second}. Si è cercato di stimare questo parametro delle misure effettuate. Il valore stimato (\Fig\ref{fig:slew_rate_circuito_1}) è di circa $\frac{\SI{8.11}{\volt}}{\SI{20.0}{\micro\second}}=\SI{0.41}{\volt\per\micro\second}$, compatibile con le indicazioni presenti sul datasheet.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 3/TEK00006.PNG}
-	\caption{Misure con cursori sul segnale $v_{out}^2$ (linea azzurra) e segnale $v_{in}$ (linea gialla). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{100}{\hertz}.}
+	\caption{Misure con cursori sul segnale $v_{out}^2$ (linea azzurra) e segnale $v_{in}$ (linea gialla). Si è utilizzato in ingresso un segnale sinusoidale di ampiezza picco-picco \SI{2}{\volt} con frequenza pari a \SI{10}{\kilo\hertz}.}
 	\label{fig:slew_rate_circuito_1}
 \end{figure}
 
@@ -150,7 +149,7 @@ Come si può osservare nel circuito, il segnale di ingresso $v_{in}$ viene appli
 	\item se $v^+-v^->0$, allora $v_{out}=V_{DD}$;
 	\item se $v^+-v^-<0$, allora $v_{out}=V_{SS}$.
 \end{itemize}
-Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a $V\sub{SS}$, di conseguenza l'uscita $v_{out}$ saturerà alla tensione $V\sub{DD}$ (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione $V\sub{DD}$. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa $V\sub{SS}$ e rimarrà tale fino a quando $v_{in}<\frac{R_1}{R_1+R_2}V_{SS}=V_L^+\overset{\mathrm{R_1=R_2}}{=}\frac{1}{2}V_{SS}$. 
+Tuttavia, nel \textit{Trigger di Schmitt} la soglia alla quale l'uscita passa dalla tensione di saturazione positiva a quella negativa è diversa rispetto a quella di un normale comparatore. Le resistenze $R\sub{1}$ e $R\sub{2}$ definiscono un partitore di tensione per cui $v^+=\frac{R_1}{R_1+R_2}v_{out}$. Supponendo che inizialmente la tensione $v_{in}$ sia pari a $V\sub{SS}$, di conseguenza l'uscita $v_{out}$ saturerà alla tensione $V\sub{DD}$ (in quanto $v_{in}$ è applicata al morsetto invertente). Infatti, la tensione al nodo $v^+$ sarà pari a $v^+=\frac{R_1}{R_1+R_2}V_{DD}=V_H^+$ e se $R_1=R_2$ risulta che $V_H^+=\frac{1}{2}V_{DD}$. Per cui, fintanto che la tensione $v_{in}$ sarà minore della tensione $V_H^+$, l'uscita resterà alla tensione $V\sub{DD}$. Quando si avrà che $v_{in}>V_H^+$, l'uscita si porterà alla tensione di saturazione negativa $V\sub{SS}$ e rimarrà tale fino a quando $v_{in}$ sarà minore di $\frac{R_1}{R_1+R_2}V_{SS}=V_L^+\overset{\mathrm{R_1=R_2}}{=}\frac{1}{2}V_{SS}$. 
 
 \noindent
 Riassumendo, in uscita si avrà un'onda quadra che commuta tra la tensione $V\sub{DD}$ e $V\sub{SS}$, con \textit{duty-cycle} regolato dal periodo del segnale in ingresso. I valori nominali ed effettivi delle resistenze utilizzate sono riportati in tabella \ref{tab:valori_componenti_2}. Le tensioni di alimentazione sono state impostate a V\sub{DD}=\SI{10}{\volt} e V\sub{SS}=-\SI{10}{\volt}.
@@ -174,9 +173,11 @@ L'utilizzo di questa struttura è molto utile perché è meno sensibile a distur
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\linewidth]{./ImageFiles/Laboratorio 3/Usicta Rumorosa e Trigger di Shmitt.jpg}
-	\caption{Confronto del comportamento di un comparatore classico (terzo grafico) con uno a \textit{Trigger di Schmitt} (secondo grafico) quando il segnale in ingresso è rumoroso (primo grafico).}
+	\caption{Confronto del comportamento di un comparatore classico (terzo grafico) con uno a \textit{Trigger di Schmitt} (secondo grafico) quando il segnale in ingresso (primo grafico) è rumoroso.}
 	\label{fig:trigger_di_shmitt_vantaggi}
 \end{figure} 
+
+\noindent
 Nella figura \ref{fig:uscita_circuito_2} sono riportate le misure del segnale in ingresso e uscita al circuito.
 \begin{figure}[tbh]
 	\centering
@@ -191,7 +192,7 @@ La caratteristica ingresso-uscita di un comparatore a \textit{Trigger di Schmitt
 	\centering
 	\includegraphics[width=0.4\linewidth]{./ImageFiles/Laboratorio 3/Ciclo di Isteresi.png}
 	\includegraphics[width=0.5\linewidth]{./ImageFiles/Laboratorio 3/TEK00008.PNG}
-	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}: a sinistra l'andamento teorico e a destra l'andamento misurato nella modalità XY.}
+	\caption{Ciclo di isteresi del \textit{Trigger di Schmitt}: a sinistra l'andamento teorico e a destra l'andamento misurato con l'oscilloscopio nella modalità XY.}
 	\label{fig:ciclo_isteresi}
 \end{figure} 
 
@@ -230,7 +231,7 @@ Per valutare il comportamento del circuito è necessario osservare che l'amplifi
 \begin{equation}
 	v^+ = \frac{R1}{R1+R2} V_{DD} = V_H^+\overset{\mathrm{R_1=R_2}}{=}\frac{V_{DD}}{2}.
 \end{equation}
-Sul morsetto invertente è presente una capacità $C$ in serie alla resistenza $R$. Si ipotizzi che il condensatore sia inizialmente scarico e quindi $V_C = \SI{0}{\volt}$. Se $v_{out} = V_{DD}$ allora il condensatore inizia a caricarsi tramite $R$. Di conseguenza, la tensione al nodo $v^-$ inizia ad aumentare fino a che supera il livello di soglia $V_H^+$. A questo punto, $v^- > v^+$ e quindi $v_{out} = V_{SS}$. Ora, la tensione ai capi del condensatore è maggiore della tensione in uscita, quindi il condensatore si scarica attraverso $R$. Ad un certo punto, il condensatore raggiungerà l'altra tensione di soglia pari a:
+Sul morsetto invertente è presente una capacità $C$ in serie alla resistenza $R$. Si ipotizzi che il condensatore sia inizialmente scarico e quindi $v_C = \SI{0}{\volt}$. Se $v_{out} = V_{DD}$ allora il condensatore inizia a caricarsi tramite $R$. Di conseguenza, la tensione al nodo $v^-$ inizia ad aumentare fino a che supera il livello di soglia $V_H^+$. A questo punto, $v^- > v^+$ e quindi $v_{out} = V_{SS}$. Ora, la tensione ai capi del condensatore è maggiore della tensione in uscita, quindi il condensatore si scarica attraverso $R$. Ad un certo punto, il condensatore raggiungerà l'altra tensione di soglia pari a:
 \begin{equation}
 	V_L^+ = \frac{R1}{R1+R2} V_{SS}\overset{\mathrm{R_1=R_2}}{=}\frac{V_{SS}}{2}.
 \end{equation}
@@ -243,7 +244,8 @@ Di conseguenza, $v_{out}$ ritorna a $V_{DD}$ e il condensatore comincia nuovamen
 	\label{fig:oscillatore}
 \end{figure}
 
-La frequenza di oscillazione può essere regolata variando i valori delle resistenze e del condensatore. In particolare, tale frequenza dipende dalla costante di tempo di carica e scarica del condensatore $\tau=RC$. Chiamiamo \textbf{T\sub{1}} l'intervallo di tempo in cui l'uscita rimane a $V\sub{DD}$ mentre con \textbf{T\sub{2}} indichiamo quando l'uscita rimane a $V\sub{SS}$. Inoltre, definiamo con \textbf{t\sub{1}} e \textbf{t\sub{2}} l'istante di tempo in cui si presenta, rispettivamente, un fronte di salita e di discesa. \`E possibile calcolare T\sub{1} e T\sub{2} con i seguenti passaggi:
+\noindent
+La frequenza di oscillazione può essere regolata variando i valori delle resistenze e del condensatore. In particolare, tale frequenza dipende dalla costante di tempo di carica e scarica del condensatore $\tau=RC$. Chiamiamo \textbf{T\sub{1}} l'intervallo di tempo in cui l'uscita rimane a $V\sub{DD}$ mentre con \textbf{T\sub{2}} indichiamo quando l'uscita rimane a $V\sub{SS}$. Inoltre, definiamo con \textbf{t\sub{1}} e \textbf{t\sub{2}} l'istante di tempo in cui si presenta, rispettivamente, un fronte di salita e di discesa dell'uscita. \`E possibile calcolare T\sub{1} e T\sub{2} con i seguenti passaggi:
 
 \begin{equation}
 	\begin{split}
@@ -271,6 +273,8 @@ Nella tabella \ref{tab:valori_componenti_3} si riportano i valori dei componenti
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_3}
 \end{table}
+
+\noindent
 Grazie alle misure ricavate dai cursori sull'oscilloscopio, è stato possibile misurare gli intervalli di tempo T\sub{1} e T\sub{2} (\Fig\ref{fig:t1_t2_3})e confrontarli con i risultati teorici attesi ricavati dalla equazione \ref{eq:t1_t2_3}. Il confronto è riportato nella tabella \ref{tab:misure_duty_3}.
 \begin{table}[h]
 	\centering
@@ -284,7 +288,6 @@ Grazie alle misure ricavate dai cursori sull'oscilloscopio, è stato possibile m
 	\caption{Valori teorici e misurati degli intervalli T\sub{1}, T\sub{2} e duty-cycle della sinusoide in uscita.}
 	\label{tab:misure_duty_3}
 \end{table}
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.496\linewidth]{./ImageFiles/Laboratorio 3/TEK00014.PNG}
@@ -292,9 +295,7 @@ Grazie alle misure ricavate dai cursori sull'oscilloscopio, è stato possibile m
 	\caption{Misure dei tempi di carica (T\sub{1}) e scarica (T\sub{2}) del condensatore. Sono rappresentati i segnali $v_{c}$ (linea gialla) ed il segnale $v_{out}$ (linea azzurra) con tensioni di alimentazioni simmetriche pari a $\pm$\SI{10}{\volt}.}
 	\label{fig:t1_t2_3}
 \end{figure} 
-
-\noindent
-Se volessimo variare il \textit{duty-cycle} del segnale in uscita al circuito, si potrebbe sbilanciare l'alimentazione positiva e negativa dell'amplificatore operazionale. Di conseguenza, variano anche le soglie ed è possibile modificare gli intervalli di carica e scarica del condensatore e quindi gli intervalli T\sub{1} e T\sub{2}. Nella figura \Fig\ref{fig:tensioni_sbilanciare} è possibile vedere che il \textit{duty-cycle} si modifica da \SI{48.01}{\percent} a \SI{55.12}{\percent}.
+Se volessimo variare il \textit{duty-cycle} del segnale in uscita al circuito, si potrebbe sbilanciare l'alimentazione positiva e negativa dell'amplificatore operazionale. Di conseguenza, variano anche le soglie ed è possibile modificare gli intervalli di carica e scarica del condensatore e quindi gli intervalli T\sub{1} e T\sub{2}. Nella figura \Fig\ref{fig:tensioni_sbilanciare} è possibile vedere che il \textit{duty-cycle} si modifica dal \SI{48.01}{\percent} al \SI{55.12}{\percent}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.496\linewidth]{./ImageFiles/Laboratorio 3/TEK00021.PNG}
