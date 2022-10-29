@@ -1,5 +1,7 @@
 \chapter{Laboratorio 4}
-\begin{figure}[ht!]
+
+Il primo circuito analizzato è il multivibratore monostabile (\Fig\ref{fig:circuito_1}). Tale circuito presenta uno stato stabile, in cui rimane fino a che un impulso esterno di comando lo porta in un secondo stato, in cui il circuito rimane per un tempo predefinito per poi tornare spontaneamente nello stato stabile, in attesa di un successivo impulso.
+\begin{figure}[h]
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\scalebox{.62}{
@@ -27,13 +29,16 @@
 	\begin{minipage}{.45\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/CIR11.jpg}
 	\end{minipage}
-	\caption{Schema circuitale del circuito monostabile di precisione e foto del circuito realizzato.}
+	\caption{Schema circuitale del multivibratore monostabile e foto del circuito realizzato.}
 	\label{fig:circuito_1}
 \end{figure}
-Il primo circuito analizzato è un circuito monostabile, che a livello costruttivo è molto simile all'ultimo circuito della lezione precedente, con la differenza che questo non oscilla continuamente in base al rapporto tra le resistenze sull'operazionale \todo{Approfondire opportunamente questa sezione}, ma invece viene controllato tramite un opportuno segnale di ingresso. Questo segnale di ingresso causa il passaggio dallo stato stabile a quello non stabile, dove dopo un periodo di tempo configurato tramite la carica di una capacità, lo stesso ritorna nuovamente nello stato iniziale in attesa di un nuovo impulso fornito esternamente.
+A livello costruttivo si parte dal generatore d'onda quadra visto nello scorso laboratorio: inserendo un diodo $D$ in parallelo alla capacità $C$ si ottiene uno stato stabile. In questo casoSI, quando la tensione di uscita è pari a $v_{out}>0$ la capacità si carica, ma quando la tensione ai capi del condensatore raggiunge circa $0.7V$ (tensione di polarizzazione del diodo $D$) smette di caricarsi perché il diodo offre un cortocircuito per la corrente fornita dall'amplificatore. 
 
-Lo stato stabile è forzato utilizzando un diodo messo in parallelo sulla capacità. Questo limita la tensione massima nella carica della stessa alla tensione di accensione del diodo $\approx 0,7$ invece che alla tensione di alimentazione $V_{cc}$ fornita all'amplificatore. Ciò impedisce la commutazione dell'op-amp se la tensione necessaria al morsetto $V_H^+$ è maggiore della caduta di tensione sul diodo. Questa si può calcolare come
-\[V_H^+=\frac{R_1}{R_1+R_2}V_{DD}\overset{\mathrm{R_1=R_2}}=\frac{V_{DD}}{2}\]
+\noindent
+Poiché il circuito commuti dallo stato stabile $v_{out}=V_{DD}$ allo stato quasi stabile $v_{out}=V_{SS}$ è necessario che la tensione dell'ingresso non invertente scenda al di sotto della tensione applicata all'ingresso invertente. Questo è possibile tramite l'applicazione sul morsetto non invertente di un picco di tensione negativo. Per fare ciò si inserisce un circuito derivatore composto da una capacità $C_T$ ed una resistenza $R_T$. Tale circuito ha il compito di generare, a partire da un segnale rettangolare $v_in$, un impulso negativo ed uno positivo. Poi, grazie all'inserimento del diodo $D_T$, l'unico impulso presentato al morsetto non invertente è quello negativo. 
+
+\noindent
+Questo impulso negativo porterà per un breve istante la tensione $v_+$ al di sotto della tensione presente ai capi del condensatore (che è pari alla tensione di polarizzazione del diodo) forzando la commutazione dell'uscita a $v_{out}=V_{SS}$. A questo punto, il condensatore si scarica fino a raggiungere la tensione di soglia $V_H^-$ e una volta raggiunta la tensione di soglia cambia nuovamente e l'uscita commuta portandosi a $v_{out}=V_{DD}$. Il condensatore ricomincia così il ciclo di carica ma una volta raggiunta la tensione di polarizzazione del diodo si blocca e il circuito entra di nuovo in uno stato stabile in attesa che sul morsetto non invertente venga generato un impulso negativo. Il tempo per cui $v_{out}=V_{SS}$ dipende dalla capacità $C$ e dalla resistenza $R3$.
 
 I valori utilizzati nel nostro circuito sono indicati nella tabella \ref{tab:valori_componenti_1}. Inoltre, gli amplificatori sono stati alimentati con una tensione duale di $\pm$\SI{10}{\volt}.
 
@@ -55,6 +60,19 @@ I valori utilizzati nel nostro circuito sono indicati nella tabella \ref{tab:val
 	\label{tab:valori_componenti_1}
 \end{table}
 
-Nel nostro caso specifico quindi $V_H^+ \approx \frac{V_{DD}}{2}\approx\SI{5}{\volt}>\SI{609}{\milli\volt}$. Questo quindi tiene il circuito stabile, visto che la capacità non potrà mai caricarsi oltre alla tensione di attivazione del diodo.
+Il segnale in ingresso utilizzato è un'onda quadra con \textit{duty-cicle} pari al 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{5}{\volt}\todo{Inserire valori corretti}. In figura \ref{fig:picchi_ingresso} si vedono i picchi generati dal derivatore. 
 
-Per permettere la commutazione dell'op-amp si è aggiunta una seconda sezione del circuito sul morsetto positivo dell'operazionale, composta da un filtro RC e da un diodo.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/TEK00002.PNG}
+	\caption{Misure del segnale $v_{+}$ (linea gialla). Questi picchi sono generati dal circuito derivatore con in ingresso un'onda quadra con \textit{duty-cicle} del 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{5}{\volt}.}
+	\label{fig:picchi_ingresso}
+\end{figure}
+
+In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$ e $v_{out}$.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/TEK00004.PNG}
+	\caption{Misure del segnale $v_{-}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra).}
+	\label{fig:segnale_uscita}
+\end{figure}
