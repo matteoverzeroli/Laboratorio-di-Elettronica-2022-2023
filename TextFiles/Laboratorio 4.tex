@@ -40,7 +40,7 @@ Poiché il circuito commuti dallo stato stabile $v_{out}=V_{DD}$ allo stato quas
 \noindent
 Questo impulso negativo porterà per un breve istante la tensione $v_+$ al di sotto della tensione presente ai capi del condensatore (che è pari alla tensione di polarizzazione del diodo) forzando la commutazione dell'uscita a $v_{out}=V_{SS}$. A questo punto, il condensatore si scarica fino a raggiungere la tensione di soglia $V_H^-$ e una volta raggiunta la tensione di soglia cambia nuovamente e l'uscita commuta portandosi a $v_{out}=V_{DD}$. Il condensatore ricomincia così il ciclo di carica ma una volta raggiunta la tensione di polarizzazione del diodo si blocca e il circuito entra di nuovo in uno stato stabile in attesa che sul morsetto non invertente venga generato un impulso negativo. Il tempo per cui $v_{out}=V_{SS}$ dipende dalla capacità $C$ e dalla resistenza $R3$.
 
-I valori utilizzati nel nostro circuito sono indicati nella tabella \ref{tab:valori_componenti_1}. Inoltre, gli amplificatori sono stati alimentati con una tensione duale di $\pm$\SI{10}{\volt}.
+I valori utilizzati nel circuito sono indicati nella tabella \ref{tab:valori_componenti_1}. L'amplificatore scelto è il \textbf{TL071} ed è stato alimentato con una tensione duale di $\pm$\SI{10}{\volt}.
 
 \def\arraystretch{1.3}
 \begin{table}[h]
@@ -76,6 +76,8 @@ In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$
 	\caption{Misure del segnale $v_{-}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra).}
 	\label{fig:segnale_uscita}
 \end{figure}
+\todo{Abbiamo una formula con cui calcolare il tempo di scarica e confrontarlo con quello che abbiamo in una delle imagini?}
+\todo{Scriviamo che con il ua741 non funzionava?}
 \newpage
 Il secondo circuito visto a lezione è una variante del circuito precedente implementata tramite un integrato 555 al posto di un amplificatore operazionale. Di seguito il circuito costruito.\todo{Circuito e immagine qua}.
 
