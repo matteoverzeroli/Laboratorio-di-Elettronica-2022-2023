@@ -82,7 +82,7 @@ In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$
 Il secondo circuito visto a lezione è una variante del circuito precedente implementata tramite un integrato 555 al posto di un amplificatore operazionale. Di seguito il circuito costruito.\todo{Circuito e immagine qua}.
 
 L'integrato 555 è composto da diversi componenti al suo interno, collegati ai suoi piedini esterni:
-\begin{figure}[h!]
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/555internals.jpg}
 	\caption{Struttura interna di un circuito integrato 555}
@@ -90,10 +90,20 @@ L'integrato 555 è composto da diversi componenti al suo interno, collegati ai s
 \end{figure}
 
 \noindent
-Quando il generatore di segnale collegato tra il pin 2 e la massa del circuito 555 rimane alta, questo risulta sempre $>=\frac{1}{3}V_{CC}$, che quindi mantiene il secondo comparatore con un uscita bassa. Ipotizzando che il suo stato iniziale non sia settato il flip flop mantiene lo stato basso in uscita, e la sua uscita negata risulta alta. Ciò mantiene chiuso l'interruttore che collega a massa il pin 6 e la capacità, mantenendo quindi il circuito in questo stato fino a quando lo stato sul pin 2 non commuta ad uno stato basso.
+Quando l'uscita del generatore di segnale collegato tra il trigger e la massa del circuito 555 rimane alta, questo risulta sempre $>=\frac{1}{3}V_{CC}$, che quindi mantiene il secondo comparatore con un uscita bassa.
 
 \noindent
-Quando ciò avviene, il morsetto del secondo comparatore risulta più negativo di $\frac{1}{3}V_{CC}$, che quindi fa commutare il comparatore e il flip flop cambia stato portando l'uscita ad uno stato alto. Questo quindi causa l'apertura dell'interruttore sul piedino 7 e la capacità ora può iniziare a caricarsi lentamente tramite la resistenza $R$ messa tra il condensatore e $V_{CC}$. Idealmente questo continuerebbe a caricarsi fino a raggiungere una tensione pari a $V_{CC}$, ma uno dei suoi capi è collegato al primo comparatore, che è collegato ad una tensione di riferimento di $\frac{2}{3}V_{CC}$ sul suo morsetto negativo. Quando quindi il morsetto positivo supera questa soglia, il comparatore imposterà la sua uscita ad un livello alto, resettando quindi il flip flop. Ciò riporterà la sua uscita ad un livello basso, l'interruttore verrà nuovamente chiuso e la capacità verrà cortocircuitata, riportando il circuito allo stato iniziale.
+Ipotizzando che il suo stato iniziale non sia settato il flip flop mantiene lo stato basso in uscita, e la sua uscita negata risulta alta. Ciò mantiene chiuso l'interruttore che collega a massa il treshhold e la capacità, mantenendo quindi il circuito in questo stato fino a quando il trigger non commuta ad uno stato basso.
+
+\noindent
+Quando ciò avviene, il morsetto del secondo comparatore risulta più negativo di $\frac{1}{3}V_{CC}$, che quindi fa commutare il comparatore e il flip flop cambia stato portando l'uscita ad uno stato alto. Questo causa l'apertura dell'interruttore scollegando il pin discharge da massa, lasciandolo flottante.
+La capacità può iniziare a caricarsi lentamente tramite la resistenza $R$ messa tra il condensatore e $V_{CC}$. 
+
+\noindent
+Idealmente questo continuerebbe a caricarsi fino a raggiungere una tensione pari a $V_{CC}$, ma uno dei suoi capi è collegato al primo comparatore, che è collegato ad una tensione di riferimento di $\frac{2}{3}V_{CC}$ sul suo morsetto negativo. 
+
+\noindent
+Quando quindi il morsetto positivo supera questa soglia, il comparatore imposterà la sua uscita ad un livello alto, resettando quindi il flip flop. Ciò riporterà la sua uscita ad un livello basso, l'interruttore verrà nuovamente chiuso e la capacità verrà cortocircuitata, riportando il circuito allo stato iniziale.
 
 \noindent
 Il periodo di carica e scarica varia in base ai valori di $R$ e di $C$, seguendo la relazione
