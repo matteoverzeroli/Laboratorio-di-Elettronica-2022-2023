@@ -96,3 +96,59 @@ Attraverso i cursori forniti dall'oscilloscopio si ricava che il tempo t\sub{A} 
 	\caption{Misure del segnale $v_{-}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra).}
 	\label{fig:calcolo_ta}
 \end{figure}
+
+\newpage
+Il secondo circuito visto a lezione è una variante del circuito precedente implementata tramite un integrato 555 al posto di un amplificatore operazionale. Di seguito il circuito costruito.\todo{Circuito e immagine qua}.
+
+L'integrato 555 è composto da diversi componenti al suo interno, collegati ai suoi piedini esterni:
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/555internals.jpg}
+	\caption{Struttura interna di un circuito integrato 555}
+	\label{fig:555_internals}
+\end{figure}
+
+\noindent
+Quando l'uscita del generatore di segnale collegato tra il trigger e la massa del circuito 555 rimane alta, questo risulta sempre $>=\frac{1}{3}V_{CC}$, che quindi mantiene il secondo comparatore con un uscita bassa.
+
+\noindent
+Ipotizzando che il suo stato iniziale non sia settato il flip flop mantiene lo stato basso in uscita, e la sua uscita negata risulta alta. Ciò mantiene chiuso l'interruttore che collega a massa il treshhold e la capacità, mantenendo quindi il circuito in questo stato fino a quando il trigger non commuta ad uno stato basso.
+
+\noindent
+Quando ciò avviene, il morsetto del secondo comparatore risulta più negativo di $\frac{1}{3}V_{CC}$, che quindi fa commutare il comparatore e il flip flop cambia stato portando l'uscita ad uno stato alto. Questo causa l'apertura dell'interruttore scollegando il pin discharge da massa, lasciandolo flottante.
+La capacità può iniziare a caricarsi lentamente tramite la resistenza $R$ messa tra il condensatore e $V_{CC}$. 
+
+\noindent
+Idealmente questo continuerebbe a caricarsi fino a raggiungere una tensione pari a $V_{CC}$, ma uno dei suoi capi è collegato al primo comparatore, che è collegato ad una tensione di riferimento di $\frac{2}{3}V_{CC}$ sul suo morsetto negativo. 
+
+\noindent
+Quando quindi il morsetto positivo supera questa soglia, il comparatore imposterà la sua uscita ad un livello alto, resettando quindi il flip flop. Ciò riporterà la sua uscita ad un livello basso, l'interruttore verrà nuovamente chiuso e la capacità verrà cortocircuitata, riportando il circuito allo stato iniziale.
+
+\noindent
+Il periodo di carica e scarica varia in base ai valori di $R$ e di $C$, seguendo la relazione
+\[v_C = V_{CC}\cdot\left(1-e^{-\frac{t}{RC}}\right)\]
+La carica della capacità termina quando $v_C = \frac{2}{3}V_{CC}$, quindi
+\[\frac{2}{3}V_{CC} = V_{CC}\cdot\left(1-e^{-\frac{T}{RC}}\right)\]
+\[T=-RC\ln\left(\frac{1}{3}\right)\approx1.1RC\]
+
+Per caratterizzare questo circuito abbiamo quindi provato a sostituire valori di $R$ e di $C$ per verificare la legge scritta sopra. Nella tabella \ref{tab:valori_componenti_2} sono indicati i valori che abbiamo scelto.
+
+\def\arraystretch{1.3}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		R1 &\SI{10}{\kilo\ohm} & \SI{10,96}{\kilo\ohm} \\ \hline
+		R2 &\SI{18}{\kilo\ohm} & \SI{18,02}{\kilo\ohm} \\ \hline
+		R3 & \SI{12}{\kilo\ohm} & \SI{11,96}{\kilo\ohm} \\ \hline
+		R4 & ? & ? \\ \hline
+		C1 & \SI{150}{\nano\farad} & Non misurato \\ \hline
+		C2 & \SI{330}{\nano\farad} & Non misurato \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_2}
+\end{table}
+\todo{Completare l'ultimo valore di R usato}
+Il segnale in ingresso utilizzato è un'onda quadra con \textit{duty-cicle} pari al 80\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{10}{\volt}, con un offset di \SI{5}{\volt}.
+\todo{Immagini e grafico di matlab risultante da aggiungere}
