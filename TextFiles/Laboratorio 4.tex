@@ -32,14 +32,13 @@ Il primo circuito analizzato è il multivibratore monostabile (\Fig\ref{fig:circ
 	\caption{Schema circuitale del multivibratore monostabile e foto del circuito realizzato.}
 	\label{fig:circuito_1}
 \end{figure}
-A livello costruttivo si parte dal generatore d'onda quadra visto nello scorso laboratorio: inserendo un diodo $D$ in parallelo alla capacità $C$ si ottiene uno stato stabile. In questo caso, quando la tensione di uscita è pari a $v_{out}>0$ la capacità si carica, ma quando la tensione ai capi del condensatore raggiunge circa $0.7V$ (tensione di polarizzazione del diodo $D$) smette di caricarsi perché il diodo offre un cortocircuito per la corrente fornita dall'amplificatore. 
+Per realizzare il circuito, si parte dal generatore d'onda quadra visto nella precedente esperienza di laboratorio. Inserendo un diodo $D$ in parallelo alla capacità $C$ si ottiene uno stato stabile. Supponiamo che inizialmente la tensione di uscita sia pari a V\sub{DD} e che la capacità sia scarica. Allora, la capacità si carica attraverso la resistenza R\sub{3} fino a quando la tensione ai suoi capi raggiunge circa \SI{0.7}{\volt} (tensione di polarizzazione del diodo $D$). A questo punto, il processo di carica si interrompe perché il diodo si accende e si comporta come un cortocircuito. Quindi la corrente scorrerà solo attraverso il diodo $D$ verso massa. Quindi l'uscita rimane stabile alla tensione V\sub{DD}.
 
 \noindent
-Poiché il circuito commuti dallo stato stabile $v_{out}=V_{DD}$ allo stato quasi stabile $v_{out}=V_{SS}$ è necessario che la tensione dell'ingresso non invertente scenda al di sotto della tensione applicata all'ingresso invertente. Questo è possibile tramite l'applicazione sul morsetto non invertente di un picco di tensione negativo. Per fare ciò si inserisce un circuito derivatore composto da una capacità $C_T$ ed una resistenza $R_T$. Tale circuito ha il compito di generare, a partire da un segnale rettangolare $v_in$, un impulso negativo ed uno positivo. Poi, grazie all'inserimento del diodo $D_T$, l'unico impulso presentato al morsetto non invertente è quello negativo. 
+Affinché il circuito commuti dallo stato stabile $v_{out}=V_{DD}$ allo stato quasi stabile $v_{out}=V_{SS}$ è necessario che la tensione dell'ingresso non invertente scenda al di sotto della tensione dell'ingresso invertente. Questo viene reso possibile applicando sul morsetto non invertente un impulso negativo di tensione. Per fare ciò si inserisce un circuito derivatore composto da una capacità $C_T$ ed una resistenza $R_T$. Tale circuito ha il compito di generare, a partire da un segnale rettangolare $v_in$, un impulso positivo ed uno negativo. Questi \textit{spike} di tensione sono generati sui fronti di salita e discesa dell'onda quadra in ingresso. Il diodo $D_T$ permette di non trasmettere gli impulsi positivi al nodo V\super{+} (il diodo infatti si spegne) ma lascia passare inalterati gli impulsi negativi.
+Questo impulso negativo generato porterà per un breve istante la tensione $v_+$ al di sotto della tensione presente ai capi del condensatore (che è pari alla tensione di polarizzazione del diodo) forzando la commutazione dell'uscita a $v_{out}=V_{SS}$. A questo punto, il condensatore si scarica fino a raggiungere la tensione di soglia $V_H^+=\frac{1}{2}V_{SS}$ dove l'uscita commuta portandosi a $v_{out}=V_{DD}$. Il condensatore ricomincia così il ciclo di carica ma termina una volta raggiunta la tensione di polarizzazione del diodo (che è minore della nuova tensione di soglia V\sub{H}\super{+}) . Il circuito entra di nuovo in uno stato stabile in attesa che sul morsetto non invertente venga generato un altro impulso negativo. Il tempo per cui $v_{out}=V_{SS}$ dipende dalla capacità $C$ e dalla resistenza $R3$.
 
 \noindent
-Questo impulso negativo porterà per un breve istante la tensione $v_+$ al di sotto della tensione presente ai capi del condensatore (che è pari alla tensione di polarizzazione del diodo) forzando la commutazione dell'uscita a $v_{out}=V_{SS}$. A questo punto, il condensatore si scarica fino a raggiungere la tensione di soglia $V_H^-$ e una volta raggiunta la tensione di soglia cambia nuovamente e l'uscita commuta portandosi a $v_{out}=V_{DD}$. Il condensatore ricomincia così il ciclo di carica ma una volta raggiunta la tensione di polarizzazione del diodo si blocca e il circuito entra di nuovo in uno stato stabile in attesa che sul morsetto non invertente venga generato un impulso negativo. Il tempo per cui $v_{out}=V_{SS}$ dipende dalla capacità $C$ e dalla resistenza $R3$.
-
 I valori utilizzati nel circuito sono indicati nella tabella \ref{tab:valori_componenti_1}. L'amplificatore scelto è il \textbf{TL071} ed è stato alimentato con una tensione duale di $\pm$\SI{10}{\volt}.
 
 \def\arraystretch{1.3}
@@ -60,15 +59,17 @@ I valori utilizzati nel circuito sono indicati nella tabella \ref{tab:valori_com
 	\label{tab:valori_componenti_1}
 \end{table}
 
-Il segnale in ingresso utilizzato è un'onda quadra con \textit{duty-cicle} pari al 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{10}{\volt}. In figura \ref{fig:picchi_ingresso} si vedono i picchi generati dal derivatore. 
+\noindent
+Per generare gli impulsi di tensione, si è utilizzato un segnale in ingresso ad onda quadra con \textit{duty-cicle} pari al 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{5}{\volt}\todo{Inserire valori corretti}. In figura \ref{fig:picchi_ingresso} si vedono i picchi generati dal derivatore. 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/TEK00002.PNG}
-	\caption{Misure del segnale $v_{+}$ (linea gialla). Questi picchi sono generati dal circuito derivatore con in ingresso un'onda quadra con \textit{duty-cicle} del 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{10}{\volt}.}
+	\caption{Misure del segnale $v_{t}$ (linea gialla). Questi picchi sono generati dal circuito derivatore con in ingresso un'onda quadra con \textit{duty-cicle} del 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{5}{\volt}.}
 	\label{fig:picchi_ingresso}
-\end{figure}
+\end{figure}\todo{inserire valori corretti}
 
+\noindent
 In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$ e $v_{out}$. È interessante notare che i valori di saturazione dell'amplificatore operazionale, e quindi i valori tra cui commuta $v_{out}$, sono minori delle tensioni di alimentazione $V_{DD}$ e $V_{SS}$.
 \begin{figure}[h!]
 	\centering
@@ -76,8 +77,26 @@ In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$
 	\caption{Misure del segnale $v_{-}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra).}
 	\label{fig:segnale_uscita}
 \end{figure}
-\todo{Abbiamo una formula con cui calcolare il tempo di scarica e confrontarlo con quello che abbiamo in una delle imagini?}
-\todo{Scriviamo che con il ua741 non funzionava? MR: Se volete solo menzionarlo ci sta anche, ma se volete anche caratterizzare il perché non funziona, quello diventa più complesso. Però alla fine è quello che abbiamo visto in pratica.}
+
+\noindent
+\`E stato inoltre possibile misurare il tempo in cui l'uscita rimane alla tensione V\sub{SS} (che indichiamo con T\sub{A}). Infatti, esso dipende dalla costate di tempo di carica e scarica $\tau=R_3C$ e dai valori delle resistenze R\sub{1} e R\sub{2}. Infatti, indicando con t\sub{1} l'istante in cui la tensione la nodo V\super{-} raggiunge la tensione soglia V\super{L}\super{+} e considerando t\sub{0} l'istante in cui viene applicato l'impulso negativo si ha che
+\begin{equation}
+	V^-(t_1)=V_{SS}+(\SI{0.7}{\volt}-V_{SS})e^{\frac{-t_1}{\tau}}=V_L^+
+\end{equation}
+e quindi, considerando $|V_{SS}|\gg\SI{0.7}{\volt}$ si ottiene
+\begin{equation}
+	t_A=\tau\ln(1+\frac{R_2}{R_1}).
+	\label{eq:ta}
+\end{equation}
+Attraverso i cursori forniti dall'oscilloscopio si ricava che il tempo t\sub{A} è pari a \SI{1.78}{\milli\second} (\Fig\ref{fig:calcolo_ta}), mentre il valore teorico dato dall'equazione \ref{eq:ta} è di \SI{1.86}{\milli\second}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/TEK00006.PNG}
+	\caption{Misure del segnale $v_{-}$ (linea gialla) e del segnale $v_{out}$ (linea azzurra).}
+	\label{fig:calcolo_ta}
+\end{figure}
+
 \newpage
 Il secondo circuito visto a lezione è una variante del circuito precedente implementata tramite un integrato 555 al posto di un amplificatore operazionale. Di seguito il circuito costruito.\todo{Circuito e immagine qua}.
 
