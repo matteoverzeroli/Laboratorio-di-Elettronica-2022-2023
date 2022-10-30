@@ -35,14 +35,14 @@ Il primo circuito analizzato è il multivibratore monostabile (\Fig\ref{fig:circ
 Per realizzare il circuito, si parte dal generatore d'onda quadra visto nella precedente esperienza di laboratorio. Inserendo un diodo $D$ in parallelo alla capacità $C$ si ottiene uno stato stabile. Supponiamo che inizialmente la tensione di uscita sia pari a V\sub{DD} e che la capacità sia scarica. Allora, la capacità si carica attraverso la resistenza R\sub{3} fino a quando la tensione ai suoi capi raggiunge circa \SI{0.7}{\volt} (tensione di polarizzazione del diodo $D$). A questo punto, il processo di carica si interrompe perché il diodo si accende e si comporta come un cortocircuito. Quindi la corrente scorrerà solo attraverso il diodo $D$ verso massa. Quindi l'uscita rimane stabile alla tensione V\sub{DD}.
 
 \noindent
-Affinché il circuito commuti dallo stato stabile $v_{out}=V_{DD}$ allo stato quasi stabile $v_{out}=V_{SS}$ è necessario che la tensione dell'ingresso non invertente scenda al di sotto della tensione dell'ingresso invertente. Questo viene reso possibile applicando sul morsetto non invertente un impulso negativo di tensione. Per fare ciò si inserisce un circuito derivatore composto da una capacità $C_T$ ed una resistenza $R_T$. Tale circuito ha il compito di generare, a partire da un segnale rettangolare $v_in$, un impulso positivo ed uno negativo. Questi \textit{spike} di tensione sono generati sui fronti di salita e discesa dell'onda quadra in ingresso. Il diodo $D_T$ permette di non trasmettere gli impulsi positivi al nodo V\super{+} (il diodo infatti si spegne) ma lascia passare inalterati gli impulsi negativi.
+Affinché il circuito commuti dallo stato stabile $v_{out}=V_{DD}$ allo stato quasi stabile $v_{out}=V_{SS}$ è necessario che la tensione dell'ingresso non invertente scenda al di sotto della tensione dell'ingresso invertente. Questo viene reso possibile applicando sul morsetto non invertente un impulso negativo di tensione. Per fare ciò si inserisce un circuito derivatore composto da una capacità $C_T$ ed una resistenza $R_T$. Tale circuito ha il compito di generare, a partire da un segnale rettangolare $v_{in}$, un impulso positivo ed uno negativo. Questi \textit{spike} di tensione sono generati sui fronti di salita e discesa dell'onda quadra in ingresso. Il diodo $D_T$ permette di non trasmettere gli impulsi positivi al nodo V\super{+} (il diodo infatti si spegne) ma lascia passare inalterati gli impulsi negativi.
 Questo impulso negativo generato porterà per un breve istante la tensione $v_+$ al di sotto della tensione presente ai capi del condensatore (che è pari alla tensione di polarizzazione del diodo) forzando la commutazione dell'uscita a $v_{out}=V_{SS}$. A questo punto, il condensatore si scarica fino a raggiungere la tensione di soglia $V_H^+=\frac{1}{2}V_{SS}$ dove l'uscita commuta portandosi a $v_{out}=V_{DD}$. Il condensatore ricomincia così il ciclo di carica ma termina una volta raggiunta la tensione di polarizzazione del diodo (che è minore della nuova tensione di soglia V\sub{H}\super{+}) . Il circuito entra di nuovo in uno stato stabile in attesa che sul morsetto non invertente venga generato un altro impulso negativo. Il tempo per cui $v_{out}=V_{SS}$ dipende dalla capacità $C$ e dalla resistenza $R3$.
 
 \noindent
 I valori utilizzati nel circuito sono indicati nella tabella \ref{tab:valori_componenti_1}. L'amplificatore scelto è il \textbf{TL071} ed è stato alimentato con una tensione duale di $\pm$\SI{10}{\volt}.
 
 \def\arraystretch{1.3}
-\begin{table}[h]
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
@@ -65,9 +65,9 @@ Per generare gli impulsi di tensione, si è utilizzato un segnale in ingresso ad
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 4/TEK00002.PNG}
-	\caption{Misure del segnale $v_{t}$ (linea gialla). Questi picchi sono generati dal circuito derivatore con in ingresso un'onda quadra con \textit{duty-cicle} del 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{5}{\volt}.}
+	\caption{Misure del segnale $v_{t}$ (linea gialla). Questi picchi sono generati dal circuito derivatore con in ingresso un'onda quadra con \textit{duty-cicle} del 20\%, frequenza di \SI{100}{\hertz} e ampiezza picco-picco pari a \SI{10}{\volt}.}
 	\label{fig:picchi_ingresso}
-\end{figure}\todo{inserire valori corretti}
+\end{figure}
 
 \noindent
 In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$ e $v_{out}$. È interessante notare che i valori di saturazione dell'amplificatore operazionale, e quindi i valori tra cui commuta $v_{out}$, sono minori delle tensioni di alimentazione $V_{DD}$ e $V_{SS}$.
@@ -85,7 +85,7 @@ In figura \ref{fig:segnale_uscita} sono invece mostrati gli andamenti di $v_{-}$
 \end{equation}
 e quindi, considerando $|V_{SS}|\gg\SI{0.7}{\volt}$ si ottiene
 \begin{equation}
-	t_A=\tau\ln(1+\frac{R_2}{R_1}).
+	t_A=\tau\ln\left(1+\frac{R_2}{R_1}\right).
 	\label{eq:ta}
 \end{equation}
 Attraverso i cursori forniti dall'oscilloscopio si ricava che il tempo t\sub{A} è pari a \SI{1.78}{\milli\second} (\Fig\ref{fig:calcolo_ta}), mentre il valore teorico dato dall'equazione \ref{eq:ta} è di \SI{1.86}{\milli\second}.
@@ -107,6 +107,31 @@ L'integrato 555 è composto da diversi componenti al suo interno, collegati ai s
 	\caption{Struttura interna di un circuito integrato 555}
 	\label{fig:555_internals}
 \end{figure}
+
+Come si può vedere dall'immagine, il 555 è composto da due comparatori collegati ad un flip flop alle loro corrispondenti uscite. Il comparatore in alto ha $\frac{2}{3}V_{CC}$ della tensione di alimentazione fornita in ingresso all'integrato. Tensioni maggiori provocano la commutazione al livello logico alto. Questa è anche collegata ad un piedino esterno in modo da permettere di collegare una capacità aggiuntiva per migliorarne la stabilità. Il compratore in basso invece ha collegato al morsetto non invertente $\frac{1}{3}V_{CC}$ della tensione applicata all'integrato. Per poterlo far commutare ad uno stato alto quindi la tensione applicata al trigger deve essere inferiore del riferimento.
+
+Il flip flop ha due uscite, la prima è l'uscita del flip flop; la seconda è l'uscita negata (deriva dalla sua costruzione interna l'avere lo stato negato "gratuito")
+L'uscita del flip flop set-reset è indicata nella tabella \ref{tab:flip_flop_states}:
+
+\def\arraystretch{1.3}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Stato SET	& Stato RESET & Uscita \\ \hline
+		Basso & Basso & Stato precedente  \\ \hline
+		Alto & Basso & Alto\\ \hline
+		Basso & Alto & Basso\\ \hline
+		Alto & Alto & Stato proibito \\ \hline
+	\end{tabular}
+	\caption{Possibili stati di un flip flop SR}
+	\label{tab:flip_flop_states}
+\end{table}
+
+Il 555 ha quindi collegato all'uscita negata del flip flop il controllo di un interruttore, dove su un lato è collegato a massa e l'altro lato è collegato ad un piedino chiamato discharge.
+
+\noindent
+Questo integrato inoltre, a differenza degli operazionali visti precedentemente, non utilizza due tensioni e un riferimento a massa, ma soltanto una tensione positiva e il riferimento a massa. Nel nostro caso specifico l'integrato è stato alimentato con una tensione positiva di \SI{10}{\volt}.
 
 \noindent
 Quando l'uscita del generatore di segnale collegato tra il trigger e la massa del circuito 555 rimane alta, questo risulta sempre $>=\frac{1}{3}V_{CC}$, che quindi mantiene il secondo comparatore con un uscita bassa.
