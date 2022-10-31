@@ -25,7 +25,7 @@ legend('Misure con capacità da 150nF', 'Misure con capacità da 330nF',...
     'Location', 'southeast', 'Interpreter', 'latex')
 
 title('Tempo T1 in funzione della resistenza e della capacità')
-ylabel('Tempo T1 [ms]')
+ylabel('Tempo T1 [s]')
 xlabel('Resistenza [\Omega]')
 ylim([0 0.009])
 xlim([10000 25000])
