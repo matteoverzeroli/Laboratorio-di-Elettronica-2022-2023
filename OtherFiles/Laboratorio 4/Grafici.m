@@ -20,12 +20,14 @@ plot(x, fitted_1, 'r')
 plot(x, fitted_2, 'b')
 
 legend('Misure con capacità da 150nF', 'Misure con capacità da 330nF',...
-    'Pendenza del modello lineare pari a $162.3 \times 10^{-9}$',...
-    'Pendenza del modello lineare pari a $352.6 \times 10^{-9}$',...
-    'Location', 'southeast', 'Interpreter', 'latex')
+    'Retta interpolata ',...
+    'Retta interpolata ',...
+    'Location', 'southeast')
 
-title('Tempo T1 in funzione della resistenza e della capacità')
-ylabel('Tempo T1 [s]')
+%162.3 10^-9 e 352.6 10^-9 coefficienti della retta
+
+title('Misure tempo T_1')
+ylabel('Tempo T_1 [s]')
 xlabel('Resistenza [\Omega]')
 ylim([0 0.009])
 xlim([10000 25000])
