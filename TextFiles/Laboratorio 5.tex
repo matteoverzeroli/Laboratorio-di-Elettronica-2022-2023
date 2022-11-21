@@ -41,11 +41,47 @@ Il primo circuito realizzato in questa esperienza di laboratorio permette di eff
 
 \noindent
 In questo circuito il Timer 555 è utilizzato in configurazione monostabile. A differenza del circuito realizzato nella relazione precedente, il segnale di trigger viene generato non più tramite il generatore di forme d'onda ma tramite un pulsante meccanico normalmente aperto. 
-Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Per cui, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione di $V_{CC}$ grazie alla resistenza $R_2$. Quando l'interruttore viene chiuso invece il morsetto di \textit{Trigger} viene collegato a massa.  
+Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Per cui, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione di $V_{CC}$ grazie alla resistenza $R_2$. Quando l'interruttore viene chiuso invece il morsetto di \textit{Trigger} viene collegato a massa. Tuttavia, la risposta reale di un pulsante meccanico durante l'apertura e la chiusura è influenzata dalla propria risposta meccanica, caratterizzata dal fenomeno del rimbalzo (\textit{switch bouncing}). A causa di questo effetto, si possono notare degli impulsi di apertura-chiusura quando viene premuto o rilasciato il pulsante (\Fig\ref{fig:switch_bouncing}).
+\begin{figure}[tbh]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00003.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00002.PNG}
+	\end{minipage}
+	\caption{Effetto rimbalzo durante l'apertura e la chiusura di un pulsante meccanico. A sinistra è possibile vedere il segnale ai morsetti del pulsante quando viene premuto per circa \SI{55.2}{\milli\second}. A destra un dettaglio sul segnale alla pressione del pulsante in cui l'effetto del rimbalzo dura circa \SI{478}{\micro\second}.}
+	\label{fig:switch_bouncing}
+\end{figure}
+Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il LM555 in modalità monostabile che, a seguito di un impulso negativo sul trigger genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito quindi realizzato può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di trigger. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di trigger e la tensione in uscita al timer 555. I valori dei componenti passivi utilizzati per questa misura sono pari a $R_2= R= C=$\todo{completare e confrontare teorico e misurato}. 
+\begin{figure}[tbh]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00005.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00006.PNG}
+	\end{minipage}
+	\caption{Uscita al LM555 (linea azzurra) in configurazione monostabile e tensione al morsetto di trigger (linea gialla).}
+	\label{fig:circuito_1_scope}
+\end{figure}
 
 
 
+\clearpage
+Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{label}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger e uno di reset.
+\todo{foto e schema circuito 2}
 
 
 
-Il problema dello switch bouncing\todo{altra bruttura} deriva dalla sua struttura meccanica interna. Infatti, quando questo viene chiuso o aperto, proprio per come è costruito internamente, questo tende ad oscillare per un certo periodo causando un "treno" di impulsi che vengono visti dall'elettronica davanti come un set continuo di pressioni e rilasci invece che una pressione singola come invece avviene nella realtà. Questo tipo di circuito quindi si comporta come da "filtro" per questo comportamento, fornendo in uscita solo il primo cambio di pendenza sul piedino del trigger invece di tutti gli eventi spuri generati all'ingresso, visto che la durata dell'evento di uscita è determinato puramente da R e da C e non dal numero di impulsi all'ingresso del 555.
+\begin{figure}[tbh]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00010.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00011.PNG}
+	\end{minipage}
+	\caption{}
+	\label{fig:circuito_2_scope}
+\end{figure}
