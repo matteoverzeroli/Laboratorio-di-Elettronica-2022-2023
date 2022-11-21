@@ -1,5 +1,5 @@
 \chapter{Laboratorio 5}
-Il primo circuito visto a lezione è come utilizzare il 555 per effettuare switch debouncing. Vediamone lo schema circuitale ed una sua immagine:
+Il primo circuito realizzato in questa esperienza di laboratorio permette di effettuare lo switch debouncing attraverso l'integrato LM555. Nella figura \ref{fig:circuito_1} è riportato lo schema del circuito.
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -27,7 +27,7 @@ Il primo circuito visto a lezione è come utilizzare il 555 per effettuare switc
 				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
 				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
 				\draw (vin) to[nopb=$B$] ++(0,-4.32) node[ground]{};
-				\draw (vin) to[R=$R$] (crgnd) -- ++(0,1.33) node[vcc]{$V_{CC}$};
+				\draw (vin) to[R=$R_2$] (crgnd) -- ++(0,1.33) node[vcc]{$V_{CC}$};
 				\draw[thick] (-7.5,-5.3) rectangle (8,5.9);
 			\end{circuitikz}
 		}
@@ -36,8 +36,16 @@ Il primo circuito visto a lezione è come utilizzare il 555 per effettuare switc
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/CIR1.jpg}
 	\end{minipage}
 	\caption{Schema circuitale e foto del circuito realizzato.}
-	\label{fig:circuito_2}
+	\label{fig:circuito_1}
 \end{figure}
-Questo circuito è praticamente identico all'ultimo circuito visto nella lezione precedente, con l'unica differenza riguardo alla sorgente dell'impulso fornito in ingresso all'integrato \textbf{LM555}. Infatti precedentemente questa era fornita direttamente da un generatore di segnale dove ora invece è stato sostituito da un interruttore meccanico normalmente aperto. Questo è collegato ad un suo capo a massa, mentre sull'altro capo è collegato al pin di trigger ed a una resistenza. La resistenza è legata a $V_{CC}$ all'altro capo. La resistenza è quindi utilizzata come resistenza di pull-up, fornendo $V_{CC}$ al piedino del trigger quando l'interruttore è aperto e viene portata a massa dall'interruttore quando quest'ultimo viene chiuso, dove la R si comporta come limitatore di corrente\todo{Mi fa schifo come frase}.
+
+\noindent
+In questo circuito il Timer 555 è utilizzato in configurazione monostabile. A differenza del circuito realizzato nella relazione precedente, il segnale di trigger viene generato non più tramite il generatore di forme d'onda ma tramite un pulsante meccanico normalmente aperto. 
+Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Per cui, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione di $V_{CC}$ grazie alla resistenza $R_2$. Quando l'interruttore viene chiuso invece il morsetto di \textit{Trigger} viene collegato a massa.  
+
+
+
+
+
 
 Il problema dello switch bouncing\todo{altra bruttura} deriva dalla sua struttura meccanica interna. Infatti, quando questo viene chiuso o aperto, proprio per come è costruito internamente, questo tende ad oscillare per un certo periodo causando un "treno" di impulsi che vengono visti dall'elettronica davanti come un set continuo di pressioni e rilasci invece che una pressione singola come invece avviene nella realtà. Questo tipo di circuito quindi si comporta come da "filtro" per questo comportamento, fornendo in uscita solo il primo cambio di pendenza sul piedino del trigger invece di tutti gli eventi spuri generati all'ingresso, visto che la durata dell'evento di uscita è determinato puramente da R e da C e non dal numero di impulsi all'ingresso del 555.
