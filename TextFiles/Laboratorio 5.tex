@@ -69,11 +69,10 @@ Questo comportamento anomalo potrebbe presentare un problema quando è inserito,
 
 
 \clearpage
-Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{label}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger e uno di reset.
-\todo{foto e schema circuito 2}
+Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{label}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger e uno di reset. \todo{inserire foto e schema}
 
-
-
+\noindent
+La configurazione astabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito quindi rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non si sono utilizzati due pulsati: il pulsante di reset è stato realizzato con un filo che viene collegato a massa e che simula la chiusura dell'interruttore. \todo{inserire valore dei componenti utilizzati} Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset dell'uscita: dopo aver premuto il pulsante di trigger, l'uscita si porta a livello logico alto pari a \SI{10}{\volt} (linea azzurra). Successivamente, quando il pulsante di reset viene premuto (ossia si collega il nodo \todo{inserire nome in base a come chiamato nel circuito}?? viene generato un impulso negativo sul pin di reset (linea gialla). Dopo un tempo di ritardo pari a \SI{43}{\milli\second} l'uscita si riporta a livello logico basso (\SI{0}{\volt}).
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -82,6 +81,23 @@ Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{l
 	\begin{minipage}{.496\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00011.PNG}
 	\end{minipage}
-	\caption{}
+	\caption{Reset del segnale in uscita al LM555 (linea azzurra) in configurazione bistabile a seguito di un impulso (linea gialla) sul pin di reset.}
 	\label{fig:circuito_2_scope}
+\end{figure}
+
+\clearpage
+Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito.
+\todo{inserire immagine del circuito}
+\todo{indicare valori componenti utilizzati: ci sono già nel csv questi mi sembra}
+
+\begin{figure}[tbh]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00014.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00015.PNG}
+	\end{minipage}
+	\caption{}
+	\label{fig:circuito_3_scope}
 \end{figure}
