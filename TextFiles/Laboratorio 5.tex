@@ -89,7 +89,51 @@ La configurazione astabile permette di ottenere in uscita un impulso rettangolar
 Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito.
 \todo{inserire immagine del circuito}
 \todo{indicare valori componenti utilizzati: ci sono già nel csv questi mi sembra}
-
+In questa configurazione, il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$ il \textit{flip-flop} viene resettato e quindi l'uscita del timer 555 va a livello logico basso e il transistor MOSFET di scarica si accende. La capacità si scarica quindi verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di carica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
+\begin{equation}
+	\begin{split}
+		v_C&=V_{CC}+(\frac{V_{CC}}{3}-V_{CC})e^{\frac{-t}{(R_A+R_B)C}} \\
+		quando\  v_C&=\frac{2}{3}V_{CC} \\
+		\frac{2}{3}V_{CC}&=V_{CC}+(\frac{V_{CC}}{3}-V_{CC})e^{\frac{-T_1}{(R_A+R_B)C}}, \\
+	\end{split}
+\end{equation}
+da cui si ricava il tempo di carica T\sub{1}
+\begin{equation}
+	T_{1}=(R_A+R_B)C\ln{2}.
+\end{equation}
+In modo analogo, è possibile ricavare il tempo di scarica attraverso la resistenza $R_B$, considerando la capacità carica a $\frac{2}{3}V_{CC}$:
+\begin{equation}
+	\begin{split}
+		v_C&=\frac{2}{3}V_{CC}e^{\frac{-t}{R_BC}} \\
+		quando \ v_C&=\frac{V_{CC}}{3} \\
+		\frac{V_{CC}}{3}&=\frac{2}{3}V_{CC}e^{\frac{-T_2}{R_BC}}, \\
+	\end{split}
+\end{equation}
+da cui si ricava che il tempo di scarica T\sub{2} è pari a
+\begin{equation}
+	T_2=R_B C \ln{2}.
+\end{equation}
+Il duty-cycle dell'onda quadra generata è quindi pari a 
+\begin{equation}
+	\delta=\frac{T_1}{T_1+T_2}=\frac{(R_A+R_B)C\ln{2}}{(R_A+2R_B)C\ln{2}}=\frac{R_A+R_B}{R_A+2R_B}.
+	\label{eq:3_1}
+\end{equation}
+Per cui, il valore del duty-cycle è compreso tra il \SI{50}{\percent} (se $R_A\ll R_B$) e il \SI{100}{\percent} (se $R_A \gg R_B$). 
+\noindent
+Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio.In questo caso i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_3}.
+\def\arraystretch{1.3}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		RA &\SI{56}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		RB &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
+		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_3}
+\end{table}
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -98,6 +142,25 @@ Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore
 	\begin{minipage}{.496\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00015.PNG}
 	\end{minipage}
-	\caption{}
+	\caption{Segnale di uscita al circuito astabile realizzato con l'integrato LM555.}
 	\label{fig:circuito_3_scope}
+\end{figure}
+Dalla equazione \ref{eq:3_1} si calcola che il valore teorico del duty-cycle con i valori indicati è pari a
+\begin{equation}
+	\delta=\frac{\SI{55.10}{\kilo\ohm}+\SI{12.00}{\kilo\ohm}}{\SI{55.10}{\kilo\ohm}+2\times\SI{12.00}{\kilo\ohm}}=\SI{84.83}{\percent},
+\end{equation}
+mentre il valore misurato tramite i cursori dell'oscilloscopio è pari a \SI{84.75}{\percent}, molto simile al valore teorico.
+
+\noindent
+Successivamente, si sono effettuate misure del duty-cycle e della frequenza del segnale ottenuto variando il valore delle resistenze $R_A$ ($R_B$ mantenuta constante con valore di \SI{12}{\kilo\ohm}) e della capacità $C$. I dati ottenuti sono stati riportati nella figura \ref{fig:circuito_3_plot}.
+\begin{figure}[tbh]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/Duty vs RA}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/F vs RA}
+	\end{minipage}
+	\caption{Misure del duty-cycle e della frequenza del segnale in uscita dal circuito in funzione della resistenza R\sub{A} e R\sub{B} e della capacità C.}
+	\label{fig:circuito_3_plot}
 \end{figure}
