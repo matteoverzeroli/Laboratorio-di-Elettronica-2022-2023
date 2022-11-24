@@ -185,16 +185,16 @@ Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		$RA_{10}$ &\SI{10}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
-		$RA_{18}$ &\SI{18}{\kilo\ohm} & \SI{18.02}{\kilo\ohm} \\ \hline
-		$RA_{23}$ &\SI{23}{\kilo\ohm} & \SI{23.90}{\kilo\ohm} \\ \hline
-		$RA_{39}$ &\SI{39}{\kilo\ohm} & \SI{38.65}{\kilo\ohm} \\ \hline
-		$RA_{50}$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
-		$RA_{66}$ &\SI{66}{\kilo\ohm} & \SI{66.87}{\kilo\ohm} \\ \hline
-		$RA_{82}$ &\SI{82}{\kilo\ohm} & \SI{82.26}{\kilo\ohm} \\ \hline
-		RB &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
-		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
-		C2 & \SI{150}{\nano\farad} & Non misurato \\ \hline
+		$R_{A10}$ &\SI{10}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
+		$R_{A18}$ &\SI{18}{\kilo\ohm} & \SI{18.02}{\kilo\ohm} \\ \hline
+		$R_{A23}$ &\SI{23}{\kilo\ohm} & \SI{23.90}{\kilo\ohm} \\ \hline
+		$R_{A39}$ &\SI{39}{\kilo\ohm} & \SI{38.65}{\kilo\ohm} \\ \hline
+		$R_{A50}$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		$R_{A66}$ &\SI{66}{\kilo\ohm} & \SI{66.87}{\kilo\ohm} \\ \hline
+		$R_{A82}$ &\SI{82}{\kilo\ohm} & \SI{82.26}{\kilo\ohm} \\ \hline
+		$R_B$ &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
+		$C$ & \SI{330}{\nano\farad} & Non misurato \\ \hline
+		$C_2$ & \SI{150}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_2}
@@ -203,7 +203,7 @@ In questa configurazione, il condensatore $C$ inizia a caricarsi attraverso le r
 \begin{equation}
 	\begin{split}
 		v_C&=V_{CC}+(\frac{V_{CC}}{3}-V_{CC})e^{\frac{-t}{(R_A+R_B)C}} \\
-		quando\  v_C&=\frac{2}{3}V_{CC} \\
+		\text{quando}\  v_C&=\frac{2}{3}V_{CC} \\
 		\frac{2}{3}V_{CC}&=V_{CC}+(\frac{V_{CC}}{3}-V_{CC})e^{\frac{-T_1}{(R_A+R_B)C}}, \\
 	\end{split}
 \end{equation}
@@ -215,7 +215,7 @@ In modo analogo, è possibile ricavare il tempo di scarica attraverso la resiste
 \begin{equation}
 	\begin{split}
 		v_C&=\frac{2}{3}V_{CC}e^{\frac{-t}{R_BC}} \\
-		quando \ v_C&=\frac{V_{CC}}{3} \\
+		\text{quando} \ v_C&=\frac{V_{CC}}{3} \\
 		\frac{V_{CC}}{3}&=\frac{2}{3}V_{CC}e^{\frac{-T_2}{R_BC}}, \\
 	\end{split}
 \end{equation}
@@ -237,9 +237,9 @@ Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisi
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		RA &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
-		RB &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
-		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
+		$R_A$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		$R_B$ &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
+		$C$ & \SI{330}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_3}
