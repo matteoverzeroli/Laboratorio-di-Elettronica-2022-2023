@@ -69,10 +69,64 @@ Questo comportamento anomalo potrebbe presentare un problema quando è inserito,
 
 
 \clearpage
-Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{label}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger e uno di reset. \todo{inserire foto e schema}
-
+Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{fig:circuito_2}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger e uno di reset.
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\scalebox{.47}{
+			\begin{circuitikz}
+				%Main dip package
+				\draw (0,0) node[dipchip,num pins=8, hide numbers, external pins width=0.1, scale=3, external pad fraction=6](C){LM555};
+				%Pin names
+				\node [right] at (C.bpin 1) {GND};
+				\node [right] at (C.bpin 2) {Trigger};
+				\node [right] at (C.bpin 3) {Output};
+				\node [right] at (C.bpin 4) {Reset};
+				\node [left] at (C.bpin 5) {Control Voltage};
+				\node [left] at (C.bpin 6) {Threshold};
+				\node [left] at (C.bpin 7) {Discharge};
+				\node [left] at (C.bpin 8) {$V_{CC}$};
+				%Connections
+				\draw (C.pin 1) -- ++(-2.9,0) ++(-.1,0) node[jump crossing](crgnd){} ++(-.1,0) -- ++(-.9,0) -- ++(0,-6.5) node[ground]{};
+				\draw (C.pin 8) -- ++(2,0) coordinate(vcc) -- ++(0,1.35) node[vcc]{$V_{CC}$};
+				\draw (C.pin 7) -- ++(2,0) coordinate(dsc) to[R=$R$] (vcc);
+				\draw (C.pin 6) -- ++(2,0) coordinate(trs) -- (dsc);
+				\draw (trs) -- ++(2,0) to[C=$C$] ++(0,-3.18) node[ground]{};
+				\draw (C.pin 5) -- ++(2,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 4) -- ++(-1.5,0) coordinate(swres) to[R=$R_3$] ++(0,1.5) -- ++(0,1.5) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
+				\draw (swres) to[nopb=$SW_{R}$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
+				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
+				\draw (vin) to[nopb=$SW_{T}$] ++(0,-2.82) -- +(0,-2) node[ground]{};
+				\draw (vin) to[R=$R_2$] (crgnd) -- ++(0,1.33) node[vcc]{$V_{CC}$};
+				\draw[thick] (-7.5,-5.3) rectangle (8,5.9);
+			\end{circuitikz}
+		}
+	\end{minipage}\qquad
+	\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/CIR2.jpg}
+	\end{minipage}
+	\caption{Schema circuitale e foto del circuito realizzato.}
+	\label{fig:circuito_2}
+\end{figure}
 \noindent
-La configurazione astabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito quindi rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non si sono utilizzati due pulsati: il pulsante di reset è stato realizzato con un filo che viene collegato a massa e che simula la chiusura dell'interruttore. \todo{inserire valore dei componenti utilizzati} Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset dell'uscita: dopo aver premuto il pulsante di trigger, l'uscita si porta a livello logico alto pari a \SI{10}{\volt} (linea azzurra). Successivamente, quando il pulsante di reset viene premuto (ossia si collega il nodo \todo{inserire nome in base a come chiamato nel circuito}?? viene generato un impulso negativo sul pin di reset (linea gialla). Dopo un tempo di ritardo pari a \SI{43}{\milli\second} l'uscita si riporta a livello logico basso (\SI{0}{\volt}).
+La configurazione astabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito quindi rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non si sono utilizzati due pulsati: il pulsante di reset è stato realizzato con un filo che viene collegato a massa e che simula la chiusura dell'interruttore. I valori dei componenti sono indicati nella tabella \ref{tab:valori_componenti_1}.
+\def\arraystretch{1.3}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		R &\SI{270}{\kilo\ohm} & \SI{265,8}{\kilo\ohm} \\ \hline
+		R2 &\SI{12}{\kilo\ohm} & \SI{10,96}{\kilo\ohm} \\ \hline
+		R3 & \SI{12}{\kilo\ohm} & \SI{12}{\kilo\ohm} \\ \hline
+		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
+		C2 & \SI{150}{\nano\farad} & Non misurato \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_1}
+\end{table}
+Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset dell'uscita: dopo aver premuto il pulsante di trigger, l'uscita si porta a livello logico alto pari a \SI{10}{\volt} (linea azzurra). Successivamente, quando il pulsante di reset viene premuto (ossia si collega il nodo $SW_{R}$ viene generato un impulso negativo sul pin di reset (linea gialla). Dopo un tempo di ritardo pari a \SI{43}{\milli\second} l'uscita si riporta a livello logico basso (\SI{0}{\volt}).
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -87,8 +141,64 @@ La configurazione astabile permette di ottenere in uscita un impulso rettangolar
 
 \clearpage
 Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito.
-\todo{inserire immagine del circuito}
-\todo{indicare valori componenti utilizzati: ci sono già nel csv questi mi sembra}
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\scalebox{.47}{
+			\begin{circuitikz}
+				%Main dip package
+				\draw (0,0) node[dipchip,num pins=8, hide numbers, external pins width=0.1, scale=3, external pad fraction=6](C){LM555};
+				%Pin names
+				\node [right] at (C.bpin 1) {GND};
+				\node [right] at (C.bpin 2) {Trigger};
+				\node [right] at (C.bpin 3) {Output};
+				\node [right] at (C.bpin 4) {Reset};
+				\node [left] at (C.bpin 5) {Control Voltage};
+				\node [left] at (C.bpin 6) {Threshold};
+				\node [left] at (C.bpin 7) {Discharge};
+				\node [left] at (C.bpin 8) {$V_{CC}$};
+				%Connections
+				\draw (C.pin 1) -- ++(-2.9,0) ++(-.1,0) node[jump crossing](crgnd){} ++(-.1,0) -- ++(-.9,0) -- ++(0,-6.5) node[ground]{};
+				\draw (C.pin 8) -- ++(.9,0) ++(.1,0) coordinate(vccj) node[jump crossing]{} ++(.1,0)-- ++(.9,0) coordinate(vcc) -- ++(0,1.35) node[vcc]{$V_{CC}$};
+				\draw (C.pin 7) -- ++(2,0) coordinate(dsc) to[R=$R_A$] (vcc);
+				\draw (C.pin 6) -- ++(2,0) coordinate(trs) -- (dsc);
+				\draw (trs) -- ++(2,0) to[C=$C$] ++(0,-3.18) node[ground]{};
+				\draw (C.pin 5) -- ++(2,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
+				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
+				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
+				\draw (vin) to[R=$R_B$] (crgnd) -- ++(0,2.5) coordinate(tb) -- (tb-|vccj) -- (vccj) to[short, -*] (C.pin 7 -| vccj);
+				\draw[thick] (-7.5,-5.3) rectangle (8,5.9);
+			\end{circuitikz}
+		}
+	\end{minipage}\qquad
+	\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/CIR3.jpg}
+	\end{minipage}
+	\caption{Schema circuitale e foto del circuito realizzato.}
+	\label{fig:circuito_3}
+\end{figure}
+
+\def\arraystretch{1.3}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		$RA_{10}$ &\SI{10}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
+		$RA_{18}$ &\SI{18}{\kilo\ohm} & \SI{18.02}{\kilo\ohm} \\ \hline
+		$RA_{23}$ &\SI{23}{\kilo\ohm} & \SI{23.90}{\kilo\ohm} \\ \hline
+		$RA_{39}$ &\SI{39}{\kilo\ohm} & \SI{38.65}{\kilo\ohm} \\ \hline
+		$RA_{50}$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		$RA_{66}$ &\SI{66}{\kilo\ohm} & \SI{66.87}{\kilo\ohm} \\ \hline
+		$RA_{82}$ &\SI{82}{\kilo\ohm} & \SI{82.26}{\kilo\ohm} \\ \hline
+		RB &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
+		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
+		C2 & \SI{150}{\nano\farad} & Non misurato \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_2}
+\end{table}
 In questa configurazione, il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$ il \textit{flip-flop} viene resettato e quindi l'uscita del timer 555 va a livello logico basso e il transistor MOSFET di scarica si accende. La capacità si scarica quindi verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di carica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
 \begin{equation}
 	\begin{split}
@@ -127,7 +237,7 @@ Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisi
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		RA &\SI{56}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		RA &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
 		RB &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
 		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
