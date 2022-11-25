@@ -158,7 +158,7 @@ Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
-		\scalebox{.5}{
+		\scalebox{.47}{
 			\begin{circuitikz}
 				%Main dip package
 				\draw (0,0) node[dipchip,num pins=8, hide numbers, external pins width=0.1, scale=3, external pad fraction=6](C){LM555};
@@ -175,7 +175,7 @@ Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore
 				\draw (C.pin 1) -- ++(-2.9,0) ++(-.1,0) node[jump crossing](crgnd){} ++(-.1,0) -- ++(-.9,0) -- ++(0,-6.5) node[ground]{};
 				\draw (C.pin 8) -- ++(.9,0) ++(.1,0) coordinate(vccj) node[jump crossing]{} ++(.1,0)-- ++(.9,0) coordinate(vcc) -- ++(0,1.35) node[vcc]{$V_{CC}$};
 				\draw (C.pin 7) -- ++(2,0) coordinate(dsc) to[R=$R_A$] (vcc);
-				\draw (C.pin 5) -- ++(.9,0) ++(.1,0) node[jump crossing] ++(.1,0) -- ++(.9,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 5) -- ++(.9,0) ++(.1,0) node[jump crossing]{} ++(.1,0) -- ++(.9,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
 				\draw (C.pin 6) -- ++(1,0) -- ++(0,-3.6) -- ++(-8.9,0) to[short, -*] ++(0,5.28);
 				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
 				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
@@ -291,7 +291,52 @@ Successivamente, si sono effettuate misure del duty-cycle e della frequenza del 
 
 
 \clearpage
-Il quarto circuito realizzato permette di superare i limiti sul valore minimo e massimo del duty-cycle presenti nel circuito precedente. \todo{inserire foto e schema}
+Il quarto circuito realizzato permette di superare i limiti sul valore minimo e massimo del duty-cycle presenti nel circuito precedente.
+
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{.45\textwidth}
+		\scalebox{.47}{
+			\begin{circuitikz}
+				%Main dip package
+				\draw (0,0) node[dipchip,num pins=8, hide numbers, external pins width=0.1, scale=3, external pad fraction=6](C){LM555};
+				%Pin names
+				\node [right] at (C.bpin 1) {GND};
+				\node [right] at (C.bpin 2) {Trigger};
+				\node [right] at (C.bpin 3) {Output};
+				\node [right] at (C.bpin 4) {Reset};
+				\node [left] at (C.bpin 5) {Control Voltage};
+				\node [left] at (C.bpin 6) {Threshold};
+				\node [left] at (C.bpin 7) {Discharge};
+				\node [left] at (C.bpin 8) {$V_{CC}$};
+				%Connections
+				\draw (C.pin 1) -- ++(-2.9,0) ++(-.1,0) node[jump crossing](crgnd){} ++(-.1,0) -- ++(-.9,0) -- ++(0,-6.5) node[ground]{};
+				\draw (C.pin 8) -- ++(.9,0) ++(.1,0) coordinate(vccj) node[jump crossing]{} ++(.1,0)-- ++(.9,0) coordinate(vcc) -- ++(0,1.35) node[vcc]{$V_{CC}$};
+				\draw (C.pin 7) -- ++(2,0) coordinate(dsc) to[R=$R_A$] (vcc);
+				\draw (C.pin 5) -- ++(.9,0) ++(.1,0) node[jump crossing]{} ++(.1,0) -- ++(.9,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 6) -- ++(1,0) -- ++(0,-3.6) -- ++(-8.9,0) to[short, -*] ++(0,5.28);
+				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
+				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
+				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
+				\draw (-1,4.02) coordinate (d1) to[potentiometer, name=P] ++(0,2) coordinate(d2);
+				\draw [-to, thick](P.wiper) to [out=-90,in=180] node[left, midway] {$R_{T1}$} (d1);
+				\draw [-to, thick](P.wiper) to [out=90,in=180] node[left, midway] {$R_{T2}$} (d2);
+				%\draw (-1.5, 5.5) node{Pinco};
+				\draw (d1) to[D=$D_1$, invert] ++(2,0) -- ++(0,1) coordinate(dend);
+				\draw (d2) to[D=$D_2$] ++(2,0) -- (dend);
+				\draw (vin) -- (crgnd) -- ++(0,2.5) coordinate(tb) to[short, -*] (P.wiper);
+				\draw (dend) to[short, *-] (tb-|vccj) -- (vccj) to[short, -*] (C.pin 7 -| vccj);
+				\draw (vin) to[C=$C$] ++(0,-4.82) node[ground]{};
+				\draw[thick] (-8,-5.3) rectangle (6.6,6.9);
+			\end{circuitikz}
+		}
+	\end{minipage}\qquad
+	\begin{minipage}{.45\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/CIR4.jpg}
+	\end{minipage}
+	\caption{Schema circuitale e foto del circuito realizzato.}
+	\label{fig:circuito_4}
+\end{figure}
 
 \noindent
 Per ottenere un duty-cycle selezionabile nell'intervallo dallo \SI{0}{\percent} al \SI{100}{\percent}, si introducono i diodi $D1$ e $D2$ e il trimmer $T$ (\Fig\ref{fig:trimmer}).
