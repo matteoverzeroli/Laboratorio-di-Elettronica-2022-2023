@@ -26,7 +26,7 @@ Il primo circuito realizzato in questa esperienza di laboratorio permette di eff
 				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
 				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
 				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
-				\draw (vin) to[nopb=$B$] ++(0,-4.32) node[ground]{};
+				\draw (vin) to[nopb=$SW_{T}$] ++(0,-4.32) node[ground]{};
 				\draw (vin) to[R=$R_2$] (crgnd) -- ++(0,1.33) node[vcc]{$V_{CC}$};
 				\draw[thick] (-7.5,-5.3) rectangle (8,5.9);
 			\end{circuitikz}
@@ -40,7 +40,7 @@ Il primo circuito realizzato in questa esperienza di laboratorio permette di eff
 \end{figure}
 
 \noindent
-In questo circuito il Timer 555 è utilizzato in configurazione monostabile. A differenza del circuito realizzato nella relazione precedente, il segnale di trigger viene generato non più tramite il generatore di forme d'onda ma tramite un pulsante meccanico normalmente aperto. 
+In questo circuito il Timer 555 è utilizzato in configurazione monostabile. A differenza del circuito realizzato nella relazione precedente, il segnale di trigger viene generato non più tramite il generatore di forme d'onda ma tramite un pulsante meccanico normalmente aperto, indicato nello schema circuitale con il nome di $SW_{T}$. 
 Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Per cui, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione di $V_{CC}$ grazie alla resistenza $R_2$. Quando l'interruttore viene chiuso invece il morsetto di \textit{Trigger} viene collegato a massa. Tuttavia, la risposta reale di un pulsante meccanico durante l'apertura e la chiusura è influenzata dalla propria risposta meccanica, caratterizzata dal fenomeno del rimbalzo (\textit{switch bouncing}). A causa di questo effetto, si possono notare degli impulsi di apertura-chiusura quando viene premuto o rilasciato il pulsante (\Fig\ref{fig:switch_bouncing}).
 \begin{figure}[tbh]
 	\centering
@@ -53,7 +53,21 @@ Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, m
 	\caption{Effetto rimbalzo durante l'apertura e la chiusura di un pulsante meccanico. A sinistra è possibile vedere il segnale ai morsetti del pulsante quando viene premuto per circa \SI{55.2}{\milli\second}. A destra un dettaglio sul segnale alla pressione del pulsante in cui l'effetto del rimbalzo dura circa \SI{478}{\micro\second}.}
 	\label{fig:switch_bouncing}
 \end{figure}
-Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il LM555 in modalità monostabile che, a seguito di un impulso negativo sul trigger genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito quindi realizzato può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di trigger. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di trigger e la tensione in uscita al timer 555. I valori dei componenti passivi utilizzati per questa misura sono pari a $R_2= R= C=$\todo{completare e confrontare teorico e misurato}. 
+Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il \textbf{LM555} in modalità monostabile che, a seguito di un impulso negativo sul trigger genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito quindi realizzato può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di trigger. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di trigger e la tensione in uscita al timer 555. I valori dei componenti passivi utilizzati per questa misura sono indicati nella tabella \ref{tab:valori_componenti_1}.
+
+\def\arraystretch{1.3}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Componente	& Valore Nominale & Valore Misurato \\ \hline
+		$R_2$ &\SI{12}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
+		$R$ &\SI{270}{\kilo\ohm} & \SI{265.8}{\kilo\ohm} \\ \hline
+		$C$ &\SI{330}{\nano\farad} & Non misurato \\ \hline
+	\end{tabular}
+	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
+	\label{tab:valori_componenti_1}
+\end{table}
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -69,7 +83,7 @@ Questo comportamento anomalo potrebbe presentare un problema quando è inserito,
 
 
 \clearpage
-Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{fig:circuito_2}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger e uno di reset.
+Il secondo circuito realizzato utilizza \textbf{LM555} in modalità bistabile (\Fig\ref{fig:circuito_2}) e permette di generare un impulso rettangolare in uscita al time 555 di durata controllabile dalla pressione di due pulsanti: un pulsante di trigger ($SW_T$) e uno di reset ($SW_R$).
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -110,7 +124,7 @@ Il secondo circuito realizzato utilizza LM555 in modalità bistabile (\Fig\ref{f
 	\label{fig:circuito_2}
 \end{figure}
 \noindent
-La configurazione astabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito quindi rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non si sono utilizzati due pulsati: il pulsante di reset è stato realizzato con un filo che viene collegato a massa e che simula la chiusura dell'interruttore. I valori dei componenti sono indicati nella tabella \ref{tab:valori_componenti_1}.
+La configurazione astabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito quindi rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non si sono utilizzati due pulsati: il pulsante di reset è stato realizzato con un filo che viene collegato a massa e che simula la chiusura dell'interruttore. I valori dei componenti sono indicati nella tabella \ref{tab:valori_componenti_2}.
 \def\arraystretch{1.3}
 \begin{table}[h!]
 	\centering
@@ -124,9 +138,9 @@ La configurazione astabile permette di ottenere in uscita un impulso rettangolar
 		C2 & \SI{150}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
-	\label{tab:valori_componenti_1}
+	\label{tab:valori_componenti_2}
 \end{table}
-Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset dell'uscita: dopo aver premuto il pulsante di trigger, l'uscita si porta a livello logico alto pari a \SI{10}{\volt} (linea azzurra). Successivamente, quando il pulsante di reset viene premuto (ossia si collega il nodo $SW_{R}$ viene generato un impulso negativo sul pin di reset (linea gialla). Dopo un tempo di ritardo pari a \SI{43}{\milli\second} l'uscita si riporta a livello logico basso (\SI{0}{\volt}).
+Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset dell'uscita: dopo aver premuto il pulsante di trigger, l'uscita si porta a livello logico alto pari a \SI{10}{\volt} (linea azzurra). Successivamente, quando il pulsante di reset $SW_R$ viene premuto (o collegando il pin di reset a massa) viene generato un impulso negativo sul pin di reset (linea gialla). Dopo un tempo di ritardo pari a \SI{43}{\milli\second} l'uscita si riporta a livello logico basso (\SI{0}{\volt}).
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -140,11 +154,11 @@ Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset del
 \end{figure}
 
 \clearpage
-Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito.
+Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito, indicati nella tabella \ref{tab:valori_componenti_3}.
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
-		\scalebox{.47}{
+		\scalebox{.5}{
 			\begin{circuitikz}
 				%Main dip package
 				\draw (0,0) node[dipchip,num pins=8, hide numbers, external pins width=0.1, scale=3, external pad fraction=6](C){LM555};
@@ -161,14 +175,14 @@ Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore
 				\draw (C.pin 1) -- ++(-2.9,0) ++(-.1,0) node[jump crossing](crgnd){} ++(-.1,0) -- ++(-.9,0) -- ++(0,-6.5) node[ground]{};
 				\draw (C.pin 8) -- ++(.9,0) ++(.1,0) coordinate(vccj) node[jump crossing]{} ++(.1,0)-- ++(.9,0) coordinate(vcc) -- ++(0,1.35) node[vcc]{$V_{CC}$};
 				\draw (C.pin 7) -- ++(2,0) coordinate(dsc) to[R=$R_A$] (vcc);
-				\draw (C.pin 6) -- ++(2,0) coordinate(trs) -- (dsc);
-				\draw (trs) -- ++(2,0) to[C=$C$] ++(0,-3.18) node[ground]{};
-				\draw (C.pin 5) -- ++(2,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 5) -- ++(.9,0) ++(.1,0) node[jump crossing] ++(.1,0) -- ++(.9,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 6) -- ++(1,0) -- ++(0,-3.6) -- ++(-8.9,0) to[short, -*] ++(0,5.28);
 				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
 				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
 				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
 				\draw (vin) to[R=$R_B$] (crgnd) -- ++(0,2.5) coordinate(tb) -- (tb-|vccj) -- (vccj) to[short, -*] (C.pin 7 -| vccj);
-				\draw[thick] (-7.5,-5.3) rectangle (8,5.9);
+				\draw (vin) to[C=$C$] ++(0,-4.82) node[ground]{};
+				\draw[thick] (-8,-5.3) rectangle (6.6,5.9);
 			\end{circuitikz}
 		}
 	\end{minipage}\qquad
@@ -185,26 +199,26 @@ Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		$R_{A10}$ &\SI{10}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
-		$R_{A18}$ &\SI{18}{\kilo\ohm} & \SI{18.02}{\kilo\ohm} \\ \hline
-		$R_{A23}$ &\SI{23}{\kilo\ohm} & \SI{23.90}{\kilo\ohm} \\ \hline
-		$R_{A39}$ &\SI{39}{\kilo\ohm} & \SI{38.65}{\kilo\ohm} \\ \hline
-		$R_{A50}$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
-		$R_{A66}$ &\SI{66}{\kilo\ohm} & \SI{66.87}{\kilo\ohm} \\ \hline
-		$R_{A82}$ &\SI{82}{\kilo\ohm} & \SI{82.26}{\kilo\ohm} \\ \hline
+		$R_{A_{12k}}$ &\SI{12}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
+		$R_{A_{18k}}$ &\SI{18}{\kilo\ohm} & \SI{18.02}{\kilo\ohm} \\ \hline
+		$R_{A_{23k}}$ &\SI{23}{\kilo\ohm} & \SI{23.90}{\kilo\ohm} \\ \hline
+		$R_{A_{39k}}$ &\SI{39}{\kilo\ohm} & \SI{38.65}{\kilo\ohm} \\ \hline
+		$R_{A_{50k}}$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		$R_{A_{66k}}$ &\SI{66}{\kilo\ohm} & \SI{66.87}{\kilo\ohm} \\ \hline
+		$R_{A_{82k}}$ &\SI{82}{\kilo\ohm} & \SI{82.26}{\kilo\ohm} \\ \hline
 		$R_B$ &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
 		$C$ & \SI{330}{\nano\farad} & Non misurato \\ \hline
 		$C_2$ & \SI{150}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
-	\label{tab:valori_componenti_2}
+	\label{tab:valori_componenti_3}
 \end{table}
 In questa configurazione, il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$ il \textit{flip-flop} viene resettato e quindi l'uscita del timer 555 va a livello logico basso e il transistor MOSFET di scarica si accende. La capacità si scarica quindi verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di carica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
 \begin{equation}
 	\begin{split}
-		v_C&=V_{CC}+(\frac{V_{CC}}{3}-V_{CC})e^{\frac{-t}{(R_A+R_B)C}} \\
-		\text{quando}\  v_C&=\frac{2}{3}V_{CC} \\
-		\frac{2}{3}V_{CC}&=V_{CC}+(\frac{V_{CC}}{3}-V_{CC})e^{\frac{-T_1}{(R_A+R_B)C}}, \\
+		v_C&=V_{CC}+\left(\frac{V_{CC}}{3}-V_{CC}\right)e^{\frac{-t}{\left(R_A+R_B\right)C}} \\
+		\text{quando }v_C&=\frac{2}{3}V_{CC}\text{:} \\
+		\frac{2}{3}V_{CC}&=V_{CC}+\left(\frac{V_{CC}}{3}-V_{CC}\right)e^{\frac{-T_1}{\left(R_A+R_B\right)C}}, \\
 	\end{split}
 \end{equation}
 da cui si ricava il tempo di carica T\sub{1}
@@ -225,12 +239,12 @@ da cui si ricava che il tempo di scarica T\sub{2} è pari a
 \end{equation}
 Il duty-cycle dell'onda quadra generata è quindi pari a 
 \begin{equation}
-	\delta=\frac{T_1}{T_1+T_2}=\frac{(R_A+R_B)C\ln{2}}{(R_A+2R_B)C\ln{2}}=\frac{R_A+R_B}{R_A+2R_B}.
+	\delta=\frac{T_1}{T_1+T_2}=\frac{\left(R_A+R_B\right)C\ln{2}}{\left(R_A+2R_B\right)C\ln{2}}=\frac{R_A+R_B}{R_A+2R_B}.
 	\label{eq:3_1}
 \end{equation}
 Per cui, il valore del duty-cycle è compreso tra il \SI{50}{\percent} (se $R_A\ll R_B$) e il \SI{100}{\percent} (se $R_A \gg R_B$). 
 \noindent
-Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio.In questo caso i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_3}.
+Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio.In questo caso i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_4}.
 \def\arraystretch{1.3}
 \begin{table}[h!]
 	\centering
@@ -242,7 +256,7 @@ Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisi
 		$C$ & \SI{330}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
-	\label{tab:valori_componenti_3}
+	\label{tab:valori_componenti_4}
 \end{table}
 \begin{figure}[tbh]
 	\centering
