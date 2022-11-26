@@ -1,5 +1,5 @@
 \chapter{Laboratorio 5}
-Il primo circuito realizzato in questa esperienza di laboratorio permette di effettuare lo switch debouncing attraverso l'integrato LM555. Nella figura \ref{fig:circuito_1} è riportato lo schema del circuito.
+Il primo circuito realizzato in questa esperienza di laboratorio permette di effettuare lo switch debouncing attraverso l'integrato \textbf{LM555}. Nella figura \ref{fig:circuito_1} è riportato lo schema del circuito.
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -297,7 +297,7 @@ Il quarto circuito realizzato permette di superare i limiti sul valore minimo e 
 	\centering
 	\begin{minipage}{.45\textwidth}
 		\scalebox{.47}{
-			\begin{circuitikz}
+			\begin{circuitikz}[use fpu reciprocal]
 				%Main dip package
 				\draw (0,0) node[dipchip,num pins=8, hide numbers, external pins width=0.1, scale=3, external pad fraction=6](C){LM555};
 				%Pin names
@@ -313,7 +313,7 @@ Il quarto circuito realizzato permette di superare i limiti sul valore minimo e 
 				\draw (C.pin 1) -- ++(-2.9,0) ++(-.1,0) node[jump crossing](crgnd){} ++(-.1,0) -- ++(-.9,0) -- ++(0,-6.5) node[ground]{};
 				\draw (C.pin 8) -- ++(.9,0) ++(.1,0) coordinate(vccj) node[jump crossing]{} ++(.1,0)-- ++(.9,0) coordinate(vcc) -- ++(0,1.35) node[vcc]{$V_{CC}$};
 				\draw (C.pin 7) -- ++(2,0) coordinate(dsc) to[R=$R_A$] (vcc);
-				\draw (C.pin 5) -- ++(.9,0) ++(.1,0) node[jump crossing]{} ++(.1,0) -- ++(.9,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
+				\draw (C.pin 5) -- ++(.865,0) ++(.135,0) node[jump crossing]{} ++(.135,0) -- ++(.865,0) to[C=$C_2$] ++(0,-1.5) node[ground]{};
 				\draw (C.pin 6) -- ++(1,0) -- ++(0,-3.6) -- ++(-8.9,0) to[short, -*] ++(0,5.28);
 				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
 				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
