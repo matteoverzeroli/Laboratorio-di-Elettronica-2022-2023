@@ -318,16 +318,17 @@ Il quarto circuito realizzato permette di superare i limiti sul valore minimo e 
 				\draw (C.pin 4) -- ++(-1.5,0) -- ++(0,3) to[crossing] ++(0,.72) to[crossing] ++ (0,2.64) node[vcc]{$V_{CC}$};
 				\draw (C.pin 3) to[short, -o] ++(-1,0) ++(0,.1) node[above]{$v_{out}$};
 				\draw (C.pin 2) -- ++(-3,0) coordinate(vin);
-				\draw (-1,4.02) coordinate (d1) to[potentiometer, name=P] ++(0,2) coordinate(d2);
-				\draw [-to, thick](P.wiper) to [out=-90,in=180] node[left, midway] {$R_{T1}$} (d1);
-				\draw [-to, thick](P.wiper) to [out=90,in=180] node[left, midway] {$R_{T2}$} (d2);
-				%\draw (-1.5, 5.5) node{Pinco};
-				\draw (d1) to[D=$D_1$, invert] ++(2,0) -- ++(0,1) coordinate(dend);
-				\draw (d2) to[D=$D_2$] ++(2,0) -- (dend);
-				\draw (vin) -- (crgnd) -- ++(0,2.5) coordinate(tb) to[short, -*] (P.wiper);
+				\draw (-1.5,4.02) coordinate (d1) to[potentiometer, name=P] ++(0,3) coordinate(d2);
+				\coordinate (d1sh) at ([xshift=1mm, yshift=1mm]d1);
+				\draw [to-, thick](d2)+(1mm,-1mm) to [out=-45,in=45] node[right, midway] {$R_{T}$} (d1sh);
+				\draw [to-, thick](d1)+(-1mm,1mm) to [out=180-45,in=-90] node[left, midway] {$R_{T1}$} (P.wiper);
+				\draw [to-, thick](d2)+(-1mm,-1mm) to [out=180+45,in=90] node[left, midway] {$R_{T2}$} (P.wiper);
+				\draw (d1) to[D=$D_1$, invert] ++(3,0) -- ++(0,1.5) coordinate(dend);
+				\draw (d2) to[D=$D_2$] ++(3,0) -- (dend);
+				\draw (vin) -- (crgnd) -- ++(0,3) coordinate(tb) to[short, -*] (P.wiper);
 				\draw (dend) to[short, *-] (tb-|vccj) -- (vccj) to[short, -*] (C.pin 7 -| vccj);
 				\draw (vin) to[C=$C$] ++(0,-4.82) node[ground]{};
-				\draw[thick] (-8,-5.3) rectangle (6.6,6.9);
+				\draw[thick] (-8,-5.3) rectangle (6.6,8.2);
 			\end{circuitikz}
 		}
 	\end{minipage}\qquad
@@ -349,17 +350,17 @@ Per ottenere un duty-cycle selezionabile nell'intervallo dallo \SI{0}{\percent} 
 Il trimmer viene utilizzato come resistenza variabile e permette di variare il valore della resistenza attraverso la quale la capacità $C$ si carica e scarica. Infatti, la corrente che carica il condensatore fluisce attraverso la resistenza $R_A$, il diodo e la resistenza $R_{T_1}$, ossia la resistenza tra il terminale 3 e 2 del trimmer. Al contrario, la capacità di scarica solo attraverso la resistenza $R_{T_2}$, ossia la resistenza tra il terminale 1 e 2 del trimmer. Le equazioni che descrivono il tempo di carica e scarica delle capacità diventano quindi:
 \begin{equation}
 	\begin{split}
-		T_1&=\ln{2}\ C (R_A+R_{T_1}), \\
-		T_2&=\ln{2}\ C(R_{T_2}).
+		T_1(\text{carica})&=\ln{2}\ C\left(R_A+R_{T_1}\right), \\
+		T_2(\text{scarica})&=\ln{2}\ C\left(R_{T_2}\right).
 	\end{split}
 \end{equation}
 Indicando con $R_T$ la resistenza tra il terminale 1 e 3 del trimmer (che equivale alla somma delle resistenze $R_{T_1}$ e $R_{T_2}$) otteniamo:
 \begin{equation}
 	\begin{split}
-		T_2&=\ln{2}\ C(R_T-R_{T_1}) \\
-		T&=T_1+T_2=\ln{2} C(R_A+\cancel{R_{T_1}}+R_T-\cancel{R_{T_1}}) \\
-		T&=\ln{2}\ C(R_A+R_T) \\
-		\frac{T_1}{T}&=\frac{\ln{2}\ C (R_A+R_{T_1})}{\ln{2}\ C(R_A+R_T)} \\
-		&=\frac{R_A+R_{T_1}}{R_A+R_T}
+		T_2&=\ln{2}\ C\left(R_T-R_{T_1}\right) \\
+		T&=T_1+T_2=\ln{2} C\left(R_A+\cancel{R_{T_1}}+R_T-\cancel{R_{T_1}}\right) \\
+		T&=\ln{2}\ C\left(R_A+R_T\right) \\
+		\frac{T_1}{T}&=\frac{\ln{2}\ C\left(R_A+R_{T_1}\right)}{\ln{2}\ C\left(R_A+R_T\right)} \\
+		\delta&=\frac{R_A+R_{T_1}}{R_A+R_T}
 	\end{split}
 \end{equation}
