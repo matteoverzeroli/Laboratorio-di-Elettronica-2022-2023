@@ -22,14 +22,12 @@ fitted_3 = fit3.Coefficients.Estimate(1) + fit3.Coefficients.Estimate(2) * x;
 % Plotto il grafico
 gcf = figure
 hold on
-plot(RA, freq_c1, 'or')
-plot(RA, freq_c2, 'ob')
-plot(x, fitted_1, 'r')
-plot(x, fitted_2, 'b')
+plot(RA, freq_c1, '-or')
+plot(RA, freq_c2, '-ob')
+%plot(x, fitted_1, 'r')
+%plot(x, fitted_2, 'b')
 
 legend('Misure con capacità da 330nF', 'Misure con capacità da 150nF',...
-    'Retta interpolata',...
-    'Retta interpolata',...
     'Location', 'northeast')
 
 title('Frequenza in funzione di RA e C')
@@ -43,11 +41,10 @@ saveas(gcf, 'F vs RA.png')
 
 gcf = figure
 hold on
-plot(RA, duty, 'or')
-plot(x, fitted_3, 'r')
+plot(RA, duty, '-or')
+%plot(x, fitted_3, 'r')
 
 legend('Misure con capacità da 330nF',...
-    'Retta interpolata',...
     'Location', 'southeast')
 
 title('Duty Cicle in funzione di RA')
