@@ -1,5 +1,5 @@
 \chapter{Laboratorio 5}
-Il primo circuito realizzato in questa esperienza di laboratorio permette di effettuare lo switch debouncing attraverso l'integrato \textbf{LM555}. Nella figura \ref{fig:circuito_1} è riportato lo schema del circuito.
+Il primo circuito realizzato in questa esperienza di laboratorio permette di effettuare lo \textit{switch debouncing} utilizzando l'integrato \textbf{LM555}. Nella figura \ref{fig:circuito_1} è riportato lo schema del circuito.
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -41,7 +41,7 @@ Il primo circuito realizzato in questa esperienza di laboratorio permette di eff
 
 \noindent
 In questo circuito il Timer 555 è utilizzato in configurazione monostabile. A differenza del circuito realizzato nella relazione precedente, il segnale di trigger viene generato non più tramite il generatore di forme d'onda ma tramite un pulsante meccanico normalmente aperto, indicato nello schema circuitale con il nome di $SW_{T}$. 
-Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Per cui, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione di $V_{CC}$ grazie alla resistenza $R_2$. Quando l'interruttore viene chiuso invece il morsetto di \textit{Trigger} viene collegato a massa. Tuttavia, la risposta reale di un pulsante meccanico durante l'apertura e la chiusura è influenzata dalla propria risposta meccanica, caratterizzata dal fenomeno del rimbalzo (\textit{switch bouncing}). A causa di questo effetto, si possono notare degli impulsi di apertura-chiusura quando viene premuto o rilasciato il pulsante (\Fig\ref{fig:switch_bouncing}).
+Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Di conseguenza, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione pari a $V_{CC}$ grazie alla resistenza $R_2$. Al contrario, quando l'interruttore viene chiuso il morsetto di \textit{Trigger} viene collegato a massa. Tuttavia, la risposta reale di un pulsante meccanico durante l'apertura e la chiusura è influenzata dalla propria risposta meccanica, caratterizzata dal fenomeno del rimbalzo (\textit{switch bouncing}). A causa di questo effetto, si possono notare degli impulsi di apertura-chiusura quando viene premuto o rilasciato il pulsante (\Fig\ref{fig:switch_bouncing}).
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -53,7 +53,7 @@ Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, m
 	\caption{Effetto rimbalzo durante l'apertura e la chiusura di un pulsante meccanico. A sinistra è possibile vedere il segnale ai morsetti del pulsante quando viene premuto per circa \SI{55.2}{\milli\second}. A destra un dettaglio sul segnale alla pressione del pulsante in cui l'effetto del rimbalzo dura circa \SI{478}{\micro\second}.}
 	\label{fig:switch_bouncing}
 \end{figure}
-Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il \textbf{LM555} in modalità monostabile che, a seguito di un impulso negativo sul trigger genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito quindi realizzato può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di trigger. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di trigger e la tensione in uscita al timer 555. I valori dei componenti passivi utilizzati per questa misura sono indicati nella tabella \ref{tab:valori_componenti_1}.
+Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il \textbf{LM555} in modalità monostabile che, a seguito di un impulso negativo sul \textit{Trigger} genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito realizzato, quindi, può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di \textit{Trigger}. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di \textit{Trigger} e la tensione in uscita al timer 555. I valori dei componenti passivi utilizzati per questa misura sono indicati nella tabella \ref{tab:valori_componenti_1}.
 
 \def\arraystretch{1.3}
 \begin{table}[h!]
