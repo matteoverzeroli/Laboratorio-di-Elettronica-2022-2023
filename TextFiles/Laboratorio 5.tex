@@ -207,7 +207,7 @@ I valori nominali e misurati dei componenti passivi utilizzati sono riportati in
 		$R_{A_{18k}}$ &\SI{18}{\kilo\ohm} & \SI{18.02}{\kilo\ohm} \\ \hline
 		$R_{A_{23k}}$ &\SI{23}{\kilo\ohm} & \SI{23.90}{\kilo\ohm} \\ \hline
 		$R_{A_{39k}}$ &\SI{39}{\kilo\ohm} & \SI{38.65}{\kilo\ohm} \\ \hline
-		$R_{A_{50k}}$ &\SI{50}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
+		$R_{A_{50k}}$ &\SI{56}{\kilo\ohm} & \SI{55.10}{\kilo\ohm} \\ \hline
 		$R_{A_{66k}}$ &\SI{66}{\kilo\ohm} & \SI{66.87}{\kilo\ohm} \\ \hline
 		$R_{A_{82k}}$ &\SI{82}{\kilo\ohm} & \SI{82.26}{\kilo\ohm} \\ \hline
 		$R_B$ &\SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
@@ -218,7 +218,7 @@ I valori nominali e misurati dei componenti passivi utilizzati sono riportati in
 	\label{tab:valori_componenti_3}
 \end{table}
 
-In questa configurazione, supponendo il condensatore inizialmente scarico, una volta fornita l'alimentazione il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$ il \textit{flip-flop} interno dell'integrato 555 viene resettato la sua uscita si porta ad un livello logico basso, accendendo il transistor MOSFET di scarica. Di conseguenza, la capacità si scarica verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di carica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
+Una volta fornita alimentazione al circuito, il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$, il \textit{flip-flop} interno dell'integrato 555 viene resettato e la sua uscita si porta ad un livello logico basso, accendendo il transistor MOSFET di scarica. Di conseguenza, la capacità si scarica verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di carica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
 \begin{equation}
 	\begin{split}
 		v_C&=V_{CC}+\left(\frac{V_{CC}}{3}-V_{CC}\right)e^{\frac{-t}{\left(R_A+R_B\right)C}} \\
@@ -249,7 +249,7 @@ Il duty-cycle dell'onda quadra generata è quindi pari a
 \end{equation}
 Per cui, il valore del duty-cycle è compreso tra il \SI{50}{\percent} (se $R_A\ll R_B$) e il \SI{100}{\percent} (se $R_A \gg R_B$). 
 \noindent
-Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio.In questo caso i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_4}.
+Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio. In questo caso, i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_4}.
 \def\arraystretch{1.3}
 \begin{table}[h!]
 	\centering
@@ -276,14 +276,18 @@ Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisi
 \end{figure}
 
 \noindent
-Dalla equazione \ref{eq:3_1} si calcola che il valore teorico del duty-cycle con i valori indicati è pari a
+Dalla equazione \ref{eq:3_1} si può ricavare che il valore teorico del duty-cycle con i valori indicati è pari a
 \begin{equation}
 	\delta=\frac{\SI{55.10}{\kilo\ohm}+\SI{12.00}{\kilo\ohm}}{\SI{55.10}{\kilo\ohm}+2\times\SI{12.00}{\kilo\ohm}}=\SI{84.83}{\percent},
 \end{equation}
-mentre il valore misurato tramite i cursori dell'oscilloscopio è pari a \SI{84.75}{\percent}, molto simile al valore teorico.
+mentre il valore misurato tramite i cursori dell'oscilloscopio è pari a \SI{84.75}{\percent}, molto simile a quello teorico.
 
 \noindent
-Successivamente, si sono effettuate misure del duty-cycle e della frequenza del segnale ottenuto variando il valore delle resistenze $R_A$ ($R_B$ mantenuta constante con valore di \SI{12}{\kilo\ohm}) e della capacità $C$. I dati ottenuti sono stati riportati nella figura \ref{fig:circuito_3_plot}.\todo{Descrivere quello che si osserva nelle immagini}
+Successivamente, si sono effettuate misure del duty-cycle e della frequenza del segnale ottenuto variando il valore delle resistenze $R_A$ ($R_B$ mantenuta constante con valore di \SI{12}{\kilo\ohm}) e della capacità $C$. In figura \ref{fig:circuito_3_plot} si possono osservare i risultati ottenuti. In particolare, in accordo con le equazioni descritte in precedenza, è possibile notare che:
+\begin{itemize}
+	\item la frequenza diminuisce con l'aumentare della resistenza $R_A$ ed è maggiore per capacità $C$ piccole;
+	\item il duty-cycle aumenta all'aumentare della resistenza  $R_A$.
+\end{itemize}
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -298,7 +302,7 @@ Successivamente, si sono effettuate misure del duty-cycle e della frequenza del 
 
 
 \clearpage
-Il quarto circuito realizzato permette di superare i limiti sul valore minimo e massimo del duty-cycle presenti nel circuito precedente.
+Il quarto circuito realizzato permette di superare i limiti sul settaggio del valore minimo e massimo del duty-cycle presenti nel circuito precedente.
 
 \begin{figure}[h!]
 	\centering
@@ -347,14 +351,14 @@ Il quarto circuito realizzato permette di superare i limiti sul valore minimo e 
 \end{figure}
 
 \noindent
-Per ottenere un duty-cycle selezionabile nell'intervallo dallo \SI{0}{\percent} al \SI{100}{\percent}, si introducono i diodi $D1$ e $D2$ e il trimmer $T$ (\Fig\ref{fig:trimmer}).
+Per ottenere un duty-cycle selezionabile nell'intervallo dallo \SI{0}{\percent} al \SI{100}{\percent}, si introducono i diodi $D1$ e $D2$ ed il trimmer $T$ (\Fig\ref{fig:trimmer}).
 \begin{figure}[tbh]
 	\centering
 	\includegraphics[width=0.2\linewidth]{./ImageFiles/Laboratorio 5/trimmer.jpg}
 	\caption{Simbolo circuitale di un trimmer.}
 	\label{fig:trimmer}
 \end{figure}
-Il trimmer viene utilizzato come resistenza variabile e permette di variare il valore della resistenza attraverso la quale la capacità $C$ si carica e scarica. Infatti, la corrente che carica il condensatore fluisce attraverso la resistenza $R_A$, il diodo e la resistenza $R_{T_1}$, ossia la resistenza tra il terminale 3 e 2 del trimmer. Al contrario, la capacità di scarica solo attraverso la resistenza $R_{T_2}$, ossia la resistenza tra il terminale 1 e 2 del trimmer. Le equazioni che descrivono il tempo di carica e scarica delle capacità diventano quindi:
+Il trimmer viene utilizzato come resistenza variabile e permette di variare il valore della resistenza attraverso la quale la capacità $C$ si carica e scarica. Infatti, la corrente che carica il condensatore fluisce attraverso la resistenza $R_A$, il diodo e la resistenza $R_{T_1}$, ossia la resistenza tra il terminale 2 e 3 del trimmer. Al contrario, la capacità di scarica solo attraverso la resistenza $R_{T_2}$, ossia la resistenza tra il terminale 1 e 2 del trimmer. Le equazioni che descrivono il tempo di carica e scarica delle capacità diventano quindi:
 \begin{equation}
 	\begin{split}
 		T_1(\text{carica})&=\ln{2}\ C\left(R_A+R_{T_1}\right), \\
@@ -371,6 +375,21 @@ Indicando con $R_T$ la resistenza tra il terminale 1 e 3 del trimmer (che equiva
 		\delta&=\frac{R_A+R_{T_1}}{R_A+R_T}
 	\end{split}
 \end{equation}
+
+In figura \ref{label} sono riportate delle acquisizioni eseguite con il trimmer impostato su diversi valori.
+
+\begin{figure}[tbh]
+	\centering
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00032.PNG}
+	\end{minipage}
+	\begin{minipage}{.496\textwidth}
+		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00033.PNG}
+	\end{minipage}
+	\includegraphics[width=.496\textwidth]{./ImageFiles/Laboratorio 5/TEK00034.PNG}
+	\caption{Tensione ai capi del condensatore (linea azzurra) rispetto alla tensione in uscita dall'integrato, al variare del valore del trimmer. In alto a sinistra il trimmer è completamente ruotato in senso orario. In alto a destra, invece, è completamente ruotato in senso anti orario. In basso è posizionato circa a metà.}
+	\label{fig:circuito_4_plot}
+\end{figure}
 
 \clearpage
 \todo{Descrivere il compito per casa e come lo si è realizzato.}
