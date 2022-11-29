@@ -41,7 +41,7 @@ Il primo circuito realizzato in questa esperienza di laboratorio permette di eff
 
 \noindent
 In questo circuito il Timer 555 è utilizzato in configurazione monostabile. A differenza del circuito realizzato nella relazione precedente, il segnale di trigger viene generato non più tramite il generatore di forme d'onda ma tramite un pulsante meccanico normalmente aperto, indicato nello schema circuitale con il nome di $SW_{T}$. 
-Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, mentre l'altro terminale è connesso a massa. Di conseguenza, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione pari a $V_{CC}$ grazie alla resistenza $R_2$. Al contrario, quando l'interruttore viene chiuso il morsetto di \textit{Trigger} viene collegato a massa. Tuttavia, la risposta reale di un pulsante meccanico durante l'apertura e la chiusura è influenzata dalla propria risposta meccanica, caratterizzata dal fenomeno del rimbalzo (\textit{switch bouncing}). A causa di questo effetto, si possono notare degli impulsi di apertura-chiusura quando viene premuto o rilasciato il pulsante (\Fig\ref{fig:switch_bouncing}).
+Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$ mentre l'altro terminale è connesso a massa. Di conseguenza, quando l'interruttore è aperto sul nodo di \textit{Trigger} viene mantenuta una tensione pari a $V_{CC}$ grazie alla resistenza $R_2$. Al contrario, quando l'interruttore viene chiuso il morsetto di \textit{Trigger} viene collegato a massa. Tuttavia, la risposta reale di un pulsante meccanico durante l'apertura e la chiusura è influenzata dalla propria risposta meccanica che è caratterizzata dal fenomeno del rimbalzo (\textit{switch bouncing}). A causa di questo effetto, si possono notare degli impulsi di apertura-chiusura quando viene premuto o rilasciato il pulsante (\Fig\ref{fig:switch_bouncing}).
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -53,10 +53,10 @@ Esso ha un terminale connesso alla resistenza $R_2$ di pull-up verso $V_{CC}$, m
 	\caption{Effetto rimbalzo durante l'apertura e la chiusura di un pulsante meccanico. A sinistra è possibile vedere il segnale ai morsetti del pulsante quando viene premuto per circa \SI{55.2}{\milli\second}. A destra un dettaglio sul segnale alla pressione del pulsante in cui l'effetto del rimbalzo dura circa \SI{478}{\micro\second}.}
 	\label{fig:switch_bouncing}
 \end{figure}
-Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il \textbf{LM555} in modalità monostabile che, a seguito di un impulso negativo sul \textit{Trigger} genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito realizzato, quindi, può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di \textit{Trigger}. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di \textit{Trigger} e la tensione in uscita al timer 555. I valori dei componenti passivi utilizzati per questa misura sono indicati nella tabella \ref{tab:valori_componenti_1}.
+Questo comportamento anomalo potrebbe presentare un problema quando è inserito, per esempio, in un circuito digitale che conta quante volte è stato premuto il pulsante: il circuito contatore conterà anche le oscillazioni causate dal rimbalzo. Per superare questo problema è possibile sfruttare il \textbf{LM555} in modalità monostabile che, a seguito di un impulso negativo sul \textit{Trigger}, genera un impulso in uscita con durata pari a $T=1.1RC$. Il circuito realizzato, quindi, può essere utilizzato per ottenere un singolo impulso in uscita a seguito della pressione del pulsante collegato al morsetto di \textit{Trigger}. Nella figura \ref{fig:circuito_1_scope} viene confrontato l'andamento della tensione al morsetto di \textit{Trigger} e la tensione in uscita al Timer 555. I valori dei componenti passivi utilizzati per questa misura sono indicati nella tabella \ref{tab:valori_componenti_1}. Alla pressione del tasto si osserva quindi un impulso di durata \SI{93.6}{\milli\second} non affetto da \textit{switch bouncing}. Il valore teorico della durata dell'impulso è di \SI{98.01}{\milli\second}, simile al valore misurato.
 
 \def\arraystretch{1.3}
-\begin{table}[h!]
+\begin{table}[b!]
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
@@ -83,7 +83,7 @@ Questo comportamento anomalo potrebbe presentare un problema quando è inserito,
 
 
 \clearpage
-Il secondo circuito realizzato utilizza un \textbf{LM555} in modalità bistabile (\Fig\ref{fig:circuito_2}) e permette di generare un impulso rettangolare in uscita al timer 555 di durata controllabile tramite la pressione di due pulsanti: un pulsante di trigger ($SW_T$) e uno di reset ($SW_R$).
+Il secondo circuito realizzato utilizza un \textbf{LM555} in modalità bistabile (\Fig\ref{fig:circuito_2}) e permette di generare un impulso rettangolare in uscita di durata controllabile tramite la pressione di due pulsanti: un pulsante di trigger ($SW_T$) e uno di reset ($SW_R$).
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -123,17 +123,18 @@ Il secondo circuito realizzato utilizza un \textbf{LM555} in modalità bistabile
 	\caption{Schema circuitale e foto del circuito realizzato.}
 	\label{fig:circuito_2}
 \end{figure}
+
 \noindent
-La configurazione astabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito, quindi, rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non sono stati utilizzati due pulsati ma uno solo per la generazione del segnale di trigger; il pulsante di reset, invece, è stato realizzato con un filo collegato a massa che simula la chiusura dell'interruttore. I valori dei componenti sono indicati nella tabella \ref{tab:valori_componenti_2}.
+La configurazione bistabile permette di ottenere in uscita un impulso rettangolare che viene generato a seguito di un impulso di trigger e termina quando sul morsetto di \textit{Reset} viene applicato un impulso. Infatti, il pin di \textit{Reset} è collegato internamente al pin di reset generale del \textit{flip-flop SR}, che porta l'uscita a zero qualsiasi siano i valori dei pin di set e reset. Il circuito rimane stabile in uno dei due stati fino a quando il pulsante di reset o di trigger viene premuto. In realtà, nel circuito realizzato in laboratorio non sono stati utilizzati due pulsati ma uno solo per la generazione del segnale di trigger; il pulsante di reset, invece, è stato realizzato con un filo collegato a massa che simula la chiusura dell'interruttore. I valori dei componenti sono indicati nella tabella \ref{tab:valori_componenti_2}.
 \def\arraystretch{1.3}
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
 		Componente	& Valore Nominale & Valore Misurato \\ \hline
-		R &\SI{270}{\kilo\ohm} & \SI{265,8}{\kilo\ohm} \\ \hline
-		R2 &\SI{12}{\kilo\ohm} & \SI{10,96}{\kilo\ohm} \\ \hline
-		R3 & \SI{12}{\kilo\ohm} & \SI{12}{\kilo\ohm} \\ \hline
+		R &\SI{270}{\kilo\ohm} & \SI{265.8}{\kilo\ohm} \\ \hline
+		R2 &\SI{12}{\kilo\ohm} & \SI{10.96}{\kilo\ohm} \\ \hline
+		R3 & \SI{12}{\kilo\ohm} & \SI{12.00}{\kilo\ohm} \\ \hline
 		C & \SI{330}{\nano\farad} & Non misurato \\ \hline
 		C2 & \SI{150}{\nano\farad} & Non misurato \\ \hline
 	\end{tabular}
@@ -156,7 +157,7 @@ Nella figura \ref{fig:circuito_2_scope} viene rappresentata la fase di reset del
 \end{figure}
 
 \clearpage
-Il terzo circuito realizzato utilizza il timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito.
+Il terzo circuito realizzato utilizza il Timer 555 per realizzare un oscillatore che permette di generare in uscita un'onda quadra periodica con un periodo definito dai valori dei componenti passivi utilizzati nel circuito.
 \begin{figure}[h!]
 	\centering
 	\begin{minipage}{.45\textwidth}
@@ -218,7 +219,8 @@ I valori nominali e misurati dei componenti passivi utilizzati sono riportati in
 	\label{tab:valori_componenti_3}
 \end{table}
 
-Una volta fornita alimentazione al circuito, il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$, il \textit{flip-flop} interno dell'integrato 555 viene resettato e la sua uscita si porta ad un livello logico basso, accendendo il transistor MOSFET di scarica. Di conseguenza, la capacità si scarica verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di carica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
+\noindent
+Una volta fornita alimentazione al circuito, il condensatore $C$ inizia a caricarsi attraverso le resistenze $R_A$ e $R_B$. Quando la tensione al nodo $v_c$ è pari a $\frac{2}{3}V_{CC}$, il \textit{flip-flop} all'interno del \textbf{LM555} viene resettato e la sua uscita si porta a livello logico basso, accendendo il transistor MOSFET di scarica. Di conseguenza, la capacità si scarica verso massa tramite la resistenza $R_B$ fino a quando la tensione al nodo $v_C$ si porta al valore $\frac{V_{CC}}{3}$. A questo punto, il \textit{flip-flop} viene settato e l'uscita si porta a livello logico alto, spegnendo il transistor di scarica: il ciclo di carica inizia di nuovo. Il duty-cycle del segnale generato in uscita dipende dal tempo di carica e scarica della capacità $C$. Considerando il condensatore inizialmente carico a $\frac{V_{CC}}{3}$, l'andamento della tensione $v_C$ nella fase di carica è pari a:
 \begin{equation}
 	\begin{split}
 		v_C&=V_{CC}+\left(\frac{V_{CC}}{3}-V_{CC}\right)e^{\frac{-t}{\left(R_A+R_B\right)C}} \\
@@ -229,6 +231,7 @@ Una volta fornita alimentazione al circuito, il condensatore $C$ inizia a carica
 da cui si ricava il tempo di carica T\sub{1}:
 \begin{equation}
 	T_{1}=(R_A+R_B)C\ln{2}.
+	\label{eq:t1}
 \end{equation}
 In modo analogo, è possibile ricavare il tempo di scarica attraverso la resistenza $R_B$, considerando la capacità carica a $\frac{2}{3}V_{CC}$:
 \begin{equation}
@@ -241,6 +244,7 @@ In modo analogo, è possibile ricavare il tempo di scarica attraverso la resiste
 da cui si ricava che il tempo di scarica T\sub{2} è pari a
 \begin{equation}
 	T_2=R_B C \ln{2}.
+	\label{eq:t2}
 \end{equation}
 Il duty-cycle dell'onda quadra generata è quindi pari a 
 \begin{equation}
@@ -249,9 +253,9 @@ Il duty-cycle dell'onda quadra generata è quindi pari a
 \end{equation}
 Per cui, il valore del duty-cycle è compreso tra il \SI{50}{\percent} (se $R_A\ll R_B$) e il \SI{100}{\percent} (se $R_A \gg R_B$). 
 \noindent
-Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio. In questo caso, i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_4}.
+Nella figura \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisite tramite l'oscilloscopio. In questo caso, i valori dei componenti passivi utilizzati sono indicati nella tabella \ref{tab:valori_componenti_4}.
 \def\arraystretch{1.3}
-\begin{table}[h!]
+\begin{table}[b!]
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\hline
@@ -271,7 +275,7 @@ Nell'immagine \ref{fig:circuito_3_scope} si riporta un esempio di misure acquisi
 	\begin{minipage}{.496\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00015.PNG}
 	\end{minipage}
-	\caption{Segnale di uscita al circuito astabile realizzato con l'integrato LM555.}
+	\caption{Segnale di uscita al circuito astabile realizzato con l'integrato \textbf{LM555}.}
 	\label{fig:circuito_3_scope}
 \end{figure}
 
@@ -285,7 +289,7 @@ mentre il valore misurato tramite i cursori dell'oscilloscopio è pari a \SI{84.
 \noindent
 Successivamente, si sono effettuate misure del duty-cycle e della frequenza del segnale ottenuto variando il valore delle resistenze $R_A$ ($R_B$ mantenuta constante con valore di \SI{12}{\kilo\ohm}) e della capacità $C$. In figura \ref{fig:circuito_3_plot} si possono osservare i risultati ottenuti. In particolare, in accordo con le equazioni descritte in precedenza, è possibile notare che:
 \begin{itemize}
-	\item la frequenza diminuisce con l'aumentare della resistenza $R_A$ ed è maggiore per capacità $C$ piccole;
+	\item la frequenza diminuisce con l'aumentare della resistenza $R_A$ ed aumenta al diminuire del valore della capacità $C$;
 	\item il duty-cycle aumenta all'aumentare della resistenza  $R_A$.
 \end{itemize}
 \begin{figure}[tbh]
@@ -296,13 +300,13 @@ Successivamente, si sono effettuate misure del duty-cycle e della frequenza del 
 	\begin{minipage}{.496\textwidth}
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/F vs RA}
 	\end{minipage}
-	\caption{Misure del duty-cycle e della frequenza del segnale in uscita dal circuito in funzione della resistenza R\sub{A} e R\sub{B} e della capacità C.}
+	\caption{Misure del duty-cycle e della frequenza del segnale in uscita dal circuito in funzione della resistenza $R_A$ e della capacità $C$.}
 	\label{fig:circuito_3_plot}
 \end{figure}
 
 
 \clearpage
-Il quarto circuito realizzato (\Fig\ref{fig:circuito_4}) permette di superare i limiti sul settaggio del valore minimo e massimo del duty-cycle presenti nel circuito precedente.
+Il quarto circuito realizzato (\Fig\ref{fig:circuito_4}) permette di superare i limiti sui possibili valori del duty-cycle dell'onda quadra in uscita presenti nel circuito precedente.
 
 \begin{figure}[h!]
 	\centering
@@ -360,13 +364,12 @@ Per ottenere un duty-cycle selezionabile nell'intervallo dallo \SI{0}{\percent} 
 \end{figure}
 
 \noindent
-Il trimmer viene utilizzato come resistenza variabile e permette di variare il valore della resistenza attraverso la quale la capacità $C$ si carica e scarica. Infatti, la corrente che carica il condensatore fluisce attraverso la resistenza $R_A$, il diodo e la resistenza $R_{T_1}$, ossia la resistenza tra il terminale 2 e 3 del trimmer. Al contrario, la capacità di scarica solo attraverso la resistenza $R_{T_2}$, ossia la resistenza tra il terminale 1 e 2 del trimmer. Le equazioni che descrivono il tempo di carica e scarica delle capacità diventano quindi:
+Il trimmer viene utilizzato come resistenza variabile e permette di disaccoppiare il valore della resistenza attraverso la quale la capacità $C$ si carica e scarica. Infatti, la corrente che carica il condensatore fluisce attraverso la resistenza $R_A$, il diodo $D_1$ e la resistenza $R_{T_1}$, ossia la resistenza tra il terminale 1 e 2 del trimmer. Al contrario, la capacità di scarica solo attraverso la resistenza $R_{T_2}$, ossia la resistenza tra il terminale 2 e 3 del trimmer. Le equazioni che descrivono il tempo di carica e scarica delle capacità diventano quindi:
 \begin{equation}
 	\begin{split}
-		T_1(\text{carica})&=\ln{2}\ C\left(R_A+R_{T_1}\right), \\
-		T_2(\text{scarica})&=\ln{2}\ C\left(R_{T_2}\right).
+		T_1&=\ln{2}\ C\left(R_A+R_{T_1}\right) (carica),\\
+		T_2&=\ln{2}\ C\left(R_{T_2}\right) (scarica).
 	\end{split}
-	\label{eq}
 \end{equation}
 Indicando con $R_T$ la resistenza tra il terminale 1 e 3 del trimmer (che equivale alla somma delle resistenze $R_{T_1}$ e $R_{T_2}$) otteniamo:
 \begin{equation}
@@ -378,8 +381,7 @@ Indicando con $R_T$ la resistenza tra il terminale 1 e 3 del trimmer (che equiva
 		\delta&=\frac{R_A+R_{T_1}}{R_A+R_T}
 	\end{split}
 \end{equation}
-I valori nominali ed effettivi dei componenti utilizzati sono riportati in tabella \ref{tab:valori_componenti_5}\todo{ mi manca il valore vero di RA e per sicurezza la conferma che C sia rimasto uguale a 330}.
-
+I valori nominali ed effettivi dei componenti utilizzati sono riportati in tabella \ref{tab:valori_componenti_5} mentre in figura \ref{fig:circuito_4_plot} sono riportate delle acquisizioni eseguite con il trimmer completamente ruotato in senso orario, antiorario ed in posizione centrale.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{|c|c|c|}
@@ -392,10 +394,6 @@ I valori nominali ed effettivi dei componenti utilizzati sono riportati in tabel
 	\caption{Valori nominali e misurati dei componenti utilizzati nel circuito.}
 	\label{tab:valori_componenti_5}
 \end{table}
-
-\noindent
-In figura \ref{fig:circuito_4_plot} sono riportate delle acquisizioni eseguite con il trimmer completamente ruotato in senso orario, antiorario ed in posizione centrale. 
-
 \begin{figure}[tbh]
 	\centering
 	\begin{minipage}{.496\textwidth}
@@ -405,12 +403,13 @@ In figura \ref{fig:circuito_4_plot} sono riportate delle acquisizioni eseguite c
 		\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/TEK00034.PNG}
 	\end{minipage}
 	\includegraphics[width=.496\textwidth]{./ImageFiles/Laboratorio 5/TEK00033.PNG}
-	\caption{Tensione ai capi del condensatore (linea azzurra) rispetto alla tensione in uscita dall'integrato, al variare del valore del trimmer. In alto a sinistra il trimmer è completamente ruotato in senso orario. In alto a destra, invece, è completamente ruotato in senso anti orario. In basso è posizionato circa a metà.}
+	\caption{Tensione ai capi del condensatore (linea azzurra) e tensione in uscita dall'integrato (linea gialla), al variare del valore del trimmer. In alto a sinistra il trimmer è completamente ruotato in senso orario. In alto a destra, invece, è completamente ruotato in senso anti orario. In basso è posizionato circa a metà.}
 	\label{fig:circuito_4_plot}
 \end{figure}
 
 \clearpage
-L'obbiettivo del seguente circuito è quello di notificare l'utente del superamento di una temperatura di soglia in un ambiente tramite il lampeggio di un led. Per fare ciò, viene utilizzata una resistenza NTC, il cui valore di resistenza diminuisce con l'aumentare della temperatura. Per verificare il superamento di una tensione di soglia viene utilizzato un comparatore. Invece, per il lampeggio del led viene utilizzato il timer 555 in modalità astabile. In figura \ref{fig:esercizio} viene riportato lo schematico del circuito realizzato. 
+\paragraph{Esercizio per casa}
+L'obbiettivo del seguente circuito è quello di notificare l'utente del superamento di una temperatura di soglia in un ambiente tramite il lampeggio di un led. Per fare ciò, viene utilizzata una resistenza NTC, il cui valore di resistenza diminuisce con l'aumentare della temperatura. Per verificare il superamento di una tensione di soglia viene utilizzato un comparatore. Invece, per il lampeggio del led viene utilizzato il Timer 555 in modalità astabile. In figura \ref{fig:esercizio} viene riportato lo schematico del circuito progettato. 
 \begin{figure}[tbh]
 	\centering
 	\includegraphics[width=\linewidth]{./ImageFiles/Laboratorio 5/eserciziocasa.jpg}
@@ -419,9 +418,14 @@ L'obbiettivo del seguente circuito è quello di notificare l'utente del superame
 \end{figure}
 
 \noindent
-Il principio di funzionamento per il lampeggio del led è lo stesso riportato nei circuiti precedenti dove il timer 555 è stato utilizzato in modalità astabile. In particolare, il led viene collegato tramite una resistenza, tra l'uscita del timer 555 e massa; è possibile modificare il duty-cycle e la frequenza di oscillazione modificando il valore dei componenti passivi del circuito. In aggiunta, è stato introdotto un comparatore per determinare quando la temperatura del sensore supera quella di riferimento. La resistenza NTC è inserita all'interno di un partitore resistivo, e la tensione ai suoi capi è collegata all'ingresso invertente del comparatore. Allo stesso modo, la tensione di riferimento in ingresso al morsetto non invertente può essere ricavata tramite un partitore resistivo e può essere impostata tramite l'utilizzo di una resistenza variabile. Quando la tensione ai capi dell'NTC supera la tensione di riferimento, l'uscita del comparatore si porta a massa, disattivando il reset del timer 555. In questo modo, il \textit{flip-flop} integrato nel chip è libero di commutare l'uscita.
-La frequenza di oscillazione del led può essere calcolata a partire dalle equazioni \ref{eq}:
+Il principio di funzionamento per il lampeggio del led è lo stesso riportato nel terzo circuito analizzato precedentemente dove il Timer 555 è stato utilizzato in modalità astabile. In particolare, il led viene collegato, tramite una resistenza, tra l'uscita dell'integrato e massa; è possibile modificare il duty-cycle e la frequenza di oscillazione modificando il valore del condensatore e delle resistenze collegate ai pin di \textit{dis} e \textit{tr}.
+
+\noindent
+Il comparatore è invece utilizzato per determinare quando la temperatura supera un valore di riferimento. La resistenza NTC è inserita all'interno di un partitore resistivo, tra l'alimentazione positiva del circuito e massa, con una resistenza di \SI{10}{\kilo\ohm}. Il morsetto invertente del comparatore è collegato a un capo della resistenza NTC. Invece, il morsetto non invertente del comparatore è mantenuto a una tensione fissa che rappresenta il valore soglia della tensione che corrisponde alla temperatura di riferimento al superamento della quale il led deve accendersi. Questa tensione di riferimento può essere ottenuta tramite un partitore resistivo e potrebbe essere impostata tramite l'utilizzo di una resistenza variabile (trimmer) che permette di regolare la temperatura soglia. Quando la tensione ai capi dell'NTC supera la tensione di riferimento, l'uscita del comparatore si porta a massa, disattivando il reset del Timer 555. In questo modo, il \textit{flip-flop} integrato nel chip è libero di commutare l'uscita.
+
+\noindent
+La frequenza di oscillazione del led può essere calcolata a partire dalle equazioni \ref{eq:t1}\ref{eq:t2}:
 \begin{equation}
 	f = \frac{1}{T_1 + T_2}.
 \end{equation}
-Con i valori riportati in figura \ref{fig:esercizio}, la frequenza di oscillazione è pari a \SI{3.2}{\hertz} mentre il duty cycle è pari al \SI{51}{\percent}.
+Con i valori riportati in figura \ref{fig:esercizio} la frequenza di oscillazione è pari a \SI{3.2}{\hertz} mentre il duty cycle è pari al \SI{51}{\percent} (Eq. \ref{eq:3_1}).
